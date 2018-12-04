@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 0
 
 spring:
   application:
@@ -18,8 +18,8 @@ spring:
 
 eureka:
   instance:
-    ip-address: 39.106.96.220
-    # instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${random.uuid}
+    # ip-address:
+    instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${random.uuid}
     prefer-ip-address: true
     lease-renewal-interval-in-seconds: 30
     lease-expiration-duration-in-seconds: 90
@@ -27,4 +27,4 @@ eureka:
     registry-fetch-interval-seconds: 30
     fetch-registry: true
     service-url:
-      defaultZone: http://39.106.96.220:8761/eureka/
+      defaultZone: http://serverb1.notobject.com:8761/eureka/,http://serverb2.notobject.com:8761/eureka/
