@@ -12,6 +12,7 @@
         <module>ccsu-config-server</module>
         <module>ccsu-register-server</module>
         <module>ccsu-proxy-server</module>
+        <module>ccsu-demo</module>
     </modules>
 
 </project>

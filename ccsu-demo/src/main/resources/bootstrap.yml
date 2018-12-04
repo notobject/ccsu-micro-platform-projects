@@ -1,0 +1,30 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: ccsu-demo-service
+  rabbitmq:
+    host: mq.notobject.com
+    port: 5672
+    username: test
+    password: test
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: ccsu-config-server
+      profile: dev
+
+eureka:
+  instance:
+    ip-address: 39.106.96.220
+    # instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${random.uuid}
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 30
+    lease-expiration-duration-in-seconds: 90
+  client:
+    registry-fetch-interval-seconds: 30
+    fetch-registry: true
+    service-url:
+      defaultZone: http://39.106.96.220:8761/eureka/

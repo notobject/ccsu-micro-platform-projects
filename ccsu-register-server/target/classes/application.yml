@@ -1,0 +1,18 @@
+server:
+  port: 8761
+spring:
+  application:
+    name: ccsu-register-server
+  profiles:
+    active: localhost
+eureka:
+  instance:
+    ip-address: localhost
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:localhost:${server.port}
+  server:
+    enable-self-preservation: false             # 关闭自我保护模式（默认为打开）
+    eviction-interval-timer-in-ms: 6000         # 续期时间，即扫描失效服务的间隔时间（缺省为60*1000ms 即1分钟）
+  client:
+    register-with-eureka: false                  # 是否注册到注册中心
+    fetch-registry: false                         # 是否拉取服务注册信息
