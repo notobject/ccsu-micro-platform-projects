@@ -28,7 +28,7 @@ spring:
         service-id: ccsu-config-server
 eureka:
   instance:
-    # ip-address:
+    ip-address: localhost
     instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${random.uuid}
     prefer-ip-address: true
     lease-renewal-interval-in-seconds: 30
