@@ -1,0 +1,27 @@
+server:
+  port: 0
+spring:
+  application:
+    name: ccsu-user-service
+  rabbitmq:
+    host: mq.notobject.com
+    port: 5672
+    username: test
+    password: test
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: ccsu-config-server
+eureka:
+  instance:
+    # ip-address:
+    instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${random.uuid}
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 30
+    lease-expiration-duration-in-seconds: 90
+  client:
+    registry-fetch-interval-seconds: 30
+    fetch-registry: true
+    service-url:
+      defaultZone: http://serverb1.notobject.com:8761/eureka/, http://serverb2.notobject.com:8761/eureka/
