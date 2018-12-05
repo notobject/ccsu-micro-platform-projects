@@ -4,9 +4,6 @@
  */
 package cn.ccsu.user.service;
 
-import cn.ccsu.user.entity.UserInfo;
-
 public interface UserService {
-
-    public UserInfo login(String jsonParam);
+    String login(String jsonParam);
 }

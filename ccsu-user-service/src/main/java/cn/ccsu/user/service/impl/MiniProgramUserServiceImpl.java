@@ -5,10 +5,10 @@
 package cn.ccsu.user.service.impl;
 
 import cn.ccsu.common.cnt.Const;
-import cn.ccsu.user.entity.UserInfo;
+import cn.ccsu.user.deps.SessionService;
+import cn.ccsu.user.entity.SessionInfo;
 import cn.ccsu.user.service.UserService;
 import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.annotation.JsonAlias;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
@@ -37,8 +36,12 @@ public class MiniProgramUserServiceImpl implements UserService {
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    private SessionService sessionService;
+
     @Override
-    public UserInfo login(String jsonParam) {
+    public String login(String jsonParam) {
+        JSONObject returnJson = new JSONObject();
         JSONObject info = JSONObject.parseObject(jsonParam);
         String code = info.getString("code");
 
@@ -46,14 +49,30 @@ public class MiniProgramUserServiceImpl implements UserService {
         JSONObject openIdAndSessionKey = code2session(code);
         int errcode = openIdAndSessionKey.getIntValue("errcode");
         if (errcode != 0) {
-            log.error("login", errcode + ":" + openIdAndSessionKey.getString("errmsg"));
-            return null;
+            returnJson.put("errcode", 10011);
+            returnJson.put("errmsg", openIdAndSessionKey.getString("errmsg"));
+            log.error(returnJson.toString());
+            return returnJson.toJSONString();
         }
+        openIdAndSessionKey.remove("errcode");
+        openIdAndSessionKey.remove("errmsg");
         // 用openId 和 session_key 去会话服务器拿到session
 
-
-        // 返回session
-        return null;
+        // 存入用户信息到会话中
+        JSONObject sessionJson = JSONObject.parseObject(sessionService.newSession(openIdAndSessionKey.toString()));
+        errcode = sessionJson.getIntValue("errcode");
+        if (0 != errcode) {
+            returnJson.put("errcode", errcode);
+            returnJson.put("errmsg", sessionJson.getString("errmsg"));
+            return returnJson.toString();
+        }
+        returnJson.put("errcode", 0);
+        returnJson.put("errmsg", "success");
+        // TODO 这里为测试数据，实际放入用户信息
+        returnJson.put("nickName", "openid");
+        returnJson.put("jwcAccount", "sessionKey");
+        returnJson.put("sessionId", sessionJson.getString("sessionId"));
+        return returnJson.toString();
     }
 
     private JSONObject code2session(String code) {
