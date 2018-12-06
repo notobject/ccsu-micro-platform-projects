@@ -4,7 +4,7 @@
  */
 package cn.ccsu.user.entity;
 
-import cn.ccsu.common.base.BaseEntity;
+import cn.ccsu.common.entity.BaseEntity;
 
 public class SessionInfo extends BaseEntity {
     private Integer expired_in;
