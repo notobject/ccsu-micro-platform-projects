@@ -10,10 +10,7 @@ import cn.ccsu.user.service.UserService;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -24,18 +21,14 @@ public class UserController {
 
     @Resource(name = "miniProgramUserService")
     private UserService miniProgramUserService;
-
     @Resource(name = "appUserService")
     private UserService appUserService;
-
     @Autowired
     private HttpServletRequest request;
-
     @Autowired
     private SessionService sessionService;
 
-
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @PostMapping("/login")
     public String login(String param) {
         String platform = request.getHeader("platform");
         String res;
@@ -48,7 +41,7 @@ public class UserController {
         return res;
     }
 
-    @RequestMapping(value = "/getUserInfo", method = RequestMethod.GET)
+    @GetMapping("/getUserInfo")
     public String getUserInfo(String sessionId) {
         JSONObject returnJson = new JSONObject();
 

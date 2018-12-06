@@ -14,11 +14,11 @@
     <version>1.0.0.RELEASE</version>
 
     <dependencies>
-
         <dependency>
             <groupId>cn.ccsu</groupId>
             <artifactId>common-code</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0.0.RELEASE</version>
+            <scope>compile</scope>
         </dependency>
 
         <dependency>

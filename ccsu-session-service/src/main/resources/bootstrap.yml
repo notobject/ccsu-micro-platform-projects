@@ -4,15 +4,15 @@ spring:
   application:
     name: ccsu-session-service
   rabbitmq:
-    host: mq.notobject.com
-    port: 5672
-    username: test
-    password: test
+    host: @rabbitmq.host@
+    port: @rabbitmq.port@
+    username: @rabbitmq.username@
+    password: @rabbitmq.password@
   redis:
     database: 0
-    host: cache.notobject.com
-    port: 6379
-    password: redis
+    host: @redis.host@
+    port: @redis.port@
+    password: @redis.password@
     timeout: 6000ms
     jedis:
       pool:
@@ -20,16 +20,15 @@ spring:
         max-idle: 10
         min-idle: 5
         max-wait: -1ms
-
   cloud:
     config:
       discovery:
         enabled: true
-        service-id: ccsu-config-server
+        service-id: @config.instance.id@
 eureka:
   instance:
-    ip-address: localhost
-    instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${random.uuid}
+    ip-address: @ip.address@
+    instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${random.int}
     prefer-ip-address: true
     lease-renewal-interval-in-seconds: 30
     lease-expiration-duration-in-seconds: 90
@@ -37,4 +36,4 @@ eureka:
     registry-fetch-interval-seconds: 30
     fetch-registry: true
     service-url:
-      defaultZone: http://serverb1.notobject.com:8761/eureka/, http://serverb2.notobject.com:8761/eureka/
+      defaultZone: @register.instance.address@

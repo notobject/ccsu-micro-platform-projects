@@ -6,7 +6,6 @@ package cn.ccsu.user.service.impl;
 
 import cn.ccsu.common.cnt.Const;
 import cn.ccsu.user.deps.SessionService;
-import cn.ccsu.user.entity.SessionInfo;
 import cn.ccsu.user.service.UserService;
 import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
@@ -29,13 +28,10 @@ public class MiniProgramUserServiceImpl implements UserService {
 
     @Value("${wx.appId: unkown}")
     private String appId;
-
     @Value("${wx.appSecret: unkown}")
     private String appSecret;
-
     @Autowired
     private RestTemplate restTemplate;
-
     @Autowired
     private SessionService sessionService;
 
@@ -56,7 +52,7 @@ public class MiniProgramUserServiceImpl implements UserService {
         }
         openIdAndSessionKey.remove("errcode");
         openIdAndSessionKey.remove("errmsg");
-        // 用openId 和 session_key 去会话服务器拿到session
+        // 用openId 和 session_key 去会话服务器拿到sessionId
 
         // 存入用户信息到会话中
         JSONObject sessionJson = JSONObject.parseObject(sessionService.newSession(openIdAndSessionKey.toString()));
@@ -87,7 +83,7 @@ public class MiniProgramUserServiceImpl implements UserService {
             JSONObject res = JSONObject.parseObject(entity.getBody());
             int errcode = res.getIntValue("errcode");
             returnJson.put("errcode", errcode);
-            if (errcode == 0) {
+            if (0 == errcode) {
                 // 请求成功
                 returnJson.put("openId", res.getString("openid"));
                 returnJson.put("sessionKey", res.getString("session_key"));

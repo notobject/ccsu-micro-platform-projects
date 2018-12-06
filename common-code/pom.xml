@@ -9,6 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>common-code</artifactId>
-
-
+    <version>1.0.0.RELEASE</version>
+    <packaging>jar</packaging>
+    <description> 用于存放公共代码，供其它模块调用</description>
 </project>
