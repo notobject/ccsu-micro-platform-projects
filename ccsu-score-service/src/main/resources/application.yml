@@ -2,21 +2,20 @@ server:
   port: 0
 spring:
   application:
-    name: ccsu-demo-service
+    name: ccsu-score-service
   rabbitmq:
-    host: @rabbitmq.host@
-    port: @rabbitmq.port@
-    username: @rabbitmq.username@
-    password: @rabbitmq.password@
+    host: mq.notobject.com
+    port: 5672
+    username: test
+    password: test
   cloud:
     config:
       discovery:
         enabled: true
-        service-id: @config.instance.id@
-      profile: dev
+        service-id: ccsu-config-server
 eureka:
   instance:
-    ip-address: @ip.address@
+    ip-address: localhost
     instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${random.uuid}
     prefer-ip-address: true
     lease-renewal-interval-in-seconds: 30
@@ -25,4 +24,4 @@ eureka:
     registry-fetch-interval-seconds: 30
     fetch-registry: true
     service-url:
-      defaultZone: @register.instance.address@
+      defaultZone: http://serverb1.notobject.com:8761/eureka/,http://serverb2.notobject.com:8761/eureka/
