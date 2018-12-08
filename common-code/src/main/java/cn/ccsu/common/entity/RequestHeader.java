@@ -4,12 +4,15 @@
  */
 package cn.ccsu.common.entity;
 
+import com.sun.istack.internal.NotNull;
+
 import java.io.Serializable;
 
 /**
  * 业务统一请求头
  */
 public class RequestHeader implements Serializable {
+
     private String appPlatform;         // 请求客户端平台名称
     private String appVersion;          // 应用版本号
     private String sessionId;           // 会话ID

@@ -211,9 +211,9 @@
         <module>ccsu-config-server</module>
         <module>ccsu-register-server</module>
         <module>ccsu-proxy-server</module>
-        <module>ccsu-demo</module>
         <module>ccsu-user-service</module>
         <module>ccsu-session-service</module>
+        <module>ccsu-score-service</module>
         <module>common-code</module>
     </modules>
 
