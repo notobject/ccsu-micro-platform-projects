@@ -11,14 +11,16 @@ import lombok.Getter;
  */
 @Getter
 public enum NotifyStatus {
-    unread("未读"),
-    read("已读"),
-    delete("已删除")
-    ;
+    unread(0, "未读"),
+    read(1, "已读"),
+    delete(2, "已删除");
+
+    private Integer code;
 
     private String status;
 
-    NotifyStatus(String status) {
+    NotifyStatus(Integer code, String status) {
+        this.code = code;
         this.status = status;
     }
 }

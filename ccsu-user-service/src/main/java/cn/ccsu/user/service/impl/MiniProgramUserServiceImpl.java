@@ -39,7 +39,7 @@ public class MiniProgramUserServiceImpl implements UserService {
     public String login(String jsonParam) {
         JSONObject returnJson = new JSONObject();
         JSONObject info = JSONObject.parseObject(jsonParam);
-        String code = info.getString("code");
+        String code = info.getString("errcode");
 
         // 用code 去微信服务器拿 openId 和 session_key
         JSONObject openIdAndSessionKey = code2session(code);

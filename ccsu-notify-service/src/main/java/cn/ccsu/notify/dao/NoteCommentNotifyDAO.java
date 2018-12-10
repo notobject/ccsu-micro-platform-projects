@@ -1,6 +1,10 @@
 package cn.ccsu.notify.dao;
 
+import cn.ccsu.notify.pojo.po.NoteCommentNotifyPO;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @author hangs.zhang
@@ -10,4 +14,16 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface NoteCommentNotifyDAO {
+
+    // 列表页
+    List<NoteCommentNotifyPO> list(@Param("userId") Integer userId, @Param("status") int status,
+                                   @Param("start") int start, @Param("offset") int offset);
+
+    // 删除通知 即修改状态
+    int updateCommentNotifyStatus(@Param("notifyId") int notifyId, @Param("notifiedUserId") int notifiedUserId,
+                                  @Param("status") int status);
+
+    // 查询通知内容
+    NoteCommentNotifyPO selectByNotifyId(@Param("notifyId") int notifyId);
+
 }

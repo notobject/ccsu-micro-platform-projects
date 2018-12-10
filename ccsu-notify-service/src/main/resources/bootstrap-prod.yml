@@ -1,0 +1,35 @@
+server:
+  # 随机端口
+  port: 0
+spring:
+  application:
+    name: ccsu-notify-service
+  rabbitmq:
+    host: @rabbitmq.host@
+    port: @rabbitmq.port@
+    username: @rabbitmq.username@
+    password: @rabbitmq.password@
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: @config.instance.id@
+
+# MyBatis配置
+mybatis:
+  mapperLocations: classpath:mapper/*.xml
+  typeAliasesPackage: cn.ccsu.notify.pojo
+  config-location: classpath:mybatis-config.xml
+
+eureka:
+  instance:
+    ip-address: @ip.address@
+    instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${random.int}
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 30
+    lease-expiration-duration-in-seconds: 90
+  client:
+    registry-fetch-interval-seconds: 30
+    fetch-registry: true
+    service-url:
+      defaultZone: @register.instance.address@

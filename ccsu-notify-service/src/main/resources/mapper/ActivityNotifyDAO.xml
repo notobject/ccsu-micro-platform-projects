@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ccsu.notify.dao.ActivityNotifyDAO">
+
+    <update id="updateActivityNotifyStatus">
+        update activity_notified set
+        status = #{status}
+        where
+        notify_id = #{notifyId} and
+        notified_user_id = #{notifiedUserId}
+    </update>
+
+    <select id="list" resultType="cn.ccsu.notify.pojo.po.ActivityNotifyPO">
+        select activity_notify.*, activity_notified.status
+        from activity_notify join activity_notified
+        on activity_notify.notify_id = activity_notified.notify_id
+        where activity_notified.notified_user_id = #{userId}
+        and activity_notified.status = #{status}
+        limit #{start}, #{offset}
+    </select>
+
+    <select id="selectByNotifyId" resultType="cn.ccsu.notify.pojo.po.ActivityNotifyPO">
+        select * from
+          activity_notify
+        where
+          notify_id = #{notifyId}
+    </select>
+
+</mapper>

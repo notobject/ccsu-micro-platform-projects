@@ -50,6 +50,13 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.47</version>
         </dependency>
+        <!-- google guava 工具库 -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>26.0-jre</version>
+        </dependency>
+        <!-- lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -87,7 +94,8 @@
             <properties>
                 <profiles.active>b1</profiles.active>
                 <ip.address>${server.b1}</ip.address>
-                <register.instance.address>http://${server.b1}:8761/eureka/,http://${server.b2}:8761/eureka/</register.instance.address>
+                <register.instance.address>http://${server.b1}:8761/eureka/,http://${server.b2}:8761/eureka/
+                </register.instance.address>
             </properties>
         </profile>
         <profile>
@@ -95,7 +103,8 @@
             <properties>
                 <profiles.active>b2</profiles.active>
                 <ip.address>${server.b2}</ip.address>
-                <register.instance.address>http://${server.b2}:8761/eureka/,http://${server.b1}:8761/eureka/</register.instance.address>
+                <register.instance.address>http://${server.b2}:8761/eureka/,http://${server.b1}:8761/eureka/
+                </register.instance.address>
             </properties>
         </profile>
         <profile>
@@ -103,7 +112,8 @@
             <properties>
                 <profiles.active>c1</profiles.active>
                 <ip.address>${server.c1}</ip.address>
-                <register.instance.address>http://${server.b1}:8761/eureka/,http://${server.b2}:8761/eureka/</register.instance.address>
+                <register.instance.address>http://${server.b1}:8761/eureka/,http://${server.b2}:8761/eureka/
+                </register.instance.address>
             </properties>
         </profile>
         <profile>
@@ -111,7 +121,8 @@
             <properties>
                 <profiles.active>c2</profiles.active>
                 <ip.address>${server.c2}</ip.address>
-                <register.instance.address>http://${server.b2}:8761/eureka/,http://${server.b1}:8761/eureka/</register.instance.address>
+                <register.instance.address>http://${server.b2}:8761/eureka/,http://${server.b1}:8761/eureka/
+                </register.instance.address>
             </properties>
         </profile>
     </profiles>
@@ -198,7 +209,7 @@
 
         <repository>
             <id>org.springframework</id>
-            <url> http://maven.springframework.org/snapshot</url>
+            <url>http://maven.springframework.org/snapshot</url>
         </repository>
         <repository>
             <id>spring-milestone</id>

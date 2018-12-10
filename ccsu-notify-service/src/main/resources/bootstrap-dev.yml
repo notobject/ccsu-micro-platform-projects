@@ -1,6 +1,6 @@
 server:
   # 随机端口
-  port: 0
+  port: 8080
 spring:
   application:
     name: ccsu-notify-service
