@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ccsu.project.dao.UserDAO">
+
+    <select id="selectUserByUid" parameterType="Integer" resultType="user">
+        select
+          u.username as "username",
+          a.title as "article.title"
+        from user as u
+        inner join
+        article as a
+        on u.uid = a.author_id
+        where u.uid = #{uid};
+    </select>
+
+    <select id="selectUserByUsername" parameterType="String" resultType="user">
+        select * from user where username = #{username}
+    </select>
+
+    <insert id="insert" parameterType="user">
+        insert into user(username, password)
+        values (#{user.username}, #{user.password})
+    </insert>
+
+    <delete id="delete" parameterType="user">
+        delete from user where uid = #{uid}
+    </delete>
+
+</mapper>

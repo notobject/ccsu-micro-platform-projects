@@ -1,0 +1,51 @@
+server:
+  # 随机端口
+  port: 0
+spring:
+  application:
+    name: ccsu-notify-service
+  rabbitmq:
+    host: @rabbitmq.host@
+    port: @rabbitmq.port@
+    username: @rabbitmq.username@
+    password: @rabbitmq.password@
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: @config.instance.id@
+
+  # 数据库配置
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: root
+    password: zhanghang
+    url: jdbc:mysql://127.0.0.1:3306/notify?characterEncoding=UTF-8&serverTimezone=GMT
+    dbcp2:
+      pool-prepared-statements: true
+      max-open-prepared-statements: 20
+      validation-query: select 'x'
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+    # 合并多个DruidDataSource的监控数据
+    useGlobalDataSourceStat: true
+    # 开始mergeSql，慢SQL
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    # 配置监控统计拦截的filters，去掉后监控界面的sql无法统计
+    filters: stat,wall
+    # 开启PSCache
+    poolPreparedStatements: false
+
+eureka:
+  instance:
+    ip-address: @ip.address@
+    instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${random.int}
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 30
+    lease-expiration-duration-in-seconds: 90
+  client:
+    registry-fetch-interval-seconds: 30
+    fetch-registry: true
+    service-url:
+      defaultZone: @register.instance.address@

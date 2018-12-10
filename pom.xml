@@ -214,6 +214,7 @@
         <module>ccsu-user-service</module>
         <module>ccsu-session-service</module>
         <module>ccsu-score-service</module>
+        <module>ccsu-notify-service</module>
         <module>common-code</module>
     </modules>
 
