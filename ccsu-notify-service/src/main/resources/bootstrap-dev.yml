@@ -37,6 +37,12 @@ spring:
     # 开启PSCache
     poolPreparedStatements: false
 
+# MyBatis配置
+mybatis:
+  mapperLocations: classpath:mapper/*.xml
+  typeAliasesPackage: com.ccsu.project.pojo
+  config-location: classpath:mybatis-config.xml
+
 eureka:
   instance:
     ip-address: @ip.address@
