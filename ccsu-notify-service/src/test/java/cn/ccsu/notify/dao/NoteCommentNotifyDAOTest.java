@@ -25,7 +25,7 @@ public class NoteCommentNotifyDAOTest extends NotifyServiceApplicationTests {
 
     @Test
     public void list() {
-        List<NoteCommentNotifyPO> list = noteCommentNotifyDAO.list(2, 1, 0, 5);
+        List<NoteCommentNotifyPO> list = noteCommentNotifyDAO.listByStatus(2, 1, 0, 5);
         log.info("size : {}", list.size());
         list.forEach(System.out::println);
     }

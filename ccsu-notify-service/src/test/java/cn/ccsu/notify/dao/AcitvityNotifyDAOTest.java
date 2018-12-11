@@ -1,7 +1,7 @@
 package cn.ccsu.notify.dao;
 
 import cn.ccsu.notify.NotifyServiceApplicationTests;
-import cn.ccsu.notify.pojo.po.ActivityNotifyPO;
+import cn.ccsu.notify.pojo.po.SystemNotifyPO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +18,11 @@ import java.util.List;
 public class AcitvityNotifyDAOTest extends NotifyServiceApplicationTests {
 
     @Autowired
-    private ActivityNotifyDAO acitvityNotifyDAO;
+    private SystemNotifyDAO acitvityNotifyDAO;
 
     @Test
     public void list() {
-        List<ActivityNotifyPO> list = acitvityNotifyDAO.list(2, 0, 0, 5);
+        List<SystemNotifyPO> list = acitvityNotifyDAO.listByStatus(2, 0, 0, 5);
         list.forEach(System.out::println);
     }
 
@@ -33,7 +33,7 @@ public class AcitvityNotifyDAOTest extends NotifyServiceApplicationTests {
 
     @Test
     public void selectByNotifyId() {
-        ActivityNotifyPO activityNotifyPO = acitvityNotifyDAO.selectByNotifyId(1);
+        SystemNotifyPO activityNotifyPO = acitvityNotifyDAO.selectByNotifyId(1);
         log.info("data : {}", activityNotifyPO);
     }
 }

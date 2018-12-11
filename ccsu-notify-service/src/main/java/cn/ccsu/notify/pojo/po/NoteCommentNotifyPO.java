@@ -23,7 +23,7 @@ public class NoteCommentNotifyPO {
     private Integer noteId;
 
     // 发出通知的人
-    private String authorId;
+    private Integer authorId;
 
     // 发送通知的时间
     private Date sendTime;

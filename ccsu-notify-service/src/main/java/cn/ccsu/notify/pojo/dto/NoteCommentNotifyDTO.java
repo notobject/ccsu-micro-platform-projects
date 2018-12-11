@@ -13,6 +13,10 @@ public class NoteCommentNotifyDTO extends Notify {
 
     private Integer noteId;
 
+    // 发出评论者的id
     private Integer authorId;
+
+    // 发出评论者的name
+    private String authorNickName;
 
 }

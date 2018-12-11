@@ -1,12 +1,13 @@
 package cn.ccsu.notify.service.impl;
 
-import cn.ccsu.notify.dao.ActivityNotifyDAO;
+import cn.ccsu.notify.dao.SystemNotifyDAO;
 import cn.ccsu.notify.dao.NoteCommentNotifyDAO;
 import cn.ccsu.notify.enums.NotifyStatus;
-import cn.ccsu.notify.pojo.dto.ActivityNotifyDTO;
+import cn.ccsu.notify.enums.NotifyType;
+import cn.ccsu.notify.pojo.dto.SystemNotifyDTO;
 import cn.ccsu.notify.pojo.dto.NoteCommentNotifyDTO;
 import cn.ccsu.notify.pojo.dto.Notify;
-import cn.ccsu.notify.pojo.po.ActivityNotifyPO;
+import cn.ccsu.notify.pojo.po.SystemNotifyPO;
 import cn.ccsu.notify.pojo.po.NoteCommentNotifyPO;
 import cn.ccsu.notify.service.NotifyService;
 import com.google.common.collect.Lists;
@@ -14,11 +15,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * @author hangs.zhang
@@ -30,38 +28,92 @@ import java.util.stream.Stream;
 public class NotifyServiceImpl implements NotifyService {
 
     @Autowired
-    private ActivityNotifyDAO activityNotifyDAO;
+    private SystemNotifyDAO systemNotifyDAO;
 
     @Autowired
     private NoteCommentNotifyDAO noteCommentNotifyDAO;
 
     @Override
     public List<Notify> getUnReadNotify(int userId, int start, int offset) {
-        List<ActivityNotifyPO> activityNotifyPOS = activityNotifyDAO.list(userId, NotifyStatus.unread.getCode(), start, offset);
-        List<NoteCommentNotifyPO> noteCommentNotifyPOS = noteCommentNotifyDAO.list(userId, NotifyStatus.unread.getCode(), start, offset);
+        List<SystemNotifyPO> systemNotifyPOS = systemNotifyDAO.listByStatus(userId, NotifyStatus.unread.getCode(), start, offset);
+        List<NoteCommentNotifyPO> noteCommentNotifyPOS = noteCommentNotifyDAO.listByStatus(userId, NotifyStatus.unread.getCode(), start, offset);
         List<Notify> result = Lists.newArrayList();
-        activityNotifyPOS.forEach(e -> {
-            ActivityNotifyDTO activityNotifyDTO = new ActivityNotifyDTO();
-            BeanUtils.copyProperties(e, activityNotifyDTO);
-            result.add(activityNotifyDTO);
+        systemNotifyPOS.forEach(e -> {
+            SystemNotifyDTO systemNotifyDTO = new SystemNotifyDTO();
+            BeanUtils.copyProperties(e, systemNotifyDTO);
+            systemNotifyDTO.setType(NotifyType.getNameByCode(e.getType()));
+            systemNotifyDTO.setNotifyType("system");
+            result.add(systemNotifyDTO);
         });
         noteCommentNotifyPOS.forEach(e -> {
             NoteCommentNotifyDTO noteCommentNotifyDTO = new NoteCommentNotifyDTO();
             BeanUtils.copyProperties(e, noteCommentNotifyDTO);
+            noteCommentNotifyDTO.setNotifyType("noteComment");
             result.add(noteCommentNotifyDTO);
         });
         return result.stream()
-                .sorted((o1, o2) -> (int) (o1.getSendTime().getTime() - o2.getSendTime().getTime()))
+                .sorted((o1, o2) -> (int) (o2.getSendTime().getTime() - o1.getSendTime().getTime()))
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<Notify> getAllNotify(int userId, int start, int offset) {
-        return null;
+        List<SystemNotifyPO> systemNotifyPOS = systemNotifyDAO.listAll(userId, start, offset);
+        List<NoteCommentNotifyPO> noteCommentNotifyPOS = noteCommentNotifyDAO.listAll(userId, start, offset);
+        List<Notify> result = Lists.newArrayList();
+        systemNotifyPOS.forEach(e -> {
+            SystemNotifyDTO systemNotifyDTO = new SystemNotifyDTO();
+            BeanUtils.copyProperties(e, systemNotifyDTO);
+            systemNotifyDTO.setType(NotifyType.getNameByCode(e.getType()));
+            systemNotifyDTO.setNotifyType("system");
+            result.add(systemNotifyDTO);
+        });
+        noteCommentNotifyPOS.forEach(e -> {
+            NoteCommentNotifyDTO noteCommentNotifyDTO = new NoteCommentNotifyDTO();
+            BeanUtils.copyProperties(e, noteCommentNotifyDTO);
+            noteCommentNotifyDTO.setNotifyType("noteComment");
+            result.add(noteCommentNotifyDTO);
+        });
+        return result.stream()
+                .sorted((o1, o2) -> (int) (o2.getSendTime().getTime() - o1.getSendTime().getTime()))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public boolean removeNotify(int userId, int notifyId) {
-        return false;
+    public Notify getNotifyContent(int userId, int notifyId, NotifyType notifyType) {
+         Notify result = null;
+        if(!NotifyType.comment.equals(notifyType)) {
+            SystemNotifyDTO systemNotifyDTO = new SystemNotifyDTO();
+            // 查询通知内容
+            SystemNotifyPO systemNotifyPO = systemNotifyDAO.selectByNotifyId(notifyId);
+            // 将status置为已读
+            systemNotifyDAO.updateActivityNotifyStatus(notifyId, userId, NotifyStatus.read.getCode());
+            BeanUtils.copyProperties(systemNotifyPO, systemNotifyDTO);
+            systemNotifyDTO.setType(NotifyType.getNameByCode(systemNotifyPO.getType()));
+            systemNotifyDTO.setNotifyType("system");
+            result = systemNotifyDTO;
+        } else {
+            NoteCommentNotifyDTO noteCommentNotifyDTO = new NoteCommentNotifyDTO();
+            // 查询通知内容
+            NoteCommentNotifyPO noteCommentNotifyPO = noteCommentNotifyDAO.selectByNotifyId(notifyId);
+            // 将status置为已读
+            noteCommentNotifyDAO.updateCommentNotifyStatus(notifyId, userId, NotifyStatus.read.getCode());
+            // 包装
+            BeanUtils.copyProperties(noteCommentNotifyPO, noteCommentNotifyDTO);
+            noteCommentNotifyDTO.setNotifyType("noteComment");
+            result = noteCommentNotifyDTO;
+        }
+        return result;
+    }
+
+    @Override
+    public boolean removeNotify(int userId, int notifyId, NotifyType notifyType) {
+        boolean result = false;
+        if(!NotifyType.comment.equals(notifyType)) {
+            result = systemNotifyDAO.updateActivityNotifyStatus(notifyId, userId, 2) == 1;
+        } else {
+            result = noteCommentNotifyDAO.updateCommentNotifyStatus(notifyId, userId, 2) == 1;
+        }
+        return result;
     }
 }

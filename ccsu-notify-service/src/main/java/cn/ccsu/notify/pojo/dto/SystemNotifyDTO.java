@@ -9,7 +9,7 @@ import lombok.Data;
  * function:
  */
 @Data
-public class ActivityNotifyDTO extends Notify {
+public class SystemNotifyDTO extends Notify {
 
     private String type;
 

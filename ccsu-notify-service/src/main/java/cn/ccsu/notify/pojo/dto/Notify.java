@@ -13,8 +13,8 @@ import java.util.Date;
 @Data
 public class Notify {
 
-    // 标志位 区分 招聘，活动，评论通知
-    private String flag;
+    // 标志位 区分 system,noteComment
+    private String notifyType;
 
     private Integer notifyId;
 

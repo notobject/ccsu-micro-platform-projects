@@ -16,8 +16,11 @@ import java.util.List;
 public interface NoteCommentNotifyDAO {
 
     // 列表页
-    List<NoteCommentNotifyPO> list(@Param("userId") Integer userId, @Param("status") int status,
-                                   @Param("start") int start, @Param("offset") int offset);
+    List<NoteCommentNotifyPO> listByStatus(@Param("userId") Integer userId, @Param("status") int status,
+                                           @Param("start") int start, @Param("offset") int offset);
+
+    List<NoteCommentNotifyPO> listAll(@Param("userId") Integer userId, @Param("start") int start,
+                                      @Param("offset") int offset);
 
     // 删除通知 即修改状态
     int updateCommentNotifyStatus(@Param("notifyId") int notifyId, @Param("notifiedUserId") int notifiedUserId,

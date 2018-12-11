@@ -14,8 +14,46 @@ spring:
       discovery:
         enabled: true
         service-id: @config.instance.id@
+    stream:
+      bindings:
+        # 生产者配置
+        output_channel:
+          # 交换机名称
+          destination: springCloud_exchange
+          # 队列名称
+          group: springCloud_queue
+          # 环境
+          binder: rabbit_cluster
+        # 消费者配置
+        notify_channel:
+          destination: springCloud_exchange
+          group: springCloud_queue
+          binder: rabbit_cluster
+          consumer:
+            concurrency: 5
+      rabbit:
+        bindings:
+          # 消费者配置
+          notify_channel:
+            consumer:
+              requeue-rejected: false
+              acknowledge-mode: MANUAL
+              recovery-interval: 3000
+              durable-subscription: true
+              max-concurrency: 10
+      binders:
+        rabbit_cluster:
+          # stream集群类型
+          type: rabbit
+          enviroment:
+            spring:
+              rabbitmq:
+                addresses: 127.0.0.1:5672
+                username: guest
+                password: guest
+                virtual-host: /
 
-  # 数据库配置
+
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
@@ -28,16 +66,8 @@ spring:
       validation-query: select 'x'
       time-between-eviction-runs-millis: 60000
       min-evictable-idle-time-millis: 300000
-    # 合并多个DruidDataSource的监控数据
-    useGlobalDataSourceStat: true
-    # 开始mergeSql，慢SQL
-    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
-    # 配置监控统计拦截的filters，去掉后监控界面的sql无法统计
-    filters: stat,wall
-    # 开启PSCache
-    poolPreparedStatements: false
 
-# MyBatis配置
+
 mybatis:
   mapperLocations: classpath:mapper/*.xml
   typeAliasesPackage: com.ccsu.project.pojo
