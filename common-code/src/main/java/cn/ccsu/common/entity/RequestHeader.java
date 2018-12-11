@@ -4,8 +4,6 @@
  */
 package cn.ccsu.common.entity;
 
-import com.sun.istack.internal.NotNull;
-
 import java.io.Serializable;
 
 /**
