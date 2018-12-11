@@ -5,10 +5,10 @@ spring:
   application:
     name: ccsu-notify-service
   rabbitmq:
-    host: @rabbitmq.host@
-    port: @rabbitmq.port@
-    username: @rabbitmq.username@
-    password: @rabbitmq.password@
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
   cloud:
     config:
       discovery:
@@ -75,7 +75,7 @@ mybatis:
 
 eureka:
   instance:
-    ip-address: @ip.address@
+    ip-address: localhost
     instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${random.int}
     prefer-ip-address: true
     lease-renewal-interval-in-seconds: 30
