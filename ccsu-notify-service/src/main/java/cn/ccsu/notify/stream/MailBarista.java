@@ -7,20 +7,20 @@ import org.springframework.messaging.SubscribableChannel;
 
 /**
  * @author hangs.zhang
- * @date 2018/12/9
+ * @date 2018/12/12
  * *****************
  * function:
  */
-public interface Barista {
+public interface MailBarista {
 
-    String OUTPUT_CHANNEL = "output_channel";
+    String MAIL_OUTPUT_CHANNEL = "mail_output_channel";
 
-    String INPUT_CHANNEL = "notify_channel";
+    String MAIL_INPUT_CHANNEL = "mail_input_channel";
 
-    @Output(Barista.OUTPUT_CHANNEL)
+    @Output(MailBarista.MAIL_OUTPUT_CHANNEL)
     MessageChannel output();
 
-    @Input(Barista.INPUT_CHANNEL)
+    @Input(MailBarista.MAIL_INPUT_CHANNEL)
     SubscribableChannel input();
 
 }

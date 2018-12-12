@@ -4,7 +4,21 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.ccsu.notify.dao.SystemNotifyDAO">
 
-    <update id="updateActivityNotifyStatus">
+    <insert id="insertNotify" parameterType="cn.ccsu.notify.pojo.po.SystemNotifyPO"
+            useGeneratedKeys="true" keyProperty="notifyId">
+        insert into system_notify(system_notify_type, activity_name, send_time, message)
+        values(#{systemNotifyType}, #{activityName}, #{sendTime}, #{message});
+    </insert>
+
+    <insert id="insertNotified">
+        insert into system_notified(notify_id, notified_user_id, status)
+        values
+        <foreach collection="notifyiedUserIds" item="item" index="index" separator=",">
+            (#{notifyId}, #{item}, 0)
+        </foreach>
+    </insert>
+
+    <update id="updateNotifyStatus">
         update system_notified set
         status = #{status}
         where
@@ -26,6 +40,7 @@
         from system_notify inner join system_notified
         on system_notify.notify_id = system_notified.notify_id
         where system_notified.notified_user_id = #{userId}
+        and system_notified.status != 2
         limit #{start}, #{offset}
     </select>
 

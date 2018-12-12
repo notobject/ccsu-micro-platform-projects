@@ -34,6 +34,23 @@ public class NotifyServiceImpl implements NotifyService {
     private NoteCommentNotifyDAO noteCommentNotifyDAO;
 
     @Override
+    public void storageNotify(Notify notify, List<Integer> userIds, NotifyType notifyType) {
+        if (!NotifyType.comment.equals(notifyType)) {
+            SystemNotifyPO systemNotifyPO = new SystemNotifyPO();
+            SystemNotifyDTO systemNotifyDTO = (SystemNotifyDTO) notify;
+            BeanUtils.copyProperties(systemNotifyDTO, systemNotifyPO);
+            systemNotifyDAO.insertNotify(systemNotifyPO);
+            systemNotifyDAO.insertNotified(systemNotifyPO.getNotifyId(), userIds);
+        } else {
+            NoteCommentNotifyPO noteCommentNotifyPO = new NoteCommentNotifyPO();
+            NoteCommentNotifyDTO noteCommentNotifyDTO = (NoteCommentNotifyDTO) notify;
+            BeanUtils.copyProperties(noteCommentNotifyDTO, noteCommentNotifyPO);
+            noteCommentNotifyDAO.insertNotify(noteCommentNotifyPO);
+            noteCommentNotifyDAO.insertNotified(noteCommentNotifyPO.getNotifyId(), userIds);
+        }
+    }
+
+    @Override
     public List<Notify> getUnReadNotify(int userId, int start, int offset) {
         List<SystemNotifyPO> systemNotifyPOS = systemNotifyDAO.listByStatus(userId, NotifyStatus.unread.getCode(), start, offset);
         List<NoteCommentNotifyPO> noteCommentNotifyPOS = noteCommentNotifyDAO.listByStatus(userId, NotifyStatus.unread.getCode(), start, offset);
@@ -41,7 +58,6 @@ public class NotifyServiceImpl implements NotifyService {
         systemNotifyPOS.forEach(e -> {
             SystemNotifyDTO systemNotifyDTO = new SystemNotifyDTO();
             BeanUtils.copyProperties(e, systemNotifyDTO);
-            systemNotifyDTO.setType(NotifyType.getNameByCode(e.getType()));
             systemNotifyDTO.setNotifyType("system");
             result.add(systemNotifyDTO);
         });
@@ -64,7 +80,6 @@ public class NotifyServiceImpl implements NotifyService {
         systemNotifyPOS.forEach(e -> {
             SystemNotifyDTO systemNotifyDTO = new SystemNotifyDTO();
             BeanUtils.copyProperties(e, systemNotifyDTO);
-            systemNotifyDTO.setType(NotifyType.getNameByCode(e.getType()));
             systemNotifyDTO.setNotifyType("system");
             result.add(systemNotifyDTO);
         });
@@ -81,15 +96,14 @@ public class NotifyServiceImpl implements NotifyService {
 
     @Override
     public Notify getNotifyContent(int userId, int notifyId, NotifyType notifyType) {
-         Notify result = null;
-        if(!NotifyType.comment.equals(notifyType)) {
+        Notify result = null;
+        if (!NotifyType.comment.equals(notifyType)) {
             SystemNotifyDTO systemNotifyDTO = new SystemNotifyDTO();
             // 查询通知内容
             SystemNotifyPO systemNotifyPO = systemNotifyDAO.selectByNotifyId(notifyId);
             // 将status置为已读
-            systemNotifyDAO.updateActivityNotifyStatus(notifyId, userId, NotifyStatus.read.getCode());
+            systemNotifyDAO.updateNotifyStatus(notifyId, userId, NotifyStatus.read.getCode());
             BeanUtils.copyProperties(systemNotifyPO, systemNotifyDTO);
-            systemNotifyDTO.setType(NotifyType.getNameByCode(systemNotifyPO.getType()));
             systemNotifyDTO.setNotifyType("system");
             result = systemNotifyDTO;
         } else {
@@ -109,10 +123,10 @@ public class NotifyServiceImpl implements NotifyService {
     @Override
     public boolean removeNotify(int userId, int notifyId, NotifyType notifyType) {
         boolean result = false;
-        if(!NotifyType.comment.equals(notifyType)) {
-            result = systemNotifyDAO.updateActivityNotifyStatus(notifyId, userId, 2) == 1;
+        if (!NotifyType.comment.equals(notifyType)) {
+            result = systemNotifyDAO.updateNotifyStatus(notifyId, userId, NotifyStatus.delete.getCode()) == 1;
         } else {
-            result = noteCommentNotifyDAO.updateCommentNotifyStatus(notifyId, userId, 2) == 1;
+            result = noteCommentNotifyDAO.updateCommentNotifyStatus(notifyId, userId, NotifyStatus.delete.getCode()) == 1;
         }
         return result;
     }

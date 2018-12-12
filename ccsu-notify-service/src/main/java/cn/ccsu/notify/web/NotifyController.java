@@ -29,19 +29,6 @@ public class NotifyController {
     @Autowired
     private NotifyService notifyService;
 
-    // 询问是否有更新
-    @GetMapping("/ask")
-    public BaseEntity ask(@RequestParam int userId) {
-        List<Notify> list = notifyService.getUnReadNotify(userId, 0, 1);
-        String result = "";
-        if (list.size() == 0) {
-            result = "没有新的通知";
-        } else {
-            result = "有新的通知";
-        }
-        return BaseEntityUtil.success(result);
-    }
-
     @GetMapping("/unread")
     public BaseEntity listUnread(@RequestParam int userId,
                                  @RequestParam(required = false, defaultValue = "0") int start,
@@ -52,9 +39,9 @@ public class NotifyController {
 
     // 根据被通知者id 删除通知
     @GetMapping("/delete")
-    public BaseEntity delete(@RequestParam Integer userId, @RequestParam Integer notifiedId, @RequestParam String notifyName) {
-        NotifyType notifyType = NotifyType.getNotifyTypeByName(notifyName);
-        boolean isDelete = notifyService.removeNotify(userId, notifiedId, notifyType);
+    public BaseEntity delete(@RequestParam Integer userId, @RequestParam Integer notifyId, @RequestParam String notifyTypeName) {
+        NotifyType notifyType = NotifyType.getNotifyType(notifyTypeName);
+        boolean isDelete = notifyService.removeNotify(userId, notifyId, notifyType);
         if (isDelete) {
             return BaseEntityUtil.success();
         } else {
@@ -73,8 +60,8 @@ public class NotifyController {
 
     // 根据notifyId与userId读取通知内容
     @GetMapping("/content")
-    public BaseEntity content(@RequestParam Integer userId, @RequestParam Integer notifyId, @RequestParam String notifyName) {
-        NotifyType notifyType = NotifyType.getNotifyTypeByName(notifyName);
+    public BaseEntity content(@RequestParam Integer userId, @RequestParam Integer notifyId, @RequestParam String notifyTypeName) {
+        NotifyType notifyType = NotifyType.getNotifyType(notifyTypeName);
         Notify notify = notifyService.getNotifyContent(userId, notifyId, notifyType);
         return BaseEntityUtil.success(notify);
     }

@@ -14,6 +14,9 @@ import java.util.List;
  */
 public interface NotifyService {
 
+    // 通知入库
+    void storageNotify(Notify notify, List<Integer> userIds, NotifyType notifyType);
+
     // 获取未读通知
     List<Notify> getUnReadNotify(int userId, int start, int offset);
 

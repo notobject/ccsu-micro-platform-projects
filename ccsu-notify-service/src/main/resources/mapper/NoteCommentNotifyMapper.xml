@@ -4,6 +4,20 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
         <mapper namespace="cn.ccsu.notify.dao.NoteCommentNotifyDAO">
 
+    <insert id="insertNotify" parameterType="cn.ccsu.notify.pojo.po.NoteCommentNotifyPO"
+            useGeneratedKeys="true" keyProperty="notifyId">
+      insert into note_comment_notify(note_id, author_id, send_time, message)
+      values (#{noteId}, #{authorId}, #{sendTime}, #{message})
+    </insert>
+
+    <insert id="insertNotified">
+        insert into note_comment_notified(notify_id, notified_user_id, status)
+        values
+        <foreach collection="notifyiedUserIds" item="item" index="index" separator=",">
+            (#{notifyId}, #{item}, 0)
+        </foreach>
+    </insert>
+
             <update id="updateCommentNotifyStatus">
         update
           note_comment_notified
@@ -28,11 +42,12 @@
         limit #{start}, #{offset}
     </select>
 
-            <select id="listAll" resultType="cn.ccsu.notify.pojo.po.NoteCommentNotifyPO">
+    <select id="listAll" resultType="cn.ccsu.notify.pojo.po.NoteCommentNotifyPO">
         select note_comment_notify.*, note_comment_notified.status
         from note_comment_notify inner join note_comment_notified
         on note_comment_notify.notify_id = note_comment_notified.notify_id
         where note_comment_notified.notified_user_id = #{userId}
+        and note_comment_notified.status != 2
         limit #{start}, #{offset}
     </select>
 

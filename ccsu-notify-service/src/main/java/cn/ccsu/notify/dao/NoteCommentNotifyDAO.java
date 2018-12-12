@@ -15,6 +15,11 @@ import java.util.List;
 @Repository
 public interface NoteCommentNotifyDAO {
 
+    int insertNotify(NoteCommentNotifyPO noteCommentNotifyPO);
+
+    int insertNotified(@Param("notifyId") int notifyId,
+                       @Param("notifyiedUserIds") List<Integer> notifyiedUserIds);
+
     // 列表页
     List<NoteCommentNotifyPO> listByStatus(@Param("userId") Integer userId, @Param("status") int status,
                                            @Param("start") int start, @Param("offset") int offset);

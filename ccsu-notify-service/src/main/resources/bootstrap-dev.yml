@@ -17,24 +17,43 @@ spring:
     stream:
       bindings:
         # 生产者配置
-        output_channel:
-          # 交换机名称
-          destination: springCloud_exchange
-          # 队列名称
-          group: springCloud_queue
-          # 环境
+        notify_output_channel:
+          destination: CCSU-NOTIFY-SERVICE-NOTIFY
+          group: NOTIFY
           binder: rabbit_cluster
-        # 消费者配置
-        notify_channel:
-          destination: springCloud_exchange
-          group: springCloud_queue
+        # 站内消息 消费者配置
+        notify_input_channel:
+          destination: CCSU-NOTIFY-SERVICE-NOTIFY
+          group: NOTIFY
           binder: rabbit_cluster
           consumer:
             concurrency: 5
+
+        # 邮箱消息生产者
+        mail_output_channel:
+          destination: CCSU-NOTIFY-SERVICE-MAIL
+          group: MAIL
+          binder: rabbit_cluster
+        # 邮箱消息 消费者配置
+        mail_input_channel:
+          destination: CCSU-NOTIFY-SERVICE-MAIL
+          group: MAIL
+          binder: rabbit_cluster
+          consumer:
+            concurrency: 5
+
       rabbit:
         bindings:
-          # 消费者配置
-          notify_channel:
+          # 站内消息 消费者配置
+          notify_input_channel:
+            consumer:
+              requeue-rejected: false
+              acknowledge-mode: MANUAL
+              recovery-interval: 3000
+              durable-subscription: true
+              max-concurrency: 10
+          # 邮箱消息 消费者配置
+          mail_input_channel:
             consumer:
               requeue-rejected: false
               acknowledge-mode: MANUAL
@@ -52,6 +71,22 @@ spring:
                 username: guest
                 password: guest
                 virtual-host: /
+  # 邮箱配置
+  mail:
+    username: 1078504296@qq.com
+    password: lwbckvlzmynfbafj
+    host: smtp.qq.com
+    default-encoding: utf-8
+    protocal: smtp
+    port: 25
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+
 
 
   datasource:

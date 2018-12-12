@@ -16,7 +16,7 @@ public class SystemNotifyPO {
     private Integer notifyId;
 
     // 0 活动通知 1 招聘通知
-    private Integer type;
+    private String systemNotifyType;
 
     private String message;
 

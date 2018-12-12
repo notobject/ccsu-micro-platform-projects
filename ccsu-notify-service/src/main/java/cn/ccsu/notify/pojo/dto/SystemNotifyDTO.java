@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 public class SystemNotifyDTO extends Notify {
 
-    private String type;
+    private String systemNotifyType;
 
     private String activityName;
 

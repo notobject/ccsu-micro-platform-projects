@@ -15,6 +15,11 @@ import java.util.List;
 @Repository
 public interface SystemNotifyDAO {
 
+    int insertNotify(SystemNotifyPO systemNotifyPO);
+
+    int insertNotified(@Param("notifyId") int notifyId,
+                       @Param("notifyiedUserIds") List<Integer> notifyiedUserIds);
+
     // 获取评论列表页
     List<SystemNotifyPO> listByStatus(@Param("userId") int userId, @Param("status") int status,
                                       @Param("start") int start, @Param("offset") int offset);
@@ -22,8 +27,8 @@ public interface SystemNotifyDAO {
     List<SystemNotifyPO> listAll(@Param("userId") int userId, @Param("start") int start,
                                  @Param("offset") int offset);
 
-    int updateActivityNotifyStatus(@Param("notifyId") int notifyId, @Param("notifiedUserId") int notifiedUserId,
-                                   @Param("status") int status);
+    int updateNotifyStatus(@Param("notifyId") int notifyId, @Param("notifiedUserId") int notifiedUserId,
+                           @Param("status") int status);
 
     SystemNotifyPO selectByNotifyId(@Param("notifyId") int notifyId);
 

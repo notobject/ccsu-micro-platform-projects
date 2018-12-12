@@ -1,10 +1,8 @@
 package cn.ccsu.notify.pojo.po;
 
-import cn.ccsu.notify.enums.NotifyStatus;
 import lombok.Data;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author hangs.zhang

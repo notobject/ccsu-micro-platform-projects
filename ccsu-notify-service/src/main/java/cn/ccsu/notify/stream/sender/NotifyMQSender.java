@@ -1,6 +1,6 @@
 package cn.ccsu.notify.stream.sender;
 
-import cn.ccsu.notify.stream.Barista;
+import cn.ccsu.notify.stream.NotifyBarista;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.EnableBinding;
@@ -19,16 +19,16 @@ import java.util.Map;
  */
 @Slf4j
 @Service
-@EnableBinding(Barista.class)
-public class RabbitMQSender {
+@EnableBinding(NotifyBarista.class)
+public class NotifyMQSender {
 
     @Autowired
-    private Barista barista;
+    private NotifyBarista notifyBarista;
 
     public void sendMessage(Object message, Map<String, Object> properties) {
         MessageHeaders messageHeaders = new MessageHeaders(properties);
         Message msg = MessageBuilder.createMessage(message, messageHeaders);
-        boolean isSend = barista.output().send(msg);
+        boolean isSend = notifyBarista.output().send(msg);
         log.info("发送数据 : {}, 发送状态 : {}", message, isSend);
     }
 

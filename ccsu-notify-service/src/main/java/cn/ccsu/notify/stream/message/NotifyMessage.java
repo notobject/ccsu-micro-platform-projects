@@ -27,11 +27,17 @@ public class NotifyMessage {
 
         private String message;
 
+        private String notifyType;
+
+        private NoteCommentNotify noteCommentNotify;
+
+        private SystemNotify systemNotify;
+
     }
 
     // 文章评论通知
     @Data
-    public class NoteCommentNotify extends Notify {
+    public static class NoteCommentNotify {
 
         private Integer noteId;
 
@@ -41,11 +47,11 @@ public class NotifyMessage {
 
     // 活动招聘通知
     @Data
-    public static class SystemNotify extends Notify {
-
-        private Integer type;
+    public static class SystemNotify {
 
         private String activityName;
+
+        private String systemNotifyType;
 
     }
 
