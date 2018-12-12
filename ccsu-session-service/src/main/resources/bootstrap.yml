@@ -1,39 +1,12 @@
 server:
-  port: 0
+  port: 8080
 spring:
   application:
     name: ccsu-session-service
-  rabbitmq:
-    host: @rabbitmq.host@
-    port: @rabbitmq.port@
-    username: @rabbitmq.username@
-    password: @rabbitmq.password@
-  redis:
-    database: 0
-    host: @redis.host@
-    port: @redis.port@
-    password: @redis.password@
-    timeout: 6000ms
-    jedis:
-      pool:
-        max-active: 1000
-        max-idle: 10
-        min-idle: 5
-        max-wait: -1ms
   cloud:
     config:
       discovery:
         enabled: true
         service-id: @config.instance.id@
-eureka:
-  instance:
-    ip-address: @ip.address@
-    instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${random.int}
-    prefer-ip-address: true
-    lease-renewal-interval-in-seconds: 30
-    lease-expiration-duration-in-seconds: 90
-  client:
-    registry-fetch-interval-seconds: 30
-    fetch-registry: true
-    service-url:
-      defaultZone: @register.instance.address@
+  profiles:
+    active: @profiles.active@

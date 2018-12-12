@@ -24,6 +24,8 @@
         <config.instance.id>ccsu-config-server</config.instance.id>
         <!-- 配置仓库 -->
         <config.git.uri>https://github.com/notobject/config-center.git</config.git.uri>
+        <!-- 注册中心(生产环境中会从环境变量中取得) -->
+        <!--<register.instance.address>${env.REGISTER_CENTER}</register.instance.address>-->
 
         <!-- RabbitMQ 连接信息 -->
         <rabbitmq.host>mq.notobject.com</rabbitmq.host>
@@ -36,11 +38,7 @@
         <redis.port>6379</redis.port>
         <redis.password>redis</redis.password>
 
-        <!-- 服务器信息 -->
-        <server.b1>serverb1.notobject.com</server.b1>
-        <server.b2>serverb2.notobject.com</server.b2>
-        <server.c1>serverc1.notobject.com</server.c1>
-        <server.c2>serverc2.notobject.com</server.c2>
+        <!-- Mysql 连接信息 -->
     </properties>
 
     <!-- 公共依赖 -->
@@ -64,6 +62,7 @@
         </dependency>
     </dependencies>
 
+    <!-- 父模块依赖管理 -->
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -75,8 +74,8 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
     <profiles>
-        <!-- 通过 profile 来指定部署到的服务器 -->
         <profile>
             <id>dev</id>
             <properties>
@@ -89,70 +88,26 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
         </profile>
+
         <profile>
-            <id>b1</id>
+            <id>prod</id>
             <properties>
-                <profiles.active>b1</profiles.active>
-                <ip.address>${server.b1}</ip.address>
-                <register.instance.address>http://${server.b1}:8761/eureka/,http://${server.b2}:8761/eureka/
-                </register.instance.address>
+                <profiles.active>prod</profiles.active>
             </properties>
-        </profile>
-        <profile>
-            <id>b2</id>
-            <properties>
-                <profiles.active>b2</profiles.active>
-                <ip.address>${server.b2}</ip.address>
-                <register.instance.address>http://${server.b2}:8761/eureka/,http://${server.b1}:8761/eureka/
-                </register.instance.address>
-            </properties>
-        </profile>
-        <profile>
-            <id>c1</id>
-            <properties>
-                <profiles.active>c1</profiles.active>
-                <ip.address>${server.c1}</ip.address>
-                <register.instance.address>http://${server.b1}:8761/eureka/,http://${server.b2}:8761/eureka/
-                </register.instance.address>
-            </properties>
-        </profile>
-        <profile>
-            <id>c2</id>
-            <properties>
-                <profiles.active>c2</profiles.active>
-                <ip.address>${server.c2}</ip.address>
-                <register.instance.address>http://${server.b2}:8761/eureka/,http://${server.b1}:8761/eureka/
-                </register.instance.address>
-            </properties>
+            <activation>
+                <property>
+                    <name>PROD</name>
+                    <value>true</value>
+                </property>
+            </activation>
         </profile>
     </profiles>
     <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-                <excludes>
-                    <exclude>bootstrap-*.yml</exclude>
-                    <exclude>application-*.yml</exclude>
-                </excludes>
-            </resource>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>bootstrap.yml</include>
-                    <include>bootstrap-${profiles.active}.yml</include>
-                    <include>application.yml</include>
-                    <include>application-${profiles.active}.yml</include>
-                </includes>
-            </resource>
-        </resources>
-        <!-- 插件 -->
         <plugins>
             <!-- 打包插件 -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
             <!-- 资源文件处理插件 -->
@@ -189,6 +144,26 @@
                 </configuration>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <excludes>
+                    <exclude>bootstrap-*.yml</exclude>
+                    <exclude>application-*.yml</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>bootstrap.yml</include>
+                    <include>bootstrap-${profiles.active}.yml</include>
+                    <include>application.yml</include>
+                    <include>application-${profiles.active}.yml</include>
+                </includes>
+            </resource>
+        </resources>
     </build>
 
     <repositories>
@@ -224,6 +199,7 @@
     </repositories>
 
     <modules>
+        <module>common-code</module>
         <module>ccsu-config-server</module>
         <module>ccsu-register-server</module>
         <module>ccsu-proxy-server</module>
@@ -231,7 +207,6 @@
         <module>ccsu-session-service</module>
         <module>ccsu-score-service</module>
         <module>ccsu-notify-service</module>
-        <module>common-code</module>
     </modules>
 
 </project>

@@ -1,6 +1,8 @@
+server:
+  port: 8080                                      # 开发环境测试端口
 eureka:
   instance:
-    ip-address: localhost
+    ip-address: localhost                         # 本机IP地址
     instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${server.port}
     prefer-ip-address: true                      # 注册IP （缺省为主机名）
     lease-renewal-interval-in-seconds: 15      # 服务续约间隔时间（缺省为30s）
@@ -8,10 +10,4 @@ eureka:
   client:
     fetch-registry: false                        # 获取服务注册信息（配置中心不需要消费其他服务，因此设为false）
     registry-fetch-interval-seconds: 30        # 获取间隔（缺省为30秒）
-    defaultZone: http://localhost:8761/eureka/
-spring:
-  rabbitmq:
-    host: mq.notobject.com
-    port: 5672
-    username: test
-    password: test
+    defaultZone: http://localhost:8761/eureka/    # 本机注册中心

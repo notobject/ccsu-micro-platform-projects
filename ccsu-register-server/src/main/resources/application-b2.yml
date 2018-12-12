@@ -1,4 +1,0 @@
-eureka:
-  client:
-    service-url:
-      defaultZone: http://serverb1.notobject.com:8761/eureka/     # 其他对等的注册中心（以","分隔）

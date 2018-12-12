@@ -1,3 +1,5 @@
+server:
+  port: 8080                                        # 开发环境端口
 eureka:
   instance:
     ip-address: localhost
@@ -15,3 +17,15 @@ spring:
     port: 5672
     username: test
     password: test
+  redis:
+    database: 0
+    host: cache.notobject.com
+    port: 6379
+    password: redis
+    timeout: 6000ms
+    jedis:
+      pool:
+        max-active: 1000
+        max-idle: 10
+        min-idle: 5
+        max-wait: -1ms

@@ -119,4 +119,4 @@ eureka:
     registry-fetch-interval-seconds: 30
     fetch-registry: true
     service-url:
-      defaultZone: @register.instance.address@
+      defaultZone: http://localhost:8761/eureka

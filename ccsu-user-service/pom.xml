@@ -18,7 +18,6 @@
             <groupId>cn.ccsu</groupId>
             <artifactId>common-code</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
 
         <dependency>

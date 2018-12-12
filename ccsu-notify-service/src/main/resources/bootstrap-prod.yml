@@ -1,5 +1,5 @@
+# 运行时注入端口
 server:
-  # 随机端口
   port: 0
 spring:
   application:
@@ -21,9 +21,10 @@ mybatis:
   typeAliasesPackage: cn.ccsu.notify.pojo
   config-location: classpath:mybatis-config.xml
 
+# 运行时注入 ip-address 和 defaultZone
 eureka:
   instance:
-    ip-address: @ip.address@
+    ip-address:
     instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${random.int}
     prefer-ip-address: true
     lease-renewal-interval-in-seconds: 30
@@ -32,4 +33,4 @@ eureka:
     registry-fetch-interval-seconds: 30
     fetch-registry: true
     service-url:
-      defaultZone: @register.instance.address@
+      defaultZone:

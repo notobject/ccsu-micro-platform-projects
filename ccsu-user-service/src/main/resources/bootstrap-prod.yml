@@ -1,0 +1,18 @@
+server:
+  port: 0                                          # 端口，运行时注入
+eureka:
+  instance:
+    ip-address:                                    # 本机IP 地址，运行时注入
+    instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${server.port}
+    prefer-ip-address: true                      # 注册IP （缺省为主机名）
+    lease-renewal-interval-in-seconds: 30       # 服务续约间隔时间（缺省为30s）
+    lease-expiration-duration-in-seconds: 90   # 服务失效时间（缺省为90s）
+  client:
+    fetch-registry: false                        # 获取服务注册信息（配置中心不需要消费其他服务，因此设为false）
+    defaultZone:                                  # 注册中心地址，运行时注入
+spring:
+  rabbitmq:
+    host: @rabbitmq.host@
+    port: 5672
+    username: @rabbitmq.username@
+    password: @rabbitmq.password@
