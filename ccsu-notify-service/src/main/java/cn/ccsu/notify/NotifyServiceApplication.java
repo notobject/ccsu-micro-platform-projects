@@ -13,5 +13,6 @@ public class NotifyServiceApplication {
     public static void main(String[] args) {
 
         SpringApplication.run(NotifyServiceApplication.class, args);
+
     }
 }
