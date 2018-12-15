@@ -12,3 +12,9 @@ eureka:
     registry-fetch-interval-seconds: 30        # 获取间隔（缺省为30秒）
     service-url:
           defaultZone: http://localhost:8761/eureka/
+spring:
+  rabbitmq:
+    host: mq.notobject.com
+    port: 5672
+    username: test
+    password: test

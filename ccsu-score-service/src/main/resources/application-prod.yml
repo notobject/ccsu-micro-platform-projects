@@ -9,3 +9,9 @@ eureka:
     fetch-registry: false                        # 获取服务注册信息（配置中心不需要消费其他服务，因此设为false）
     service-url:
           defaultZone:
+spring:
+  rabbitmq:
+    host: mq.notobject.com
+    port: 5672
+    username: test
+    password: test
