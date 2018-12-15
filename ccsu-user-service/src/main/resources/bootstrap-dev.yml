@@ -10,7 +10,8 @@ eureka:
   client:
     fetch-registry: false                        # 获取服务注册信息（配置中心不需要消费其他服务，因此设为false）
     registry-fetch-interval-seconds: 30        # 获取间隔（缺省为30秒）
-    defaultZone: http://localhost:8761/eureka/
+    service-url:
+          defaultZone: http://localhost:8761/eureka/
 spring:
   rabbitmq:
     host: mq.notobject.com

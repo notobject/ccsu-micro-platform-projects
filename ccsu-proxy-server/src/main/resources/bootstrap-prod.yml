@@ -8,7 +8,8 @@ eureka:
   client:
     registry-fetch-interval-seconds: 30         # 拉取服务注册信息间隔（缺省为30s）
     fetch-registry: true
-    defaultZone:
+    service-url:
+      defaultZone:
 spring:
   rabbitmq:
     host: @rabbitmq.host@
