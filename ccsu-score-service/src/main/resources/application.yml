@@ -5,6 +5,41 @@ spring:
     config:
       discovery:
         enabled: true
-        service-id: @config.instance.id@
-  profiles:
-    active: @profiles.active@       #启动的环境，运行时指定（如：mvn spring-boot:run -Pdev）
+        service-id: ccsu-config-server
+  datasource:
+    druid:
+      url: jdbc:mysql://127.0.0.1:3306/ccsu_test?useUnicode=true&characterEncoding=utf8
+      username: root
+      password: ycp92742520
+      filters: stat
+      max-active: 2
+      initial-size: 1
+      max-wait: 6000
+      min-idle: 1
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 30000
+      validation-query: select 'x'
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+    driver-class-name: com.mysql.jdbc.Driver
+eureka:
+  instance:
+    ip-address: localhost
+    instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${random.uuid}
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 30
+    lease-expiration-duration-in-seconds: 90
+  client:
+    registry-fetch-interval-seconds: 30
+    fetch-registry: true
+    service-url:
+      defaultZone: http://serverb1.notobject.com:8761/eureka/,http://serverb2.notobject.com:8761/eureka/
+
+
+mybatis:
+  type-aliases-package: cn.ccsu.score.dao
+  configuration:
+    map-underscore-to-camel-case: true
+    default-fetch-size: 100
+    default-statement-timeout: 3000
