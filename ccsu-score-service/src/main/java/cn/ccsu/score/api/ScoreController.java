@@ -25,8 +25,9 @@ public class ScoreController {
     @Autowired
     ScoreServiceImpl scoreService;
 
-    @GetMapping(value = "/{studentId}/totalScore",produces = "application/json;character=UTF-8")
-    public String getStudentTotalScore(@PathVariable("studentId") String id){
+    //获取全部综测信息
+    @GetMapping(value = "/totalScore",produces = "application/json;character=UTF-8")
+    public String getStudentTotalScore(@RequestParam String id){
         if (StringUtils.isEmpty(id)){
             return Result.error(CodeMessage.STUDENT_ID_EMPTY).toString();
         }
@@ -37,8 +38,9 @@ public class ScoreController {
         return Result.success(studentData).toString();
     }
 
-    @GetMapping(value = "/{studentId}/scoreDetail",produces = "application/json;character=UTF-8")
-    public String getStudentEvents(@PathVariable("studentId") String id){
+    //获取综测具体信息
+    @GetMapping(value = "scoreDetail",produces = "application/json;character=UTF-8")
+    public String getStudentEvents(@RequestParam String id){
         if (StringUtils.isEmpty(id)){
             return Result.error(CodeMessage.STUDENT_ID_EMPTY).toString();
         }
@@ -49,10 +51,9 @@ public class ScoreController {
         return Result.success(scoreEvents).toString();
     }
 
-    @GetMapping(value = "/{studentId}/addScore",produces = "application/json;character=UTF-8")
-    public String increaseScore(@PathVariable("studentId") String id, PostStudentScoreInfo scoreInfo){
+    @GetMapping(value = "addScore",produces = "application/json;character=UTF-8")
+    public String increaseScore(@RequestParam String id, PostStudentScoreInfo scoreInfo){
         //todo
-
         Boolean success  = scoreService.increaseScoreById("B20160304301",1,"英语四级",new Date());
         return Result.success(success).toString();
     }
