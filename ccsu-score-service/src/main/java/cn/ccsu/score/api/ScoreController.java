@@ -6,6 +6,10 @@ import cn.ccsu.score.entity.StudentData;
 import cn.ccsu.score.enums.CodeMessage;
 import cn.ccsu.score.entity.Result;
 import cn.ccsu.score.service.impl.ScoreServiceImpl;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.TypeReference;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
 
@@ -51,10 +56,23 @@ public class ScoreController {
         return Result.success(scoreEvents).toString();
     }
 
-    @GetMapping(value = "addScore",produces = "application/json;character=UTF-8")
-    public String increaseScore(@RequestParam String id, PostStudentScoreInfo scoreInfo){
-        //todo
-        Boolean success  = scoreService.increaseScoreById("B20160304301",1,"英语四级",new Date());
+
+    //增加综测
+
+    /**
+     * @param postInfo Json数据，必须包含以下数据
+     * String id;
+     * Date recordTime;
+     * String event;
+     * float score;
+     * @return 成功或者失败的Json消息
+     */
+
+    @PostMapping(value = "addScore",produces = "application/json;character=UTF-8")
+    public String increaseScore(String postInfo){
+        @Valid PostStudentScoreInfo info = JSON.parseObject(postInfo,new TypeReference<PostStudentScoreInfo>(){});
+        Boolean success  = scoreService.increaseScoreById(info.getId(),info.getScore(),info.getEvent(),info.getRecordTime());
+        logger.info(Boolean.toString(success));
         return Result.success(success).toString();
     }
 }

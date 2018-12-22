@@ -7,6 +7,7 @@ import cn.ccsu.score.entity.StudentData;
 import cn.ccsu.score.service.ScoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -31,6 +32,7 @@ public class ScoreServiceImpl implements ScoreService {
     }
 
     @Override
+    @Transactional
     public Boolean increaseScoreById(String id, float score, String event, Date time) {
         studentDataDAO.increaseTotalScore(id,score);
         studentDataDAO.increaseEventDetail(id,score,time,event);

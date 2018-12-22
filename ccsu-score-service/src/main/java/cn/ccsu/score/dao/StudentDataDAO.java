@@ -21,11 +21,10 @@ public interface StudentDataDAO {
     @ResultType(ScoreEvent.class)
     List<ScoreEvent> getScoreDetailById(@Param("id") String id);
 
-    @Transactional
     @Update("update ccsu_score_student_data set total_score = total_score + #{score} where id = #{id}")
     Boolean increaseTotalScore(String id, float score);
 
-    @Transactional
+
     @Insert("insert into ccsu_score_event(id,record_time,event,score) values(#{id},#{date},#{event},#{score})")
     Boolean increaseEventDetail(String id, float score, Date date,String event);
 
