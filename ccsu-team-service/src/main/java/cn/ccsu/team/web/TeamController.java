@@ -59,6 +59,7 @@ public class TeamController {
     @GetMapping("/updateMember2Team")
     public BaseRes updateMember2Team(@RequestParam int teamId, @RequestParam ArrayList<GroupMemberVO> groupMemberVOS) {
         teamService.updateMember2Team(teamId, groupMemberVOS);
+
         return BaseResUtil.success();
     }
 
