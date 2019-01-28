@@ -11,7 +11,10 @@ import lombok.Getter;
  */
 @Getter
 public enum ResultEnum {
-    SUCCESS(0, "success");
+    SUCCESS(0, "success"),
+    PARAM_ERROR(-10005, "param error"),
+    SERVER_INNER_ERROR(-10006, "server inner error"),
+    ;
 
     private Integer code;
 

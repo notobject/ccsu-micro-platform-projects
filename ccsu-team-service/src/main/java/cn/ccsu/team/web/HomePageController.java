@@ -32,8 +32,8 @@ public class HomePageController {
     private TeamService teamService;
 
     // 根据userId返回teamList，projectList
-    @GetMapping("/homePage")
-    public BaseRes homePage(int userId) {
+    @GetMapping("/getTeamHomePage")
+    public BaseRes getTeamHomePage(int userId) {
         HashMap<String, Object> result = Maps.newHashMap();
         List<TeamVO> teams = teamService.getTeamByUserId(userId);
         result.put("teams", teams);

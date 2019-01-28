@@ -7,10 +7,10 @@
         <artifactId>micro-platform</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>ccsu-team-service</artifactId>
+    <artifactId>ccsu-main-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>ccsu-team-service</name>
-    <description>Demo project for Spring Boot</description>
+    <name>ccsu-main-service</name>
+    <description>首页服务</description>
 
     <dependencies>
         <!-- data -->
@@ -64,7 +64,15 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-context</artifactId>
         </dependency>
-
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ccsu.main.dao.InformationDAO">
+
+    <insert id="insert">
+        insert into information(title, content, authors, release_time, category)
+        values(#{title}, #{content}, #{authors}, #{releaseTime}, #{category})
+    </insert>
+
+    <update id="update">
+        update information
+        set
+          title = #{title},
+          authors = #{authors},
+          content = #{content},
+          release_time = #{releaseTime},
+          category = #{category}
+        where id = #{id}
+    </update>
+
+    <delete id="delete">
+        delete from information
+        where id = #{id}
+    </delete>
+
+    <select id="selectById" resultType="cn.ccsu.main.pojo.po.Information">
+        select * from information where id = #{id}
+    </select>
+
+    <select id="list" resultType="cn.ccsu.main.pojo.po.Information">
+        select * from information where id between #{start} and #{offset}
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        select count(*) from information;
+    </select>
+
+    <select id="maxId" resultType="java.lang.Integer">
+        select max(id) from information;
+    </select>
+
+    <select id="listByCategory" resultType="cn.ccsu.main.pojo.po.Information">
+      select * from information where category = #{category} limit #{start}, #{offset}
+    </select>
+
+</mapper>
