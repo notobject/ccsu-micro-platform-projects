@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ccsu.team.dao.TeamDAO">
+
+    <insert id="insertTeam">
+      insert into team(name, honor, log, members)
+      value(#{name}, #{honor}, #{log}, #{members})
+    </insert>
+
+    <insert id="insert2TeamUser">
+      insert into team_user(user_id, team_id)
+      values(#{userId}, #{teamId})
+    </insert>
+
+    <insert id="insert2TeamProject">
+        insert into project_team(team_id, project_id)
+        values (#{teamId}, #{projectId})
+    </insert>
+
+    <update id="updateTeam">
+      update team
+      set
+        name = #{name},
+        honor = #{honor},
+        log = #{log},
+        members = #{members}
+      where id = #{id}
+    </update>
+
+    <delete id="deleteTeamByTeamId">
+      delete from team where id = #{teamId}
+    </delete>
+
+    <select id="selectByTeamId" resultType="cn.ccsu.team.pojo.po.TeamPO">
+      select * from team where id = #{teamId}
+    </select>
+
+    <select id="selectProjectByTeamId" resultType="cn.ccsu.team.pojo.po.ProjectPO">
+      select * from project
+      where id in
+      (select project_id from project_team where team_id = #{teamId})
+    </select>
+
+    <select id="selectTeamByUserId" resultType="cn.ccsu.team.pojo.po.TeamPO">
+      select * from team
+      where id in
+      (select team_id from team_user where user_id = #{userId})
+    </select>
+
+    <select id="selectTeamByProjectId" resultType="cn.ccsu.team.pojo.po.TeamPO">
+      select * from team
+      where id in
+      (select team_id from project_team where project_id = #{projectId})
+    </select>
+
+</mapper>

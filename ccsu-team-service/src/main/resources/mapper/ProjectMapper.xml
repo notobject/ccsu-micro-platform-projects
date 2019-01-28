@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ccsu.team.dao.ProjectDAO">
+
+    <insert id="insertProject">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into project(name, description, honor, schedule, properties)
+        value(#{name}, #{description}, #{honor}, #{schedule}, #{properties})
+    </insert>
+
+    <update id="updateProject">
+        update project
+        set
+          name = #{name},
+          description = #{description},
+          honor = #{honor},
+          properties = #{properties},
+          schedule = #{schedule}
+        where id = #{id}
+    </update>
+
+    <select id="selectByProjectId" resultType="cn.ccsu.team.pojo.po.ProjectPO">
+        select * from project where id = #{id}
+    </select>
+
+</mapper>
