@@ -9,7 +9,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class CcsuMainServiceApplication {
 
     public static void main(String[] args) {
-
         SpringApplication.run(CcsuMainServiceApplication.class, args);
     }
 
