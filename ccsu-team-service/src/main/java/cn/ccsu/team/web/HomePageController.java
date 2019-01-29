@@ -1,12 +1,8 @@
 package cn.ccsu.team.web;
 
-import cn.ccsu.common.entity.BaseRes;
-import cn.ccsu.common.util.BaseResUtil;
 import cn.ccsu.team.pojo.vo.ProjectVO;
 import cn.ccsu.team.pojo.vo.TeamVO;
-import cn.ccsu.team.service.ProjectService;
 import cn.ccsu.team.service.TeamService;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import org.springframework.beans.factory.annotation.Autowired;

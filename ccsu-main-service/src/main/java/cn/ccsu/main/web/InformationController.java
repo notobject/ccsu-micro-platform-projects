@@ -1,10 +1,11 @@
 package cn.ccsu.main.web;
 
-import cn.ccsu.common.entity.BaseRes;
-import cn.ccsu.common.util.BaseResUtil;
 import cn.ccsu.main.exceptions.GlobalException;
 import cn.ccsu.main.pojo.po.Information;
+import cn.ccsu.main.pojo.vo.BaseRes;
 import cn.ccsu.main.service.InformationService;
+import cn.ccsu.main.utils.BaseResUtil;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -76,6 +77,7 @@ public class InformationController {
     }
 
     // 4 查询
+    @JsonView(Information.DetailInformation.class)
     @GetMapping("/getInformationById")
     public BaseRes getInformationById(@RequestParam int id) {
         return BaseResUtil.success(informationService.getInformationById(id));

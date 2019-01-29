@@ -1,7 +1,7 @@
-package cn.ccsu.common.util;
+package cn.ccsu.main.utils;
 
-import cn.ccsu.common.entity.BaseRes;
 import cn.ccsu.common.enums.ResultEnum;
+import cn.ccsu.main.pojo.vo.BaseRes;
 
 /**
  * @author hangs.zhang

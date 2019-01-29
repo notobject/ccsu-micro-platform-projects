@@ -1,10 +1,11 @@
 package cn.ccsu.main.web;
 
-import cn.ccsu.common.entity.BaseRes;
-import cn.ccsu.common.util.BaseResUtil;
 import cn.ccsu.main.exceptions.GlobalException;
 import cn.ccsu.main.pojo.po.Information;
+import cn.ccsu.main.pojo.vo.BaseRes;
 import cn.ccsu.main.service.InformationService;
+import cn.ccsu.main.utils.BaseResUtil;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,7 @@ public class FeedController {
     private InformationService informationService;
 
     // 最新的10条
+    @JsonView(Information.SimpleInformation.class)
     @GetMapping("/latest")
     public BaseRes latest() {
         List<Information> latestInformation = informationService.getLatestInformation();
@@ -36,13 +38,18 @@ public class FeedController {
     }
 
     // 最热
+    @JsonView(Information.SimpleInformation.class)
     @GetMapping("/hot")
     public BaseRes hot() {
-        // TODO: 2019/1/29 使用redis完成hot
-        return BaseResUtil.success();
+        List<Information> hotInformation = informationService.getHotInformation();
+        if (hotInformation == null || hotInformation.size() == 0) {
+            return BaseResUtil.success(informationService.getLatestInformation());
+        }
+        return BaseResUtil.success(hotInformation);
     }
 
     // 根据类别查询
+    @JsonView(Information.SimpleInformation.class)
     @GetMapping("/listByCategory")
     public BaseRes listByCategory(String category, int start, int offset) {
         if (!CATEGORY_MAP.containsKey(category)) {

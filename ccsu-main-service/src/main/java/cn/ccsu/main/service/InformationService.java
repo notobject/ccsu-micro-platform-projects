@@ -3,6 +3,7 @@ package cn.ccsu.main.service;
 import cn.ccsu.main.dao.InformationDAO;
 import cn.ccsu.main.exceptions.GlobalException;
 import cn.ccsu.main.pojo.po.Information;
+import cn.ccsu.main.utils.RedisUtil;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,12 @@ import java.util.List;
 public class InformationService {
 
     @Autowired
+    private RedisUtil redisUtil;
+
+    @Autowired
+    private HotAndCacheService cacheService;
+
+    @Autowired
     private InformationDAO informationDAO;
 
     // 1,创建,创建之后返回id
@@ -29,6 +36,7 @@ public class InformationService {
         if (i != 1) {
             throw new GlobalException(-1, "添加失败");
         }
+        cacheService.addInformation2Cache(information);
         return information.getId();
     }
 
@@ -38,6 +46,7 @@ public class InformationService {
         if (i != 1) {
             throw new GlobalException(-1, "删除失败");
         }
+        cacheService.removeInformationFromCache(id);
     }
 
     // 3，修改
@@ -46,6 +55,7 @@ public class InformationService {
         if (i != 1) {
             throw new GlobalException(-1, "修改失败");
         }
+        cacheService.addInformation2Cache(information);
     }
 
     // 4，查询指定id区域的数据
@@ -60,7 +70,11 @@ public class InformationService {
 
     // 查询指定id的数据
     public Information getInformationById(int id) {
-        return informationDAO.selectById(id);
+        Information information = cacheService.getInformationFromCacheById(id);
+        if (information != null) {
+            cacheService.addInformationClick(id);
+        }
+        return information;
     }
 
     // 查询最新数据 10条
@@ -80,6 +94,11 @@ public class InformationService {
     // 根据类别查询
     public List<Information> getInformationByCategory(String category, int start, int offset) {
         return informationDAO.listByCategory(category, start, offset);
+    }
+
+    // 查询热榜 10个
+    public List<Information> getHotInformation() {
+        return cacheService.getHotInformation();
     }
 
 }

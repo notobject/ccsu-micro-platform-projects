@@ -20,6 +20,12 @@ public class ApplicationConfig {
 
     public static final List<String> FUNCTION2 = Lists.newArrayList();
 
+    public static final String INFORMATION_HOT_PREFIX = "INFORMATION_HOT_PREFIX";
+
+    public static final String INFORMATION_PREFIX = "INFORMATION_PREFIX::";
+
+    public static final int INFORMATION_EXPIRE = 0;
+
     static {
         CATEGORY_MAP.put("latest", "最新");
         CATEGORY_MAP.put("hot", "最热");

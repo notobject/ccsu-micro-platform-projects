@@ -1,5 +1,7 @@
-package cn.ccsu.common.entity;
+package cn.ccsu.main.pojo.vo;
 
+import cn.ccsu.main.pojo.po.Information;
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 
 /**
@@ -17,6 +19,7 @@ public class BaseRes<T> {
     // 错误信息
     private String errmsg;
 
+    @JsonView(Information.SimpleInformation.class)
     private T data;
 
 }

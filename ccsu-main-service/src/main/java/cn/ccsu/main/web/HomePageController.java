@@ -1,7 +1,7 @@
 package cn.ccsu.main.web;
 
-import cn.ccsu.common.entity.BaseRes;
-import cn.ccsu.common.util.BaseResUtil;
+import cn.ccsu.main.pojo.vo.BaseRes;
+import cn.ccsu.main.utils.BaseResUtil;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
