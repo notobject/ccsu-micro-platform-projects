@@ -14,6 +14,7 @@
     <description>站内通知，邮件通知服务</description>
 
     <dependencies>
+
         <dependency>
             <groupId>cn.ccsu</groupId>
             <artifactId>common-code</artifactId>
@@ -75,16 +76,22 @@
         <!--</dependency>-->
 
         <!-- 服务发现 -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.cloud</groupId>-->
+            <!--<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>-->
+        <!--</dependency>-->
 
         <!--单元测试-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <!--本地测试时使用-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-context</artifactId>
         </dependency>
     </dependencies>
 

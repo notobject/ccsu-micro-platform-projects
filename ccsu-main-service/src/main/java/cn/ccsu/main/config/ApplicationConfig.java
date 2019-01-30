@@ -27,12 +27,12 @@ public class ApplicationConfig {
     public static final int INFORMATION_EXPIRE = 0;
 
     static {
-        CATEGORY_MAP.put("latest", "最新");
-        CATEGORY_MAP.put("hot", "最热");
-        CATEGORY_MAP.put("activity", "活动");
-        CATEGORY_MAP.put("notify", "通知");
-        CATEGORY_MAP.put("recruitment", "招聘");
-        CATEGORY_MAP.put("public", "公示");
+        CATEGORY_MAP.put("LATEST", "最新");
+        CATEGORY_MAP.put("HOT", "最热");
+        CATEGORY_MAP.put("ACTIVITY", "活动");
+        CATEGORY_MAP.put("NOTIFY", "通知");
+        CATEGORY_MAP.put("RECRUITMENT", "招聘");
+        CATEGORY_MAP.put("PUBLIC", "公示");
     }
 
     static {

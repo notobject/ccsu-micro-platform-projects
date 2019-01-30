@@ -18,9 +18,8 @@ public interface SystemNotifyDAO {
     int insertNotify(SystemNotifyPO systemNotifyPO);
 
     int insertNotified(@Param("notifyId") int notifyId,
-                       @Param("notifyiedUserIds") List<Integer> notifyiedUserIds);
+                       @Param("notifiedUserIds") List<Integer> notifiedUserIds);
 
-    // 获取评论列表页
     List<SystemNotifyPO> listByStatus(@Param("userId") int userId, @Param("status") int status,
                                       @Param("start") int start, @Param("offset") int offset);
 

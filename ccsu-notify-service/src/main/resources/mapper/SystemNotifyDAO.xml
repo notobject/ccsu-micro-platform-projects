@@ -13,7 +13,7 @@
     <insert id="insertNotified">
         insert into system_notified(notify_id, notified_user_id, status)
         values
-        <foreach collection="notifyiedUserIds" item="item" index="index" separator=",">
+        <foreach collection="notifiedUserIds" item="item" index="index" separator=",">
             (#{notifyId}, #{item}, 0)
         </foreach>
     </insert>

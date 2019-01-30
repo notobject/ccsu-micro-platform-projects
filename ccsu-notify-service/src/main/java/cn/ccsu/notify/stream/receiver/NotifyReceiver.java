@@ -24,11 +24,11 @@ import java.util.List;
  * @author hangs.zhang
  * @date 2018/12/9
  * *****************
- * function:
+ * function: 消息接收
  */
 @Slf4j
- @Service
- @EnableBinding(NotifyBarista.class)
+@Service
+@EnableBinding(NotifyBarista.class)
 public class NotifyReceiver {
 
     @Autowired
@@ -42,7 +42,7 @@ public class NotifyReceiver {
         log.info("notify : {}", notifyMessage);
         // 入库
         stroageNotify(notifyMessage);
-        // websocket 推送通知
+        // webSocket 推送通知
         push(notifyMessage);
         channel.basicAck(deliveryTag, false);
     }
@@ -56,6 +56,7 @@ public class NotifyReceiver {
         list.forEach(e -> NotifyWebSocketServer.sendInfo(pushJson.toJSONString(), e));
     }
 
+    // 消息存储
     private void stroageNotify(NotifyMessage notifyMessage) {
         NotifyMessage.Notify notify = notifyMessage.getNotify();
         String notifyType = notify.getNotifyType();

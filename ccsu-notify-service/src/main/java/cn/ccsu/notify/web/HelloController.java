@@ -8,7 +8,6 @@ import cn.ccsu.notify.stream.sender.MailMQSender;
 import cn.ccsu.notify.stream.sender.NotifyMQSender;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailSender;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,8 +30,8 @@ public class HelloController {
     private MailMQSender mailMQSender;
 
     @GetMapping("/system/push")
-    public String push() {
-        List<Integer> userIds = Lists.newArrayList(1, 2, 3, 4, 5);
+    public String system() {
+        List<Integer> userIds = Lists.newArrayList(1);
         NotifyMessage notifyMessage = new NotifyMessage();
         // 测试使用userId进行push
         notifyMessage.setUserIds(userIds);
@@ -52,7 +51,7 @@ public class HelloController {
     }
 
     @GetMapping("/comment/push")
-    public String pushComment() {
+    public String comment() {
         List<Integer> userIds = Lists.newArrayList(10);
         NotifyMessage notifyMessage = new NotifyMessage();
         // 测试使用userId进行push

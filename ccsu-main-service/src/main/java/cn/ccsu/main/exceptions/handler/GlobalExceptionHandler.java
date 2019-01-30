@@ -5,6 +5,7 @@ import cn.ccsu.main.exceptions.GlobalException;
 import cn.ccsu.main.pojo.vo.BaseRes;
 import cn.ccsu.main.utils.BaseResUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -41,10 +42,13 @@ public class GlobalExceptionHandler {
             GlobalException globalException = (GlobalException) ex;
             return BaseResUtil.error(globalException.getCode(), globalException.getMessage());
             // 其他异常
+        } else if (ex instanceof HttpRequestMethodNotSupportedException) {
+            return BaseResUtil.error(-1, "对不起，不支持当前HTTP方法");
         } else {
             return BaseResUtil.error(ResultEnum.SERVER_INNER_ERROR);
         }
     }
+
 
     private String list2String(List<String> list) {
         String prefix = "validate error : ";

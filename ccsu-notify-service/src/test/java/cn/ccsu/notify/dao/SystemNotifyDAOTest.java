@@ -3,18 +3,15 @@ package cn.ccsu.notify.dao;
 import cn.ccsu.notify.NotifyServiceApplicationTests;
 import cn.ccsu.notify.enums.SystemNotifyType;
 import cn.ccsu.notify.pojo.po.SystemNotifyPO;
-import com.netflix.discovery.converters.Auto;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.validation.constraints.Null;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import static org.junit.Assert.*;
+
 
 /**
  * @author hangs.zhang

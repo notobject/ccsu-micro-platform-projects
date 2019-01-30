@@ -1,8 +1,10 @@
 package cn.ccsu.main.web;
 
+import cn.ccsu.main.enums.ApplyStatus;
 import cn.ccsu.main.exceptions.GlobalException;
 import cn.ccsu.main.pojo.po.Information;
 import cn.ccsu.main.pojo.vo.BaseRes;
+import cn.ccsu.main.service.ApplyService;
 import cn.ccsu.main.service.InformationService;
 import cn.ccsu.main.utils.BaseResUtil;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -26,6 +28,9 @@ public class InformationController {
 
     @Autowired
     private InformationService informationService;
+
+    @Autowired
+    private ApplyService applyService;
 
     // 列表类目list
     @GetMapping("categoryList")
@@ -76,11 +81,39 @@ public class InformationController {
         return BaseResUtil.success();
     }
 
-    // 4 查询
+    // 4 查询information
     @JsonView(Information.DetailInformation.class)
     @GetMapping("/getInformationById")
     public BaseRes getInformationById(@RequestParam int id) {
         return BaseResUtil.success(informationService.getInformationById(id));
+    }
+
+    // 5 activity 活动申请
+    @PostMapping("/applyActivity")
+    public BaseRes activityApply(int userId, int informationId) {
+        Information information = informationService.getInformationById(informationId);
+        if (information == null) {
+            return BaseResUtil.error(-1, "找不到information");
+        }
+        if (!CATEGORY_MAP.containsKey(information.getCategory())) {
+            return BaseResUtil.error(-1, "不是活动，无法报名");
+        }
+        applyService.apply(information.getId(), userId);
+        return BaseResUtil.success();
+    }
+
+    // 6 activity 更新申请状态为成功
+    @GetMapping("/modifyActivityStatusSuccess")
+    public BaseRes modifyStatusSuccess(int applyId) {
+        applyService.updateApplyStatus(applyId, ApplyStatus.SUCCESS);
+        return BaseResUtil.success();
+    }
+
+    // 7 activity 更新申请状态为成功
+    @GetMapping("/modifyActivityStatusFailure")
+    public BaseRes modifyStatusFailure(int applyId) {
+        applyService.updateApplyStatus(applyId, ApplyStatus.FAILURE);
+        return BaseResUtil.success();
     }
 
 }

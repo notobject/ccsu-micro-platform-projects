@@ -22,9 +22,6 @@ import java.util.List;
 public class InformationService {
 
     @Autowired
-    private RedisUtil redisUtil;
-
-    @Autowired
     private HotAndCacheService cacheService;
 
     @Autowired

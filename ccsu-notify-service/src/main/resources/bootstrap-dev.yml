@@ -1,22 +1,22 @@
 server:
   # 随机端口
-  port: 8080
+  port: 8081
 spring:
   application:
     name: ccsu-notify-service
   rabbitmq:
-    host: 127.0.0.1
+    host: mq.notobject.com
     port: 5672
     username: guest
     password: guest
   cloud:
-    config:
-      discovery:
-        enabled: true
-        service-id: @config.instance.id@
+    #    config:
+    #      discovery:
+    #        enabled: true
+    #        service-id: @config.instance.id@
     stream:
       bindings:
-        # 生产者配置
+        # 站内消息 生产者配置
         notify_output_channel:
           destination: CCSU-NOTIFY-SERVICE-NOTIFY
           group: NOTIFY
@@ -29,7 +29,7 @@ spring:
           consumer:
             concurrency: 5
 
-        # 邮箱消息生产者
+        # 邮箱消息 生产者配置
         mail_output_channel:
           destination: CCSU-NOTIFY-SERVICE-MAIL
           group: MAIL
@@ -67,10 +67,22 @@ spring:
           enviroment:
             spring:
               rabbitmq:
-                addresses: 127.0.0.1:5672
+                addresses: mq.notobject.com:5672
                 username: guest
                 password: guest
                 virtual-host: /
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: root
+    password: zhanghang
+    url: jdbc:mysql://127.0.0.1:3306/notify?characterEncoding=UTF-8&serverTimezone=GMT
+    dbcp2:
+      pool-prepared-statements: true
+      max-open-prepared-statements: 20
+      validation-query: select 'x'
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
   # 邮箱配置
   mail:
     username: 1078504296@qq.com
@@ -87,36 +99,20 @@ spring:
             enable: true
             required: true
 
-
-
-  datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    type: com.alibaba.druid.pool.DruidDataSource
-    username: root
-    password: zhanghang
-    url: jdbc:mysql://127.0.0.1:3306/notify?characterEncoding=UTF-8&serverTimezone=GMT
-    dbcp2:
-      pool-prepared-statements: true
-      max-open-prepared-statements: 20
-      validation-query: select 'x'
-      time-between-eviction-runs-millis: 60000
-      min-evictable-idle-time-millis: 300000
-
-
 mybatis:
   mapperLocations: classpath:mapper/*.xml
   typeAliasesPackage: com.ccsu.project.pojo
   config-location: classpath:mybatis-config.xml
 
-eureka:
-  instance:
-    ip-address: localhost
-    instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${random.int}
-    prefer-ip-address: true
-    lease-renewal-interval-in-seconds: 30
-    lease-expiration-duration-in-seconds: 90
-  client:
-    registry-fetch-interval-seconds: 30
-    fetch-registry: true
-    service-url:
-      defaultZone: http://localhost:8761/eureka
+#eureka:
+#  instance:
+#    ip-address: localhost
+#    instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${random.int}
+#    prefer-ip-address: true
+#    lease-renewal-interval-in-seconds: 30
+#    lease-expiration-duration-in-seconds: 90
+#  client:
+#    registry-fetch-interval-seconds: 30
+#    fetch-registry: true
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka

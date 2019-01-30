@@ -2,18 +2,11 @@ server:
   port: 8090
 
 spring:
-  datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    type: com.alibaba.druid.pool.DruidDataSource
-    username: root
-    password: zhanghang
-    url: jdbc:mysql://127.0.0.1:3306/main?characterEncoding=UTF-8&serverTimezone=GMT
-    dbcp2:
-      pool-prepared-statements: true
-      max-open-prepared-statements: 20
-      validation-query: select 'x'
-      time-between-eviction-runs-millis: 60000
-      min-evictable-idle-time-millis: 300000
+  rabbitmq:
+    host: mq.notobject.com
+    port: 5672
+    username: guest
+    password: guest
   redis:
     host: 127.0.0.1
     password: zhanghang
@@ -28,6 +21,37 @@ spring:
         max-idle: 20
     # 连接超时 ms
     timeout: 1000ms
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: root
+    password: zhanghang
+    url: jdbc:mysql://127.0.0.1:3306/micro-platform?characterEncoding=UTF-8&serverTimezone=GMT
+    dbcp2:
+      pool-prepared-statements: true
+      max-open-prepared-statements: 20
+      validation-query: select 'x'
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+  cloud:
+    stream:
+      bindings:
+        # 站内消息 生产者配置
+        notify_output_channel:
+          destination: CCSU-NOTIFY-SERVICE-NOTIFY
+          group: NOTIFY
+          binder: rabbit_cluster
+      binders:
+        rabbit_cluster:
+          # stream集群类型
+          type: rabbit
+          enviroment:
+            spring:
+              rabbitmq:
+                addresses: mq.notobject.com:5672
+                username: guest
+                password: guest
+                virtual-host: /
 
 mybatis:
   mapperLocations: classpath:mapper/*.xml
