@@ -5,7 +5,7 @@
 <mapper namespace="cn.ccsu.main.dao.ApplyDAO">
 
     <insert id="insert">
-        insert into activity_apply(information_id, user_id, status)
+        insert ignore activity_apply(information_id, user_id, status)
         values(#{informationId}, #{userId}, #{status})
     </insert>
 

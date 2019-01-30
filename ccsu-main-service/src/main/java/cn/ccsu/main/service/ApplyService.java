@@ -50,7 +50,7 @@ public class ApplyService {
         apply.setStatus(ApplyStatus.CURRENT_APPLY.name());
         int i = applyDAO.insert(apply);
         if (i != 1) {
-            throw new GlobalException(-1, "报名失败");
+            throw new GlobalException(-1, "报名失败，无法重复报名");
         }
     }
 
