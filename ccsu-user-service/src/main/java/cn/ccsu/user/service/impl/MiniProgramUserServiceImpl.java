@@ -5,11 +5,14 @@
 package cn.ccsu.user.service.impl;
 
 import cn.ccsu.common.cnt.Const;
-import cn.ccsu.user.deps.SessionService;
+import cn.ccsu.user.dao.UserInfoDAO;
+import cn.ccsu.user.entity.UserInfo;
+import cn.ccsu.user.service.SessionService;
 import cn.ccsu.user.service.UserService;
 import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -26,20 +29,22 @@ import java.net.URI;
 public class MiniProgramUserServiceImpl implements UserService {
     private static final Logger log = LoggerFactory.getLogger(MiniProgramUserServiceImpl.class);
 
-    @Value("${wx.appId: unkown}")
+    @Value("${wx.appId: wx3e84b5a3155384ee}")
     private String appId;
-    @Value("${wx.appSecret: unkown}")
+    @Value("${wx.appSecret: 853e6bbdc2fc227f340b304a68da444a}")
     private String appSecret;
     @Autowired
     private RestTemplate restTemplate;
+
     @Autowired
     private SessionService sessionService;
 
+    @Autowired
+    private UserInfoDAO userInfoDAO;
+
     @Override
-    public String login(String jsonParam) {
+    public String login(String code) {
         JSONObject returnJson = new JSONObject();
-        JSONObject info = JSONObject.parseObject(jsonParam);
-        String code = info.getString("errcode");
 
         // 用code 去微信服务器拿 openId 和 session_key
         JSONObject openIdAndSessionKey = code2session(code);
@@ -50,12 +55,12 @@ public class MiniProgramUserServiceImpl implements UserService {
             log.error(returnJson.toString());
             return returnJson.toJSONString();
         }
-        openIdAndSessionKey.remove("errcode");
-        openIdAndSessionKey.remove("errmsg");
-        // 用openId 和 session_key 去会话服务器拿到sessionId
 
-        // 存入用户信息到会话中
-        JSONObject sessionJson = JSONObject.parseObject(sessionService.newSession(openIdAndSessionKey.toString()));
+        // 根据openId 查询用户信息
+        String openId = openIdAndSessionKey.getString("openId");
+        log.debug("openid=" + openId);
+        UserInfo userInfo = userInfoDAO.selectByOpenId(openId);
+        JSONObject sessionJson = sessionService.newSession(JSONObject.toJSONString(userInfo));
         errcode = sessionJson.getIntValue("errcode");
         if (0 != errcode) {
             returnJson.put("errcode", errcode);
@@ -64,15 +69,14 @@ public class MiniProgramUserServiceImpl implements UserService {
         }
         returnJson.put("errcode", 0);
         returnJson.put("errmsg", "success");
-        // TODO 这里为测试数据，实际放入用户信息
-        returnJson.put("nickName", "openid");
-        returnJson.put("jwcAccount", "sessionKey");
+        returnJson.put("userInfo", userInfo);
         returnJson.put("sessionId", sessionJson.getString("sessionId"));
         return returnJson.toString();
     }
 
     private JSONObject code2session(String code) {
         JSONObject returnJson = new JSONObject();
+        log.debug("appid={},appSecret={}", appId, appSecret);
         URI uri = UriComponentsBuilder.fromUriString(Const.WxApi.CODE_TO_SESSION)
                 .build()
                 .expand(appId, appSecret, code)

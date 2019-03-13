@@ -1,5 +1,5 @@
 server:
-  port: 8090                                        # 开发环境端口
+  port: 8080                                        # 开发环境端口
 eureka:
   instance:
     ip-address: localhost
@@ -18,3 +18,30 @@ spring:
     port: 5672
     username: test
     password: test
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: root
+    password:
+    url: jdbc:mysql://127.0.0.1:3306/micro-platform?characterEncoding=UTF-8&serverTimezone=GMT
+    dbcp2:
+      pool-prepared-statements: true
+      max-open-prepared-statements: 20
+      validation-query: select 'x'
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password: redis
+    timeout: 6000ms
+    jedis:
+      pool:
+        max-active: 1000
+        max-idle: 10
+        min-idle: 5
+        max-wait: -1ms
+logging:
+  level:
+    root: info

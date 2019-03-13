@@ -18,7 +18,6 @@ import javax.servlet.Filter;
 @SpringBootApplication
 @EnableConfigServer
 @EnableDiscoveryClient
-@ComponentScan(basePackages = "cn.ccsu.config")
 public class ConfigServerApplication {
 
     public static void main(String[] args) {

@@ -2,7 +2,7 @@
  * Created by Long Duping
  * Date 2018/12/5 13:51
  */
-package cn.ccsu.session.conf;
+package cn.ccsu.user.conf;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;

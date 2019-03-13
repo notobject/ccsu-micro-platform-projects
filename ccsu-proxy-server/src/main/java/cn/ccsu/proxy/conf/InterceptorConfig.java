@@ -4,8 +4,6 @@
  */
 package cn.ccsu.proxy.conf;
 
-import cn.ccsu.proxy.interceptor.AuthorInterceptor;
-import cn.ccsu.proxy.interceptor.HeaderInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
@@ -18,13 +16,9 @@ public class InterceptorConfig extends WebMvcConfigurationSupport {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new HeaderInterceptor())
-                .addPathPatterns("/**")
-                .excludePathPatterns("/tag");
-        registry.addInterceptor(new AuthorInterceptor())
-                .addPathPatterns("/**")
-                .excludePathPatterns("/login")
-                .excludePathPatterns("/tag");
+        /**
+         * 换 Zuul 的 filter实现了
+         */
         super.addInterceptors(registry);
     }
 }

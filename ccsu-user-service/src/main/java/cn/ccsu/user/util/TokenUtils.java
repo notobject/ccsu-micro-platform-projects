@@ -2,7 +2,7 @@
  * Created by Long Duping
  * Date 2018/12/5 12:41
  */
-package cn.ccsu.session.util;
+package cn.ccsu.user.util;
 
 import java.util.UUID;
 
