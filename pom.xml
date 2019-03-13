@@ -210,7 +210,7 @@
         <module>ccsu-register-server</module>
         <module>ccsu-proxy-server</module>
         <module>ccsu-user-service</module>
-        <module>ccsu-session-service</module>
+        <module>ccsu-main-service</module>
         <module>ccsu-score-service</module>
         <module>ccsu-notify-service</module>
         <module>ccsu-team-service</module>

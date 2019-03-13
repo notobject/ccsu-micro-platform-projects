@@ -1,10 +1,8 @@
 package cn.ccsu.main.service;
 
-import cn.ccsu.main.config.ApplicationConfig;
 import cn.ccsu.main.dao.InformationDAO;
 import cn.ccsu.main.pojo.po.Information;
 import cn.ccsu.main.utils.RedisUtil;
-import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +10,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static cn.ccsu.main.config.ApplicationConfig.*;
+import static cn.ccsu.main.config.ApplicationConfig.INFORMATION_HOT_PREFIX;
+import static cn.ccsu.main.config.ApplicationConfig.INFORMATION_PREFIX;
 
 /**
  * @author hangs.zhang
