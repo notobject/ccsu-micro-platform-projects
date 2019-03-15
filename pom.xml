@@ -30,8 +30,8 @@
         <!-- RabbitMQ 连接信息 -->
         <rabbitmq.host>mq.notobject.com</rabbitmq.host>
         <rabbitmq.port>5672</rabbitmq.port>
-        <rabbitmq.username>test</rabbitmq.username>
-        <rabbitmq.password>test</rabbitmq.password>
+        <rabbitmq.username>guest</rabbitmq.username>
+        <rabbitmq.password>guest</rabbitmq.password>
 
         <!-- Redis 连接信息 -->
         <redis.host>cache.notobject.com</redis.host>
