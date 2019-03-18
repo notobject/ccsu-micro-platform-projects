@@ -88,7 +88,7 @@
                 <profiles.active>dev</profiles.active>
                 <ip.address>localhost</ip.address>
                 <!-- 注册中心-->
-                <register.instance.address>http://localhost:8761/eureka/</register.instance.address>
+                <register.instance.address>http://39.106.96.220:8761/eureka/</register.instance.address>
             </properties>
             <activation>
                 <activeByDefault>true</activeByDefault>
