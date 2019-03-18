@@ -16,8 +16,8 @@ spring:
   rabbitmq:
     host: mq.notobject.com
     port: 5672
-    username: test
-    password: test
+    username: guest
+    password: guest
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
