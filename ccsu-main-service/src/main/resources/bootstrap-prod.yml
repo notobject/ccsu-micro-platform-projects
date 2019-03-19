@@ -22,8 +22,8 @@ spring:
     username: guest
     password: guest
   redis:
-    host: 127.0.0.1
-    password: zhanghang
+    host: 106.13.47.65
+    password: redis
     port: 6379
     database: 0
     jedis:

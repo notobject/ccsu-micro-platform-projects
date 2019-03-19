@@ -3,6 +3,7 @@ package cn.ccsu.main.service;
 import cn.ccsu.main.dao.InformationDAO;
 import cn.ccsu.main.pojo.po.Information;
 import cn.ccsu.main.utils.RedisUtil;
+import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,9 +54,12 @@ public class HotAndCacheService {
 
     public List<Information> getHotInformation() {
         Set<Object> set = redisUtil.zRevrange(INFORMATION_HOT_PREFIX, 0, 10);
-        return set.stream()
-                .map(e -> getInformationFromCacheById((Integer) e))
-                .collect(Collectors.toList());
+        if (set != null) {
+            return set.stream()
+                    .map(e -> getInformationFromCacheById((Integer) e))
+                    .collect(Collectors.toList());
+        }
+        return Lists.newArrayList();
     }
 
 }

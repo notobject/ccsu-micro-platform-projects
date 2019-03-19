@@ -8,6 +8,8 @@ import cn.ccsu.main.service.ApplyService;
 import cn.ccsu.main.service.InformationService;
 import cn.ccsu.main.utils.BaseResUtil;
 import com.fasterxml.jackson.annotation.JsonView;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +24,7 @@ import static cn.ccsu.main.config.ApplicationConfig.CATEGORY_MAP;
  * *****************
  * function:
  */
+@Api("首页information服务，information即feed流中得内容")
 @RequestMapping("/information")
 @RestController
 public class InformationController {
@@ -33,12 +36,14 @@ public class InformationController {
     private ApplyService applyService;
 
     // 列表类目list
+    @ApiOperation("请求类别列表")
     @GetMapping("categoryList")
     public BaseRes categoryList() {
-        return BaseResUtil.success(categoryList());
+        return BaseResUtil.success(CATEGORY_MAP);
     }
 
     // 1 创建
+    @ApiOperation("请求一个information")
     @PostMapping("/createInformation")
     public BaseRes createInformation(String title, String content, String authors, String category) {
         if (!CATEGORY_MAP.containsKey(category)) {
@@ -55,6 +60,7 @@ public class InformationController {
     }
 
     // 2 删除
+    @ApiOperation("删除information")
     @PostMapping("/removeInformation")
     public BaseRes removeInformation(@RequestParam int id) {
         informationService.removeInformation(id);
@@ -62,6 +68,7 @@ public class InformationController {
     }
 
     // 3 修改
+    @ApiOperation("修改information")
     @PostMapping("/modifyInformation")
     public BaseRes modifyInformation(int id, String title, String content, String authors) {
         Information information = informationService.getInformationById(id);
@@ -82,6 +89,7 @@ public class InformationController {
     }
 
     // 4 查询information
+    @ApiOperation("根据id获取information")
     @JsonView(Information.DetailInformation.class)
     @GetMapping("/getInformationById")
     public BaseRes getInformationById(@RequestParam int id) {
@@ -89,6 +97,7 @@ public class InformationController {
     }
 
     // 5 activity 活动申请
+    @ApiOperation("活动申请，暂时不可用，需要联调")
     @PostMapping("/applyActivity")
     public BaseRes activityApply(int userId, int informationId) {
         Information information = informationService.getInformationById(informationId);
@@ -103,13 +112,15 @@ public class InformationController {
     }
 
     // 6 activity 更新申请状态为成功
+    @ApiOperation("更新申请状态为申请成功，暂时不可用，需要联调")
     @GetMapping("/modifyActivityStatusSuccess")
     public BaseRes modifyStatusSuccess(int applyId) {
         applyService.updateApplyStatus(applyId, ApplyStatus.SUCCESS);
         return BaseResUtil.success();
     }
 
-    // 7 activity 更新申请状态为成功
+    // 7 activity 更新申请状态为失败
+    @ApiOperation("更新申请状态为申请失败，暂时不可用，需要联调")
     @GetMapping("/modifyActivityStatusFailure")
     public BaseRes modifyStatusFailure(int applyId) {
         applyService.updateApplyStatus(applyId, ApplyStatus.FAILURE);

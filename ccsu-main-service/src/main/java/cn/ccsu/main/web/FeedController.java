@@ -6,6 +6,8 @@ import cn.ccsu.main.pojo.vo.BaseRes;
 import cn.ccsu.main.service.InformationService;
 import cn.ccsu.main.utils.BaseResUtil;
 import com.fasterxml.jackson.annotation.JsonView;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +24,7 @@ import static cn.ccsu.main.config.ApplicationConfig.CATEGORY_MAP;
  * *****************
  * function:
  */
+@Api("首页feed流")
 @RequestMapping("/feed")
 @RestController
 public class FeedController {
@@ -30,6 +33,7 @@ public class FeedController {
     private InformationService informationService;
 
     // 最新的10条
+    @ApiOperation("请求最新得十条feed流数据")
     @JsonView(Information.SimpleInformation.class)
     @GetMapping("/latest")
     public BaseRes latest() {
@@ -38,6 +42,7 @@ public class FeedController {
     }
 
     // 最热
+    @ApiOperation("请求点击最多的feed流数据")
     @JsonView(Information.SimpleInformation.class)
     @GetMapping("/hot")
     public BaseRes hot() {
@@ -49,6 +54,7 @@ public class FeedController {
     }
 
     // 根据类别查询
+    @ApiOperation("根据类别查询feed流数据")
     @JsonView(Information.SimpleInformation.class)
     @GetMapping("/listByCategory")
     public BaseRes listByCategory(String category, int start, int offset) {

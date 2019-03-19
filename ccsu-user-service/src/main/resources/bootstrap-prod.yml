@@ -1,5 +1,5 @@
 server:
-  port: 0                                          # 端口，运行时注入
+  port: 8080                                          # 端口，运行时注入
 eureka:
   instance:
     ip-address:                                    # 本机IP 地址，运行时注入

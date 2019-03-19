@@ -8,3 +8,5 @@ spring:
         service-id: @config.instance.id@
   profiles:
     active: @profiles.active@
+server:
+  port: 8080
