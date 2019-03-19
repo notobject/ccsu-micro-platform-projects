@@ -3,6 +3,7 @@ server:
 
 eureka:
   instance:
+    # --eureka.instance.ip-address
     ip-address:                                    # 本机IP 地址，运行时注入
     instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${server.port}
     prefer-ip-address: true                      # 注册IP （缺省为主机名）
@@ -38,7 +39,7 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     username: root
     password: zhanghang
-    url: jdbc:mysql://127.0.0.1:3306/micro-platform?characterEncoding=UTF-8&serverTimezone=GMT
+    url: jdbc:mysql://193.112.120.245:3306/micro-platform?characterEncoding=UTF-8&serverTimezone=GMT
     dbcp2:
       pool-prepared-statements: true
       max-open-prepared-statements: 20

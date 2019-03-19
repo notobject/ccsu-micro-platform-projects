@@ -37,6 +37,7 @@
         <redis.host>cache.notobject.com</redis.host>
         <redis.port>6379</redis.port>
         <redis.password>redis</redis.password>
+        <skipTests>true</skipTests>
 
         <!-- Mysql 连接信息 -->
     </properties>

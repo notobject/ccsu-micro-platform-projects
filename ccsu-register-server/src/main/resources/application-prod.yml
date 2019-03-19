@@ -1,8 +1,8 @@
 eureka:
   instance:
-#    ip-address:                                     # 本机地址 ，运行时注入
+    ip-address:                                     # 本机地址 ，运行时注入
     prefer-ip-address: true
-#    instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${server.port}
+    instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${server.port}
   server:
     enable-self-preservation: false              # 关闭自我保护模式（默认为打开）
     eviction-interval-timer-in-ms: 60000         # 续期时间，即扫描失效服务的间隔时间（缺省为60*1000ms 即1分钟）

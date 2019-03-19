@@ -1,7 +1,7 @@
 eureka:
   instance:
-#    ip-address:
-#    instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${server.port}
+    ip-address:
+    instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${server.port}
     prefer-ip-address: true                       # 注册IP （缺省为主机名）
     lease-renewal-interval-in-seconds: 30       # 心跳时间，即服务续约间隔时间（缺省为30s）
     lease-expiration-duration-in-seconds: 90    # 发呆时间，即服务续约到期时间（缺省为90s）
