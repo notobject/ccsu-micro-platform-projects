@@ -5,5 +5,5 @@
 package cn.ccsu.user.service;
 
 public interface UserService {
-    String login(String jsonParam);
+    String login(String jsonParam, String rawData);
 }

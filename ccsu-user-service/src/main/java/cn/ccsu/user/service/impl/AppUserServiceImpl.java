@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service("appUserService")
 public class AppUserServiceImpl implements UserService {
     @Override
-    public String login(String jsonParam) {
+    public String login(String jsonParam, String rawData) {
         JSONObject returnJson = new JSONObject();
         returnJson.put("errcode", 10010);
         returnJson.put("errmsg", "暂未实现基于其它平台的登录方式。");

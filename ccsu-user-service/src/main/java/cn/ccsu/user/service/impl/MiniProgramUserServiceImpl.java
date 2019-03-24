@@ -10,9 +10,9 @@ import cn.ccsu.user.entity.UserInfo;
 import cn.ccsu.user.service.SessionService;
 import cn.ccsu.user.service.UserService;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.logging.log4j.util.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -23,6 +23,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Date;
 
 @Service("miniProgramUserService")
 @RefreshScope
@@ -43,9 +44,8 @@ public class MiniProgramUserServiceImpl implements UserService {
     private UserInfoDAO userInfoDAO;
 
     @Override
-    public String login(String code) {
+    public String login(String code, String rawData) {
         JSONObject returnJson = new JSONObject();
-
         // 用code 去微信服务器拿 openId 和 session_key
         JSONObject openIdAndSessionKey = code2session(code);
         int errcode = openIdAndSessionKey.getIntValue("errcode");
@@ -55,11 +55,33 @@ public class MiniProgramUserServiceImpl implements UserService {
             log.error(returnJson.toString());
             return returnJson.toJSONString();
         }
-
         // 根据openId 查询用户信息
         String openId = openIdAndSessionKey.getString("openId");
-        log.debug("openid=" + openId);
-        UserInfo userInfo = userInfoDAO.selectByOpenId(openId);
+        log.debug("openid: {}", openId);
+
+        UserInfo userInfo = new UserInfo();
+        userInfo.setOpenId(openId);
+        if (!Strings.isEmpty(rawData)){
+            JSONObject json = JSONObject.parseObject(rawData);
+            log.debug("rawData: {}", rawData);
+            userInfo.setNickName(json.getString("nickName"));
+            userInfo.setAvatarUrl(json.getString("avatarUrl"));
+            userInfo.setCity(json.getString("city"));
+            userInfo.setCountry(json.getString("country"));
+            userInfo.setGender(json.getInteger("gender"));
+            userInfo.setProvince(json.getString("province"));
+            userInfo.setRoleId(0);
+            userInfo.setStuNumber("");
+            userInfo.setRealName("");
+            userInfo.setCreateTime(new Date(System.currentTimeMillis()));
+            userInfo.setLastLoginTime(new Date(System.currentTimeMillis()));
+            if (userInfoDAO.isExist(openId)) {
+                userInfoDAO.updateLastLoginTime(openId);
+            } else {
+                userInfoDAO.insert(userInfo);
+            }
+        }
+        // 将用户信息写入会话缓存
         JSONObject sessionJson = sessionService.newSession(JSONObject.toJSONString(userInfo));
         errcode = sessionJson.getIntValue("errcode");
         if (0 != errcode) {

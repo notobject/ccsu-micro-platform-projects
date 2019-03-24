@@ -39,7 +39,7 @@ public class HeaderCheckFilter extends ZuulFilter {
 
     @Override
     public Object run() throws ZuulException {
-        if (RequestContext.getCurrentContext().getRequest().getRequestURI().equals("/ccsu-user-service/login"))
+        if (RequestContext.getCurrentContext().getRequest().getRequestURI().contains("/ccsu-user-service/login"))
             return null;
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ccsu.user.dao.UserInfoDAO">
+
+    <select id="isExist" resultType="boolean">
+        select count(id) from t_user_info where open_id = #{openId}
+    </select>
+
+    <update id="updateLastLoginTime">
+        update t_user_info set last_login_time = NOW() where open_id = #{openId}
+    </update>
+
+    <insert id="insert">
+        insert into t_user_info(open_id,create_time,last_login_time,nick_name,avatar_url,gender,city,province,country)
+        values(#{openId}, NOW(), NOW(),#{nickName},#{avatarUrl},#{gender},#{city},#{province},#{country});
+    </insert>
+</mapper>

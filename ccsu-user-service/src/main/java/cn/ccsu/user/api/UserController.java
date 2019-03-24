@@ -16,6 +16,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -47,7 +48,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(@Param("code") String code) {
+    public String login(@RequestParam String code , @RequestParam String rawData) {
         log.info("appPlatform: {}", request.getHeader("appPlatform"));
         if (StringUtils.isEmpty(code)) {
             JSONObject returnJson = new JSONObject();
@@ -57,11 +58,11 @@ public class UserController {
             return returnJson.toString();
         }
         log.info("code: {}", code);
-        return miniProgramUserService.login(code);
+        return miniProgramUserService.login(code,rawData);
     }
 
     @GetMapping("/getUserInfo")
-    public String getUserInfo(@Param("sessionId") String sessionId) throws IOException {
+    public String getUserInfo(@RequestParam String sessionId) throws IOException {
 //        log.info("sessionId: " + request.getHeader("sessionId"));
 //        log.info("appPlatform: " + request.getHeader("appPlatform"));
 //        log.info("appVersion: " + request.getHeader("appVersion"));
