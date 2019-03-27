@@ -1,14 +1,14 @@
 server:
-  port: 8080                                        # 开发环境端口
+  port: 8080                                   # 开发环境端口
 eureka:
   instance:
     ip-address: localhost
     instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${server.port}
-    prefer-ip-address: true                      # 注册IP （缺省为主机名）
+    prefer-ip-address: true                    # 注册IP （缺省为主机名）
     lease-renewal-interval-in-seconds: 15      # 服务续约间隔时间（缺省为30s）
     lease-expiration-duration-in-seconds: 30   # 服务失效时间（缺省为90s）
   client:
-    fetch-registry: false                        # 获取服务注册信息（配置中心不需要消费其他服务，因此设为false）
+    fetch-registry: true                       # 获取服务注册信息
     registry-fetch-interval-seconds: 30        # 获取间隔（缺省为30秒）
     service-url:
           defaultZone: http://localhost:8761/eureka/
@@ -32,7 +32,7 @@ spring:
       min-evictable-idle-time-millis: 300000
 mybatis:
   type-aliases-package: cn.ccsu.user.entity
-  mapper-locations: "classpath: mapper/*.xml"
+  mapper-locations: classpath:mapper/*.xml
   configuration:
     use-generated-keys: true
     use-column-label: true

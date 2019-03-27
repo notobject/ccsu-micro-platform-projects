@@ -5,19 +5,20 @@
 package cn.ccsu.user.service;
 
 import cn.ccsu.user.util.TokenUtils;
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.concurrent.TimeUnit;
 
 @Service
 public class SessionService {
+    private static final Logger log = LoggerFactory.getLogger(SessionService.class);
 
     @Value("${expireIn: 7200}")
     private int expiredIn;           // 会话过期时间（默认 7200 秒）
@@ -29,6 +30,7 @@ public class SessionService {
         JSONObject returnJson = new JSONObject();
         ValueOperations<String, String> ops = template.opsForValue();
         String sessionId = TokenUtils.getToken();
+        log.info("redis set {} = {}", sessionId, data);
         ops.set(sessionId, data == null ? "null" : data, expiredIn, TimeUnit.SECONDS);
         returnJson.put("errcode", 0);
         returnJson.put("errmsg", "success");
@@ -39,9 +41,9 @@ public class SessionService {
 
     public JSONObject getSessionInfo(String sessionId) {
         JSONObject returnJson = new JSONObject();
-
         ValueOperations<String, String> ops = template.opsForValue();
         String sessionInfo = ops.get(sessionId);
+        log.info("redis get {} = ", sessionId, sessionInfo);
         if (sessionInfo == null) {
             // 两种情况：sessionId 不存在，sessionId 已过期。这里统一当作过期处理
             returnJson.put("errcode", 10012);

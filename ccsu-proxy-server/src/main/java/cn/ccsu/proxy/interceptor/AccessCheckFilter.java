@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.ServletInputStream;
@@ -44,7 +45,7 @@ public class AccessCheckFilter extends ZuulFilter {
 
     @Override
     public Object run() throws ZuulException {
-        if (RequestContext.getCurrentContext().getRequest().getRequestURI().equals("/ccsu-user-service/login"))
+        if (RequestContext.getCurrentContext().getRequest().getRequestURI().contains("/ccsu-user-service/login"))
             return null;
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
@@ -56,48 +57,54 @@ public class AccessCheckFilter extends ZuulFilter {
             return null;
         }
         // 填充用户信息
-        ResponseEntity<String> entity = restTemplate.getForEntity("http://ccsu-user-service/getUserInfo?sessionId={1}", String.class, sessionId);
-        if (entity.getStatusCode() == HttpStatus.OK) {
-            String resp = entity.getBody();
-            if (resp != null) log.info("resp: " + resp);
-            JSONObject userInfo = JSONObject.parseObject(resp).getJSONObject("userInfo");
-            if (userInfo == null) {
-                RespUtil.resp(10000, "userInfo is null.");
-            }
-            try {
-                JSONObject jsonObject = new JSONObject();
-                Enumeration<String> parameterNames = request.getParameterNames();
-                while (parameterNames.hasMoreElements()) {
-                    String key = parameterNames.nextElement();
-                    jsonObject.put(key, request.getParameter(key));
+        try {
+
+            ResponseEntity<String> entity = restTemplate.getForEntity("http://ccsu-user-service/getUserInfo?sessionId={1}", String.class, sessionId);
+            if (entity.getStatusCode() == HttpStatus.OK) {
+                String resp = entity.getBody();
+                if (resp != null) log.info("resp: " + resp);
+                JSONObject userInfo = JSONObject.parseObject(resp).getJSONObject("userInfo");
+                if (userInfo == null) {
+                    RespUtil.resp(10000, "userInfo is null.");
                 }
-                log.info("body: " + jsonObject.toString());
-                jsonObject.put("userInfo", userInfo);
-                String newBody = jsonObject.toString();
-                log.info("new body: " + newBody);
-                final byte[] bytes = newBody.getBytes();
-                ctx.setRequest(new HttpServletRequestWrapper(request) {
-                    @Override
-                    public ServletInputStream getInputStream() throws IOException {
-                        return new ServletInputStreamWrapper(bytes);
+                try {
+                    JSONObject jsonObject = new JSONObject();
+                    Enumeration<String> parameterNames = request.getParameterNames();
+                    while (parameterNames.hasMoreElements()) {
+                        String key = parameterNames.nextElement();
+                        jsonObject.put(key, request.getParameter(key));
                     }
+                    log.info("body: " + jsonObject.toString());
+                    jsonObject.put("userInfo", userInfo);
+                    String newBody = jsonObject.toString();
+                    log.info("new body: " + newBody);
+                    final byte[] bytes = newBody.getBytes();
+                    ctx.setRequest(new HttpServletRequestWrapper(request) {
+                        @Override
+                        public ServletInputStream getInputStream() throws IOException {
+                            return new ServletInputStreamWrapper(bytes);
+                        }
 
-                    @Override
-                    public int getContentLength() {
-                        return bytes.length;
-                    }
+                        @Override
+                        public int getContentLength() {
+                            return bytes.length;
+                        }
 
-                    @Override
-                    public long getContentLengthLong() {
-                        return bytes.length;
-                    }
-                });
-            } catch (Exception e) {
-                RespUtil.resp(10000, e.getMessage());
+                        @Override
+                        public long getContentLengthLong() {
+                            return bytes.length;
+                        }
+                    });
+                } catch (Exception e) {
+                    RespUtil.resp(10000, e.getMessage());
+                }
+            } else {
+                RespUtil.resp(10000, "getUserInfo error.status code:" + entity.getStatusCode());
             }
-        } else {
-            RespUtil.resp(10000, "getUserInfo error.");
+        } catch (HttpServerErrorException e) {
+            RespUtil.resp(e.getRawStatusCode(), e.getMessage());
         }
+
         return null;
     }
 }
