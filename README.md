@@ -48,6 +48,8 @@
 
 ### step 9. Other-Services
 
+### step 10. mp-ui (mini program)
+
 ## FAQ
 
 - Any issue or question is welcome, Please feel free to open github issues :)
