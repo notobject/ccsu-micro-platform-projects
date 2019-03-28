@@ -2,6 +2,7 @@ package cn.ccsu.proxy;
 
 import cn.ccsu.proxy.conf.InterceptorConfig;
 import cn.ccsu.proxy.interceptor.AccessCheckFilter;
+import cn.ccsu.proxy.interceptor.CSRFCheckFilter;
 import cn.ccsu.proxy.interceptor.HeaderCheckFilter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -42,8 +43,13 @@ public class ProxyServerApplication {
     }
 
     @RequestMapping("/")
-    public String index(){
+    public String index() {
         return "redirect:https://github.com/notobject/ccsu-micro-platform-projects";
+    }
+
+    @Bean
+    CSRFCheckFilter csrfCheckFilter() {
+        return new CSRFCheckFilter();
     }
 
     @Bean

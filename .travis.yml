@@ -5,9 +5,6 @@ language: java
 java:
   - "1.8"
 
-services:
-  - maven
-
 script:
   - mvn package -DskipTests=true -Pdev
 
