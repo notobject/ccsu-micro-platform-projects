@@ -48,7 +48,7 @@
 
 ### step 9. Other-Services
 
-### step 10. mp-ui (mini program)
+### step 10. MP-UI (mini program)
 
 ## FAQ
 
