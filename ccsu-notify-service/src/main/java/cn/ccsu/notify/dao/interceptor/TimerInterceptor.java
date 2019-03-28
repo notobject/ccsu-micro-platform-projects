@@ -63,7 +63,7 @@ public class TimerInterceptor implements Interceptor {
         Object result = invocation.proceed();
         long end = System.currentTimeMillis();
         long timing = end - start;
-        log.info("id:{} - Sql:{} - cost:{}ms", statementId, sql, timing);
+        log.info("id:{} - Sql:{} - cost:{}templates", statementId, sql, timing);
         return result;
     }
 

@@ -33,7 +33,7 @@ spring:
         max-wait: -1ms
         min-idle: 10
         max-idle: 20
-    # 连接超时 ms
+    # 连接超时 templates
     timeout: 1000ms
   datasource:
     driver-class-name: com.mysql.jdbc.Driver

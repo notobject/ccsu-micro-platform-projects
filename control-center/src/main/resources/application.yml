@@ -1,0 +1,11 @@
+server:
+  port: 80
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    use-generated-keys: true
+    use-column-label: true
+    map-underscore-to-camel-case: true
+spring:
+  freemarker:
+    suffix: .html

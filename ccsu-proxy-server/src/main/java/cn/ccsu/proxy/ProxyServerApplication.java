@@ -14,14 +14,16 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableZuulProxy
 @EnableDiscoveryClient
-@RestController
+@Controller
 @RefreshScope
 @Import(InterceptorConfig.class)
 public class ProxyServerApplication {
@@ -34,8 +36,14 @@ public class ProxyServerApplication {
     }
 
     @RequestMapping("/tag")
+    @ResponseBody
     public String version() {
         return "tag: " + tag;
+    }
+
+    @RequestMapping("/")
+    public String index(){
+        return "redirect:https://github.com/notobject/ccsu-micro-platform-projects";
     }
 
     @Bean
