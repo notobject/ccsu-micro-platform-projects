@@ -53,7 +53,7 @@
 
 ### step 8. Proxy-Server
 
-### step 9. Other-Services
+### step 9. Business-Services
 
 ### step 10. MP-UI (mini program)
 
