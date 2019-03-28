@@ -1,7 +1,7 @@
 # 长沙学院-校园双创服务平台
 [![Build Status](https://travis-ci.org/notobject/ccsu-micro-platform-projects.svg?branch=master)](https://travis-ci.org/notobject/ccsu-micro-platform-projects)
 [![License](https://img.shields.io/badge/LICENSE-Apache2.0-ff69b4.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
-## 介绍
+## 一、介绍
 
 ### 逻辑架构
 
@@ -9,11 +9,11 @@
 
 ### 目录结构
 
-## 文档
+## 二、文档
  
  - [API 文档](https://github.com/notobject/ccsu-micro-platform-projects/edit/master/README.md#)
 
-## 准备
+## 三、准备
 
 ### 系统&工具版本参考
 - CentOS = 7.x
@@ -36,7 +36,7 @@
 3|ServerC|持久化集群| 这个非重点，用一台模拟集群环境
 4|ServerD|服务治理平台| 这个可以选择在自己本地部署
 
-## 开始
+## 四、开始
 ### step 1. Mysql安装
 
 ### step 2. Redis安装
@@ -57,10 +57,13 @@
 
 ### step 10. MP-UI (mini program)
 
-## FAQ
-
+## 五、FAQ
 - Any issue or question is welcome, Please feel free to open github issues :)
 
-## Contributors
+## 六、Contributors
 
-- This project exists thanks to all the people who contribute.
+- [longduping](https://github.com/notobject/ccsu-micro-platform-projects/edit/master/README.md#六、Contributors) 
+- [zhanghang](https://github.com/notobject/ccsu-micro-platform-projects/edit/master/README.md#六、Contributors)
+- [caoxiaoshuang](https://github.com/notobject/ccsu-micro-platform-projects/edit/master/README.md#六、Contributors)
+- [hechong](https://github.com/notobject/ccsu-micro-platform-projects/edit/master/README.md#六、Contributors)
+
