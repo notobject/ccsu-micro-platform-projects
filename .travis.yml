@@ -6,10 +6,9 @@ go:
   - "1.8"
 
 services:
-  - docker
   - maven
 
 script:
-  - mvn clean package -skipTests=true
+  - mvn package -DskipTests=true -Pdev
 
 after_success:
