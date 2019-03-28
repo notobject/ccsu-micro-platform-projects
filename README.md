@@ -1,10 +1,11 @@
 # 长沙学院-校园双创服务平台
 [![Build Status](https://travis-ci.org/notobject/ccsu-micro-platform-projects.svg?branch=master)](https://travis-ci.org/notobject/ccsu-micro-platform-projects)
 [![License](https://img.shields.io/badge/LICENSE-Apache2.0-ff69b4.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
+## 介绍
 
-## 文档
-
- - Usage
+## 相关文档
+ 
+ - API 文档
 
 ## 准备
 
