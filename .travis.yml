@@ -7,5 +7,3 @@ java:
 
 script:
   - mvn package -DskipTests=true -Pdev
-
-after_success:
