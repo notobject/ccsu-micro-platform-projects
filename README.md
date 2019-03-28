@@ -4,13 +4,21 @@
 
 ## Documentations
 
+ - Usage
+
 ## Prerequisite
+
+- CentOS = 7.X
+- JDK >= 1.8
+- Maven >= 3.6.0
+- Git >= 2.20.0
+- Go >= 1.1
 
 ## Getting Started
 
-## API Standard
 
-## Q&A
+
+## FAQ
 
 - Any issue or question is welcome, Please feel free to open github issues :)
 
