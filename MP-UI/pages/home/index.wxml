@@ -1,0 +1,94 @@
+<!--首页-->
+<view class="idx {{isIphoneX ? 'b160' : ''}}">
+    <view class="idx-header">
+        <!-- 横幅 -->
+        <swiper class="idx-banner" autoplay="true" current="0" interval="2000" duration="500"
+        circular="false" display-multiple-items="1" skip-hidden-item-layout="true" bindchange="swiperChange">
+            <block wx:for="{{imgUrls}}" wx:key="bannarNum">
+                <swiper-item>
+                    <image src="{{item}}" class="idx-banner-item"/>
+                </swiper-item>
+            </block>
+        </swiper>
+        <view class="idx-circles">
+            <block wx:for="{{imgUrls}}" wx:key="bannarNum">
+                <view class="idx-circles-item {{index == bannarIndex ? ' active' : ''}}"></view>
+            </block>
+        </view>
+    </view>
+    <!-- 功能菜单 -->
+    <view class="idx-menus">
+        <view class="idx-menus-item1">
+            <view class="idx-menus__content">
+                <view class="idx-content-items" hover-class="menuBtnActive">
+                    <text class="iconfont ft24 iconMenuBtn"></text>
+                    <text class="ft14">\n功能1</text>
+                </view>
+                <view class="idx-content-items" hover-class="menuBtnActive">
+                    <text class="iconfont ft24 iconMenuBtn"></text>
+                    <text class="ft14">\n功能2</text>
+                </view>
+                <view class="idx-content-items" hover-class="menuBtnActive">
+                    <text class="iconfont ft24 iconMenuBtn"></text>
+                    <text class="ft14">\n功能3</text>
+                </view>
+                <view class="idx-content-items" hover-class="menuBtnActive">
+                    <text class="iconfont ft24 iconMenuBtn"></text>
+                    <text class="ft14">\n功能4</text>
+                </view>
+                <!-- <view class="idx-content-items" hover-class="menuBtnActive">
+                    <text class="iconfont ft24 iconMore"></text>
+                    <text class="ft14">\n更多</text>
+                </view> -->
+            </view>
+        </view>
+        <view class="iconfont ft18 iconDown icon-down"></view>
+    </view>
+    <!-- 校园动态 -->
+    <view class="idx-CampusEvent">
+        <view class="idx-CampusEvent-nav">
+            <view data-index="{{index}}" class="idx-CampusEvent__menuBtn {{index == CampusEventMenuIndex ? 'active' : ''}}" wx:for="{{CampusEventMenuList}}" wx:key="MenuListNum" bindtap="CampusEventMenuClick">{{item}}</view>
+        </view>
+        <!-- 1 -->
+        <view class="idx-CampusEvent-content" bindtap="navigaTo" hover-class="CampusEventBoxActive">
+            <view class="idx-CampusEvent__title ft16">
+                育优良团风，圆青春梦想。 ——我校第七届团支部风采大赛决赛圆满落幕
+            </view>
+            <view class="idx-CampusEvent__messBox pd5">
+                <text class="idx-CampusEvent__activeType ft12">活动</text>
+                <text class="idx-CampusEvent__activeTime ft12">发表于 2018-11-27</text>
+            </view>
+            <view class="idx-CampusEvent__imageBox pd5">
+                <image class="idx-CampusEvent__image" src="../../static/images/5.png"></image>
+            </view>
+        </view>
+        <!-- 2 -->
+        <view class="idx-CampusEvent-content displayFlex" bindtap="navigaTo" hover-class="CampusEventBoxActive">
+            <view class="idx-CampusEvent__item flex1">
+                <view class="idx-CampusEvent__title ft16">
+                    育优良团风，圆青春梦想。 ——我校第七届团支部风采大赛决赛圆满落幕
+                </view>
+                <view class="idx-CampusEvent__messBox pd5">
+                    <text class="idx-CampusEvent__activeType ft12">活动</text>
+                    <text class="idx-CampusEvent__activeTime ft12">发表于 2018-11-27</text>
+                </view>
+            </view>
+            <view class="idx-CampusEvent__item pd5">
+                <image class="idx-CampusEvent__imageFr" src="../../static/images/5.png"></image>
+            </view>
+        </view>
+        <!-- 3 -->
+        <view class="idx-CampusEvent-content" bindtap="navigaTo"  hover-class="CampusEventBoxActive">
+            <view class="idx-CampusEvent__title ft16">
+                育优良团风，圆青春梦想。 ——我校第七届团支部风采大赛决赛圆满落幕
+            </view>
+            <view class="idx-CampusEvent__messBox pd5">
+                <text class="idx-CampusEvent__activeType ft12">活动</text>
+                <text class="idx-CampusEvent__activeTime ft12">发表于 2018-11-27</text>
+            </view>
+        </view>
+    </view>
+</view>
+<!-- 底部按钮 -->
+<tabbar-view active-index="0" bind:getIsIphoneX="getIsIphoneX"></tabbar-view>
+

@@ -1,0 +1,148 @@
+.idx {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 120rpx;
+    left: 0;
+    overflow: hidden;
+    overflow-y: auto;
+    background-color: #eee;
+    -webkit-overflow-scrolling: touch; /* ios下惯性滚动 */
+}
+/* iponeX系列 */
+.b160 {
+    bottom: 168rpx !important;
+}
+/* 横幅 */
+.idx-header {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 400rpx;
+    overflow: hidden;
+}
+.idx-banner {
+    width: 100%;
+    height: 400rpx;
+}
+.idx-banner image {
+    width: 750rpx;
+    height: 400rpx;
+}
+/* 圆点 */
+.idx-circles {
+    width: 144rpx;
+    height: 20rpx;
+    position: absolute;
+    left: 50%;
+    bottom: 40rpx;
+    margin-left: -64rpx;
+    z-index: 999;
+}
+.idx-circles .idx-circles-item {
+    float: left;
+    margin-right: 16rpx;
+    width: 20rpx;
+    height: 20rpx;
+    border-width: 2rpx;
+    border-color: #333;
+    border-style: solid;
+    border-radius: 50%;
+}
+.idx-circles .idx-circles-item:last-child{
+    margin-right: 0;
+}
+.idx-circles .idx-circles-item.active {
+    background-color: #666;
+}
+/* 功能菜单 */
+.idx-menus {
+    position: absolute;
+    top: 400rpx;
+    right: 0;
+    left: 0;
+}
+.idx-menus-item1, .idx-menus-item2 {
+    width: 100%;
+    background-color: #fff;
+}
+.idx-menus .idx-menus__content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 166rpx;
+    line-height: 1.2;
+    text-align: center;
+    margin-left: -2rpx;
+}
+.idx-menus .idx-menus__content .idx-content-items {
+    width: 186rpx;
+}
+.idx-menus .icon-down {
+    height: 28rpx;
+    line-height: 18rpx;
+    text-align: center;
+    background-color: #fff;
+
+}
+.idx-menus .menuBtnActive {
+    color: #ff9800;
+}
+/* 校园动态 */
+.idx-CampusEvent {
+    position: absolute;
+    top: 620rpx;
+    right: 0;
+    left: 0;
+    font-size: 28rpx;
+}
+.idx-CampusEvent-nav {
+    display: flex;
+    width: 100%;
+    height: 100rpx;
+    line-height: 100rpx;
+    border-bottom: 2rpx solid #f2f2f2;
+    background-color: #fff;
+    overflow: hidden;
+}
+.idx-CampusEvent .idx-CampusEvent__menuBtn {
+    flex: 1;
+    text-align: center;
+}
+.idx-CampusEvent .idx-CampusEvent__menuBtn.active {
+    border-bottom: 2rpx solid #ff9800;
+    color: #ff9800;
+}
+/* 1 */
+.idx-CampusEvent .idx-CampusEvent-content {
+    padding: 20rpx;
+    background-color: #fff;
+    box-sizing: content-box;
+}
+.idx-CampusEvent .idx-CampusEvent__activeType {
+    margin-right: 20rpx;
+    border: 2rpx solid #ff9800;
+    padding: 2rpx 12rpx;
+    border-radius: 4rpx;
+}
+.idx-CampusEvent .idx-CampusEvent__image {
+    width: 710rpx;
+    height: 400rpx;
+}
+.w250 {
+    width: 500rpx;
+}
+/* 活动样式 */
+.idx-CampusEvent-content.CampusEventBoxActive {
+    background-color: rgba(0, 0, 0, .03);
+}
+/* 图片在右边时大小 */
+.idx-CampusEvent .idx-CampusEvent__imageFr {
+    width: 160rpx;
+    height: 160rpx;
+    line-height: 1.2;
+}
+.flex1 {
+    flex:1;
+}

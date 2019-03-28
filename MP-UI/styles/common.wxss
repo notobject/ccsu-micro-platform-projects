@@ -1,0 +1,79 @@
+/*  */
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+.ft24 {
+    font-size: 48rpx !important;
+}
+.ft20 {
+    font-size: 40rpx !important;
+}
+.ft18 {
+    font-size: 36rpx !important;
+}
+.ft16 {
+    font-size: 32rpx !important;
+}
+.ft14 {
+    font-size: 28rpx !important;
+}
+.ft13 {
+    font-size: 26rpx !important;
+}
+.ft12 {
+    font-size: 24rpx !important;
+}
+.borderBottom {
+    border-bottom: 2rpx solid rgba(187, 187, 187, .2);
+}
+/* 字体加粗 */
+.ftBold {
+    font-weight: bold;
+}
+/* 上下内间距 */
+.pd5 {
+    padding: 10rpx 0;
+}
+.pd20 {
+    padding: 0 40rpx;
+}
+/* 左内间距 */
+.pdl5 {
+    padding-left: 10rpx;
+}
+/* 上下外边距 */
+.mg10 {
+    margin: 20rpx 0;
+}
+.mgB20 {
+    margin-top: 40rpx;
+}
+/* 清除浮动 */
+.clearfix:before,.clearfix:after{
+    content:"";
+    display:table;
+}
+.clearfix:after{clear:both;}
+/* flex */
+.displayFlex {
+    display:-webkit-box;
+    display:-webkit-flex;
+    display:flex;
+    box-sizing:border-box;
+}
+
+/* 页面返回功能 */
+.atc-back {
+    width: 242rpx;
+    height: 76rpx;
+    line-height: 76rpx;
+    margin-bottom: 20rpx;
+    margin-left: -20rpx;
+}
+.iconBackActive {
+    color: #e51c23;
+    background-color: #ff9800;
+}

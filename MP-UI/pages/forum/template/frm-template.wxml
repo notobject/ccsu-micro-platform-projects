@@ -1,0 +1,21 @@
+<!-- 帖子模板 -->
+<template name="articleBox">
+    <view class="frm-articleBox" bindtap="navigateToArticle" hover-class="urlActive">
+        <!-- 作者信息 -->
+        <view class="frm-article-header displayFlex">
+            <view class="frm-imageBox">
+                <image class="frm-author-headImg" src=""></image>
+            </view>
+            <view class="frm-author-name">{{authorName}}</view>
+            <view class="frm-author-time">发表于{{authorTime}}</view>
+            <view class="frm-author-tip">[{{authorTip}}]</view>
+        </view>
+        <!-- 文章名 -->
+        <view class="frm-article-name">
+            {{articleName}}
+        </view>
+        <view class="frm-article-content">
+            {{articleContent}}
+        </view>
+    </view>
+</template>

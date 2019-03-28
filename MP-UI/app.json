@@ -1,0 +1,48 @@
+{
+    "pages": [
+        "pages/forum/articleDetail/index",
+        "pages/home/index",
+        "pages/home/articleDetial/index",
+        "pages/forum/index",
+        "pages/forum/articleDetail/commentDetail/index",
+        "pages/doubleCreation/index",
+        "pages/doubleCreation/projectDetail/index",
+        "pages/doubleCreation/teamDetail/index",
+        "pages/login/index",
+        "pages/personal/index",
+        "pages/personal/userInfo/index",
+        "pages/personal/userActivity/index"
+        ],
+    "window": {
+        "navigationStyle": "custom",
+        "navigationBarTextStyle": "black",
+        "enablePullDownRefresh": false
+    },
+    "tabBar": {
+        "list": [
+            {
+                "pagePath": "pages/home/index",
+                "text": "首页"
+            },
+            {
+                "pagePath": "pages/forum/index",
+                "text": "圈子"
+            },
+            {
+                "pagePath": "pages/doubleCreation/index",
+                "text": "双创"
+            },
+            {
+                "pagePath": "pages/personal/index",
+                "text": "我的"
+            }
+        ]
+    },
+    "networkTimeout": {
+        "request": 5000,
+        "connectSocket": 5000,
+        "uploadFile": 5000,
+        "downloadFile": 5000
+    },
+    "debug": true
+}

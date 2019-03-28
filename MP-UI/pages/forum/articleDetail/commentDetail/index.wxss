@@ -1,0 +1,15 @@
+/* 评论详情 */
+@import './template/cmd-template.wxss';
+.cmd-content {
+    background-color: #f0f0f2;
+}
+.cmd-mian {
+    padding: 0 0 40rpx 0;
+    background-color: #fff;
+    margin-bottom: 60rpx;
+}
+.cmd-commentsContent {
+    padding: 20rpx 0;
+    background-color: #fff;
+    border-bottom: 2rpx solid #BBB;
+}

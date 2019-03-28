@@ -1,0 +1,32 @@
+<!-- 头像、名称模板 -->
+<template name="authorBox">
+    <view class="fad-article-authorBox displayFlex">
+        <view class="fad-authorImgBox">
+            <image class="fad-authorImg" src=""></image>
+        </view>
+        <view class="fad-authorInfo">
+            <view class="fad-author-name">{{authorName}}</view>
+            <view class="fad-publication-time">{{publicationTime}}</view>
+        </view>
+    </view>
+</template>
+
+<!-- 评论模板 -->
+<template name="commentBox">
+    <view class="fad-commentBox" bindtap="navigateToComment" hover-class="urlActive">
+        <view class="fad-userBox displayFlex">
+            <template is="authorBox" data="{{...authorList}}"></template>
+            <view class="fad-comment-state displayFlex ft14">
+                <view class="comment-num">
+                    <text class="iconfont iconComment ft16"></text>{{commentNum}}
+                </view>
+                <view class="praise-num">
+                    <text class="iconfont iconPraise ft16"></text>{{praiseNum}}
+                </view>
+            </view>
+        </view>
+        <view class="fad-comment-content">
+            {{articleContent}}
+        </view>
+    </view>
+</template>

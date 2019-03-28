@@ -1,0 +1,26 @@
+<!-- 登录 -->
+<view class="lg-bg">
+    <!-- logo块 -->
+    <view class="lg-header">
+        
+    </view>
+    <!-- 用户登录 -->
+    <form class="lg-form" report-submit="false" bindsubmit="" bindreset="">
+        <view class="lg-input-box">
+            <input class="lg-input" type="text" placeholder="请输入用户名" placeholder-class="ft14" bindinput="" bindfocus="" bindblur="" bindconfirm="" cursor-spacing="" />
+        </view>
+        <view class="lg-input-box">
+            <input class="lg-input" type="number" password="true" placeholder="请输入密码" placeholder-class="ft14" bindinput="" bindfocus="" bindblur="" bindconfirm="" />
+        </view>
+        <!-- 登录提示之类 -->
+        <view class="lg-tip">
+            
+        </view>
+        <!-- 登录按钮 -->
+        <view class="lg-form-submit">
+            <button class="lg-btn" hover-class="lg-button-hover" form-type="submit" open-type="getUserInfo">
+                登录
+            </button>
+        </view>
+    </form>
+</view>

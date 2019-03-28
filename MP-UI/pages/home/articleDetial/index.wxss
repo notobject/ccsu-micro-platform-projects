@@ -1,0 +1,58 @@
+/* 文章详情 */
+.atc-content {
+    position: relative;
+    overflow: hidden;
+    overflow-y: auto;
+    padding: 0 30rpx;
+}
+/* 标签 */
+.atc-tip {
+    padding: 20rpx 0 0;
+}
+.atc-tip-item {
+    width: 120rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    text-align: center;
+    border-radius: 8rpx;
+}
+.atc-tip-item.activit {
+    border: 2rpx solid #ff9800;
+}
+.atc-tip-item.recent {
+    border: 2rpx solid #e51c23;
+}
+.atc-tip-item:first-child {
+    margin-right: 20rpx;
+}
+/* 文章信息 */
+.atc-messBox {
+    margin: 20rpx 0;
+    font-size: 24rpx;
+    color: #927979;
+}
+.atc-mess-time {
+    margin-right: 40rpx;
+}
+/* 文章内容 */
+.atc-essay {
+    margin: 20rpx 0;
+    padding: 0 30rpx;
+}
+/* 按钮 */
+.atc-footer {
+    margin: 40rpx 0;
+}
+.atc-applyBtn {
+    width: 360rpx;
+    height: 74rpx;
+    line-height: 70rpx;
+    font-size: 32rpx;
+    background-color: #fff;
+    color: #1AAD19;
+    border: 2rpx solid #1AAD19;
+}
+.atc-footer .atc-applayBtnActive {
+    color: #166139;
+    border-color: #166139;
+}

@@ -1,0 +1,122 @@
+.dct-myTeam__item,.dct-myProject__item {
+    width: 100%;
+    margin: 20rpx 0;
+    background-color: #fff;
+    overflow: hidden;
+}
+/* 我的团队 */
+.dct-myTeam__item {
+    height: 240rpx;
+}
+.dct-myTeam__logoBox {
+    width: 220rpx;
+    height: 220rpx;
+    padding: 20rpx 0 0 20rpx;
+}
+.dct-myTeam__logoBox .dct-myTeam__logo {
+    width: 200rpx;
+    height: 200rpx;
+    border-radius: 50%;
+    background: #ccc;
+}
+/*  */
+.dct-myTeam__mess {
+    height: 100%;
+    width: 430rpx;
+    padding-left: 20rpx;
+}
+.dct-myTeam__mess .dct-myTeam__messTitle {
+    margin-top: 20rpx;
+    font-size: 32rpx;
+}
+.dct-myTeam__messPic{
+    width: 100%;
+    height: 64rpx;
+    margin: 20rpx 0;
+}
+.dct-myTeam__messPic .dct-messPic__picBox {
+    width: 60rpx;
+    height: 60rpx;
+    border-radius: 50%;
+    background: #f00;
+    margin-left: 10rpx;
+}
+.dct-myTeam__messPic .dct-messPic__picBox:first-child {
+    margin-left: 0;
+}
+.dct-myTeam__messPic .dct-messPic__border {
+    margin-left: 10rpx;
+    border-left: 2rpx solid #BBB;
+}
+/*  */
+.dct-myTeam__messTip {
+    font-size: 24rpx;
+}
+.dct-myTeam__messTip .dct-messTip__title {
+    margin-right: 20rpx;
+}
+.dct-myTeam__messTip .dct-messTip__content {
+    color: #1AAD19;
+}
+
+/* 我的项目 */
+.dct-myProject__item  {
+    max-height: 270rpx;
+    min-height: 230rpx;
+    padding: 0 20rpx;
+    box-sizing:border-box;
+}
+.dct-myProject-header {
+    height: 70rpx;
+    font-size: 32rpx;
+}
+.dct-myProject-header .dct-header__title {
+    flex: 1;
+    height: 70rpx;
+    line-height: 70rpx;
+}
+.dct-myProject-header .dct-header__tip {
+    margin-top: 13rpx;
+    width: 120rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    text-align: center;
+    border: 2rpx solid #ff9800;
+    border-radius: 8rpx;
+    color: #ff9800;
+}
+.dct-myProject-contentBox {
+    width: 600rpx;
+    font-size: 28rpx;
+    margin-bottom: 10rpx;
+    /* 超出两行自动换行 */
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* 限制在一个块元素显示的文本的行数 */
+    -webkit-box-orient: vertical; /* 垂直排列 */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break:break-all;
+    line-height: 1.4;
+}
+/*  */
+.dct-myProject-messBox {
+    border-top: 2rpx solid #BBB;
+}
+.dct-messBox-item {
+    margin-right: 20rpx;
+    margin-bottom: 10rpx;
+    font-size: 24rpx;
+    line-height: 2;
+}
+.dct-messBox-item  .dct-messBox__value {
+    min-width: 56rpx;
+    max-width: 202rpx;
+    height: 50rpx;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.dct-messBoxBtn {
+    margin-left: 40rpx;
+    line-height: 100rpx;
+}

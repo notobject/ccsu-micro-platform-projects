@@ -1,0 +1,44 @@
+/* 头像、名称模板 */
+.fad-article-authorBox {
+    flex: 1;
+    height: 140rpx;
+    align-items: center;
+    font-size: 28rpx;
+}
+.fad-authorImgBox {
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 50%;
+    background-color: red;
+}
+.fad-authorImg {
+    width: 100rpx;
+    height: 100rpx; 
+}
+.fad-authorInfo {
+    margin-left: 30rpx;
+}
+.fad-author-name {
+    margin-bottom: 14rpx;
+}
+
+/* 评论部分 */
+.fad-commentBox {
+    margin-top: 20rpx;
+    background-color: #fff;
+    padding: 0 20rpx;
+    overflow: hidden;
+}
+.fad-comment-content {
+    font-size: 28rpx;
+    margin: 0 0 20rpx 130rpx;
+}
+.fad-comment-state {
+    padding: 20rpx 0;
+}
+.comment-num, .praise-num {
+    margin: 0 10rpx;
+}
+.iconComment, .iconPraise {
+    padding-right: 6rpx;
+}

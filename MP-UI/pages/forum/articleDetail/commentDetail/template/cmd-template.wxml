@@ -1,0 +1,11 @@
+<!-- 评论详情模板 -->
+<template name="commentDetailBox">
+    <view class="cmd-contentDetail displayFlex">
+        <view class="cmd-userImgBox">
+            <image class="cmd-userImg" src=""></image>
+        </view>
+        <view class="cmd-userName">{{userName}}</view>
+        <view class="cmd-publicTime">{{publicTime}}</view>
+    </view>
+    <view class="cmd-detail">{{detail}}</view>
+</template>

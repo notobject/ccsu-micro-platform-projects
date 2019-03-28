@@ -1,0 +1,5 @@
+/* 团队成员简介 */
+@import './template/tmt-templateChidren.wxss';
+.tmt-memberMess-detailBox {
+    overflow: hidden;
+}

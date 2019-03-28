@@ -1,0 +1,7 @@
+<!-- 底部按钮 -->
+<view class="tabbar-bottom {{isIphoneX ? 'fix-iphonex-tabbar' : ''}} displayFlex">
+    <view class="tabbar-item {{index == activeIndex ? 'active' : ''}}" wx:for="{{tabbarList}}" wx:key="tabbarNum" bindtap="tabbarClick" data-index="{{index}}">
+        <text class="iconfont {{item.iconImg}}"></text>
+        <text class="">\n{{item.name}}</text>
+    </view>
+</view>

@@ -1,0 +1,19 @@
+/* 个人信息 */
+.usf-messger {
+    height: 100rpx;
+    align-items: center;
+    border-bottom: 2rpx solid #BBB;
+    font-size: 28rpx;
+}
+.usf-userInfoTitle {
+    flex: 1;
+}
+.usf-userPic {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+    background-color: red;
+}
+.usf-userInfocontent {
+    color: #101010;
+}

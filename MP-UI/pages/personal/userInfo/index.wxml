@@ -1,0 +1,13 @@
+<!-- 个人信息 -->
+<import src="./template/usf-template.wxml" />
+<view class="usf-content">
+    <view class="usf-messger pd20 displayFlex">
+        <view class="usf-userInfoTitle">头像</view>
+        <view class="usf-userInfocontent">
+            <image class="usf-userPic" src=""></image>
+        </view>
+    </view>
+    <block wx:for="{{userInfoList}}" wx:for-item="item" wx:key="userInfoIndex">
+        <template is="usfTemplate" data="{{...item}}"></template>
+    </block>
+</view>

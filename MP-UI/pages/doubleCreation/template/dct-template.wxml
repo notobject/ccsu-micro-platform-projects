@@ -1,0 +1,53 @@
+<!-- 我的团队 -->
+<template name="myTeam">
+    <view class="dct-myTeam__item displayFlex" bindtap="myTeamNavigateTo">
+        <view class="dct-myTeam__logoBox"><image class="dct-myTeam__logo"></image></view>
+        <view class="dct-myTeam__mess">
+            <view class="dct-myTeam__messTitle">{{messTitle}}</view>
+            <view class="dct-myTeam__messPic displayFlex">
+                <image class="dct-messPic__picBox " src=""></image>
+                <view class="dct-messPic__border"></view>
+                <image class="dct-messPic__picBox" src=""></image>
+                <image class="dct-messPic__picBox" src=""></image>
+                <image class="dct-messPic__picBox" src=""></image>
+                <image class="dct-messPic__picBox" src=""></image>
+            </view>
+            <view class="dct-myTeam__messTip">
+                <text class="dct-messTip__title">导师：<text class="dct-messTip__content">{{name}}</text></text>
+                <text class="dct-messTip__title">项目：<text class="dct-messTip__content">{{number}}</text></text>
+                <text class="dct-messTip__title">荣誉：<text class="dct-messTip__content">{{numberx}}</text></text>
+            </view>
+        </view>
+    </view>
+</template>
+<!-- 我的项目 -->
+<template name="myProject">
+    <view class="dct-myProject__item" bindtap="myProjectNavigateTo">
+        <view class="dct-myProject-header displayFlex">
+            <view class="dct-header__title">{{projectTitle}}</view>
+            <text class="dct-header__tip ft14">{{projectType}}</text>
+        </view>
+        <view class="dct-myProject-contentBox">
+            {{projectContent}}
+        </view>
+        <view class="dct-myProject-messBox displayFlex">
+            <view class="dct-messBox-item">
+                <view class="dct-messBox__title">导师</view>
+                <view class="dct-messBox__value">{{projectGuide}}</view>
+            </view>
+            <view class="dct-messBox-item">
+                <view class="dct-messBox__title">开发团队</view>
+                <view class="dct-messBox__value">{{development}}</view>
+            </view>
+            <view class="dct-messBox-item">
+                <view class="dct-messBox__title">状态</view>
+                <view class="dct-messBox__value">{{process}}</view>
+            </view>
+            <view class="dct-messBox-item">
+                <view class="dct-messBox__title">荣誉</view>
+                <view class="dct-messBox__value">{{honor}}</view>
+            </view>
+            <view class="dct-messBox-item dct-messBoxBtn">查看详情</view>
+        </view>
+    </view>
+</template>

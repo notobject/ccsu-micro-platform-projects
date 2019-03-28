@@ -1,0 +1,54 @@
+<!-- 团队项目 -->
+<view class="pjd-content">
+    <!-- 头部 -->
+    <view class="pjd-header displayFlex">
+        <view class="pjd-header-title">多源老人居家监护系统</view>
+        <view class="pjd-header-fold">
+            <text class="iconfont iconDown ft20"></text>
+        </view>
+    </view>
+    <!-- 项目介绍 -->
+    <view class="pjd-contentBox mg10">
+        项目介绍
+    </view>
+    <!-- 开发团队 -->
+    <view class="pjd-teamMess mg10">
+        <view class="pjd-introduce-title">开发团队</view>
+        <view class="pjd-team pdl5">
+            1204应用开发小组 / 1204机器人竞赛小组
+        </view>
+    </view>
+    <!-- 项目荣誉 -->
+    <view class="pjd-honorList mg10">
+        <view class="pjd-introduce-title">项目荣誉</view>
+        <block wx:for="{{honorList}}" wx:for-item="item" wx:key="honorIndex">
+            <view class="pjd-projectHonor displayFlex pdl5">
+                <text class="iconfont iconHonor ft20"></text>
+                <text class="pjd-honor__name">{{item.honorName}}</text>
+                <text class="pjd-honor__prize">{{item.honorPrize}}</text>
+            </view>
+        </block>
+    </view>
+    <!-- 项目性质 -->
+    <view class="pjd-property mg10">
+        <view class="pjd-introduce-title">项目性质</view>
+        <view class="pjd-propertyMess pdl5">
+            程序设计竞赛 / 大学生研究型学习课题 / 双创竞赛
+        </view>
+    </view>
+    <!-- 项目进展 -->
+    <view class="pjd-progress mg10">
+        <view class="pjd-introduce-title">项目进展</view>
+        <timeline-view class="" eventList="{{eventList}}"></timeline-view>
+    </view>
+    <!-- 项目管理 -->
+    <view class="pjd-manageBox mg10">
+        <view class="pjd-introduce-title">项目管理</view>
+        <view class="pjd-menuBox displayFlex">
+            <view class="pjd-moreBtn ft14">基本信息管理</view>
+            <view class="pjd-moreBtn ft14">团队管理</view>
+            <view class="pjd-moreBtn ft14">荣誉管理</view>
+            <view class="pjd-moreBtn ft14">添加最新进展</view>
+        </view>
+    </view>
+</view>

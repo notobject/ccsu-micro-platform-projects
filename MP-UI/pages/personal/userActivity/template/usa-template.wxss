@@ -1,0 +1,15 @@
+/* 活动模板 */
+.usa-acitivityBox {
+    height: 240rpx;
+    padding: 0 40rpx;
+}
+.image {
+    width: 160rpx;
+    height: 160rpx;
+    background-color: blue;
+}
+.usa-activeMess {
+    margin-left: 20rpx;
+    line-height: 1.5;
+    font-size: 28rpx;
+}

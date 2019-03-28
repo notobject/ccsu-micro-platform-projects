@@ -1,0 +1,15 @@
+{
+    "navigationBarBackgroundColor": "#000000",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "",
+    "navigationStyle": "default",
+    "backgroundColor": "#ffffff",
+    "backgroundTextStyle": "dark",
+    "enablePullDownRefresh": false,
+    "onReachBottomDistance": 50,
+    "pageOrientation": "portrait",
+    "disableScroll": false, //设置为 true 则页面整体不能上下滚动。只在页面配置中有效，无法在 app.json 中设置
+    "disableSwipeBack": false,  //禁止页面右滑手势返回
+    "component": true,  //自定义组件声明
+    "usingComponents": {}   //页面自定义组件配置
+}

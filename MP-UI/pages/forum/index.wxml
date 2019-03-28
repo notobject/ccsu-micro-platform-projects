@@ -1,0 +1,31 @@
+<!-- 圈子 -->
+<import src="./template/frm-template.wxml" />
+<view class="frm-content {{isIphoneX ? 'b160' : ''}}">
+    <!-- 信息筛选 -->
+    <view class="frm-header displayFlex">
+        <view class="frm-typeBox displayFlex">
+            <view class="frm-type">最新发表</view>
+            <view class="iconfont iconDown ft32"></view>
+        </view>
+        <view class="frm-label displayFlex">
+            <view class="frm-label-item active">全部</view>
+            <view class="frm-label-item">校友</view>
+            <view class="frm-label-item">技术</view>
+        </view>
+    </view>
+    <!-- 近期热帖 -->
+    <view class="frm-hotArticle displayFlex" hover-class="urlActive">
+        <view class="frm-hotArticle-type">近期热帖</view>
+        <view class="frm-hotArticle-titleBox">
+            <block wx:for="{{hotArticleTitleList}}" wx:for-item="item" wx:key="hotArticleTitleIndex">
+                <view class="frm-hotArticle-title">{{item.hotArticleTitle}}</view>
+            </block>
+        </view>
+    </view>
+    <!-- 帖子 -->
+    <block wx:for="{{articleList}}" wx:for-item="item" wx:key="articleIndex">
+        <template is="articleBox" data="{{...item}}"></template>
+    </block>
+</view>
+<!-- 底部按钮 -->
+<tabbar-view active-index="1" bind:getIsIphoneX="getIsIphoneX"></tabbar-view>

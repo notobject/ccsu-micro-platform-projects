@@ -1,0 +1,24 @@
+/*  */
+.tmt-memberBox {
+    flex: 1;
+    overflow: hidden;
+    margin-bottom: 30rpx;
+    padding: 0 20rpx;
+}
+.tmt-memberImg {
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 50%;
+    background-color: #f00;
+}
+.tmt-memberInfo {
+    margin-left: 20rpx;
+    font-size: 28rpx;
+    line-height: 1.3;
+}
+.tmt-memberInfo__college {
+    max-width: 200rpx;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

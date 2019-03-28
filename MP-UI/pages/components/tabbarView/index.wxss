@@ -1,0 +1,39 @@
+@import '../../../static/iconFonts/fonts/iconfont.wxss';
+/* 底部按钮 */
+.tabbar-bottom {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display:-webkit-box;
+    display:-webkit-flex;
+    display:flex;
+    box-sizing:border-box;
+    height: 120rpx;
+    line-height: 1.2;
+    background-color: #fff;
+}
+.tabbar-item {
+    flex: 1;
+    text-align: center;
+    padding-top: 12rpx;
+    font-size: 28rpx;
+    color: #333;
+    border-top: 2rpx solid #f2f2f2;
+    overflow: hidden;
+}
+/* 活动样式 */
+.tabbar-bottom .active {
+    color: #ff9800;
+}
+.iconfont {
+    font-family: "iconfont" !important;
+    font-size: 48rpx;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+/* iphoneX */
+.fix-iphonex-tabbar {
+    height:168rpx!important;
+}

@@ -1,0 +1,45 @@
+{
+"pages": ["pages/index/index"], //地址
+"window": { //全局默认窗口体现
+    "navigationBarBackgroundColor": "#000",  //导航栏背景颜色
+    "navigationBarTextStyle": "white",    //导航栏标题颜色
+    "navigationBarTitleText": "",   //导航栏标题文字内容
+    "navigationStyle": "default",    //导航栏样式，仅支持以下值：default 默认样式;custom 自定义导航栏，只保留右上角胶囊按钮
+    "backgroundColor": "#ffffff",   //窗口的背景色
+    "backgroundTextStyle": "dark", //下拉 loading 的样式，仅支持 dark / light
+    "enablePullDownRefresh": false, //是否开启当前页面的下拉刷新
+    "onReachBottomDistance": "50",   //页面上拉触底事件触发时距页面底部距离，单位为px
+    "pageOrientation": "portrait"   //屏幕旋转设置，支持 auto / portrait / landscape
+
+},
+"tabBar": { //底部菜单栏的表现
+    "color": "", //tab 上的文字默认颜色，仅支持十六进制颜色
+    "selectedColor": "", //tab 上的文字选中时的颜色，仅支持十六进制颜色
+    "backgroundColor": "",   //tab 的背景色，仅支持十六进制颜色
+    "borderStyle": "black",   //tabbar上边框的颜色， 仅支持 black / white
+    "list": [   //tab 的列表，详见 list 属性说明，最少2个、最多5个 tab
+    {
+        "pagePath": "pages/index/index",    //页面路径，必须在 pages 中先定义
+        "text": "首页", //tab 上按钮文字
+        "iconPath": "", //图片路径，icon 大小限制为40kb，建议尺寸为 81px * 81px，不支持网络图片。当 postion 为 top 时，不显示 icon
+        "selectedIconPath": "selectedIconPath"  //选中时的图片路径，icon 大小限制为40kb，建议尺寸为 81px * 81px，不支持网络图片
+    },
+    {
+        "pagePath": "pages/logs/logs",
+        "text": "日志",
+        "iconPath": "",
+        "selectedIconPath": "selectedIconPath"
+    }
+    ],
+    "position": "bottom",   //tabBar的位置，仅支持 bottom / top
+    "custom": "false"    //自定义 tabBar
+},
+"networkTimeout": { //网络超时时间，单位毫秒
+    "request": 60000,    //wx.request 的超时时间
+    "connectSocket": 60000,  //wx.connectSocket 的超时时间
+    "uploadFile": 60000, //wx.uploadFile 的超时时间
+    "downloadFile": 60000    //wx.downloadFile 的超时时间
+},
+"debug": false,  //是否开启debug模式
+"navigateToMiniProgramAppIdList": ["wxe5f52902cf4de896"]    //需要跳转的小程序列表
+}

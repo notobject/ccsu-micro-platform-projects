@@ -1,0 +1,26 @@
+/* 评论详情模板 */
+.cmd-contentDetail {
+    padding: 0 20rpx;
+    font-size: 28rpx;
+}
+.cmd-userImgBox {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+    background-color: red;
+}
+.cmd-userImg {
+    width: 80rpx;
+    height: 80rpx;
+}
+.cmd-userName {
+    flex: 1;
+    margin-left: 20rpx;
+}
+.cmd-publicTime {
+    font-size: 24rpx;
+}
+.cmd-detail {
+    font-size: 28rpx;
+    margin-left: 120rpx;
+}

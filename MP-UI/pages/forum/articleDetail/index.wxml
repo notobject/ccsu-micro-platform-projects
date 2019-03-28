@@ -1,0 +1,21 @@
+<!-- 帖子详情 -->
+<import src="./template/fad-template.wxml" />
+<view class="fad-content">
+    <!-- 文章内容 -->
+    <view class="fad-article-contentBox">
+        <view class="fad-artcle-title">{{artcleList.artcleTitle}}</view>
+        <template is="authorBox" data="{{...artcleList.authorList}}"></template>
+        <view class="fad-articleContentShow">
+            富文本
+        </view>
+    </view>
+    <!-- 评论部分 -->
+    <block wx:for="{{commentList}}" wx:for-item="item" wx:key="commentIndex">
+        <template is="commentBox" data="{{...item}}"></template>
+    </block>
+    <!-- 发表评论 -->
+    <view class="commentInputBox displayFlex">
+        <input class="commentInput" value="" type="text" placeholder="写下你的评论" placeholder-class="comment-pld" disabled="false" maxlength="-1" cursor-spacing="10" />
+        <text class="iconfont iconPublic ft20"></text>
+    </view>
+</view>

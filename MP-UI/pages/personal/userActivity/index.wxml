@@ -1,0 +1,7 @@
+<!-- 活动 -->
+<import src="./template/usa-template.wxml" />
+<view class="usa-content">
+    <block wx:for="{{userActivityList}}" wx:for-item="item" wx:key="userActivityindex">
+        <template is="usaTemplate" data="{{...item}}"></template>
+    </block>
+</view>

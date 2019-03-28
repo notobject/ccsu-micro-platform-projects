@@ -1,0 +1,47 @@
+<!-- 团队详情 -->
+<import src="./template/tmt-template.wxml" />
+<view class="tmt-content">
+    <view class="tmt-header displayFlex">
+        <view class="tmt-header-title">1204应用开发小组</view>
+        <view class="tmt-header-fold">
+            <text class="iconfont iconDown ft20"></text>
+        </view>
+    </view>
+    <!-- 团队成员简介 -->
+    <view class="tmt-membersBox">
+        <block wx:for="{{memberList}}" wx:for-item="item" wx:key="memberIndex">
+            <template is="memberMess" data="{{...item}}">
+            </template>
+        </block>
+    </view>
+    <!-- 团队项目简介 -->
+    <view class="tmt-project-introduce">
+        <!-- 团队项目 -->
+        <view class="mgB20">
+            <view class="tmt-introduce-title">团队项目</view>
+            <view class="tmt-projectType">竞赛:<text class="tmt-projectName">多源老人居家监护系统</text></view>
+            <view class="tmt-projectType">毕设:<text class="tmt-projectName">基于微服务与容器技术的后台系统架构设计</text></view>
+        </view>
+        <!-- 团队荣誉 -->
+        <view class="mgB20">
+            <view class="tmt-introduce-title">团队荣誉</view>
+            <block wx:for="{{honorList}}" wx:for-item="item" wx:key="honorIndex">
+                <view class="tmt-projectHonor displayFlex">
+                    <text class="iconfont iconHonor ft20"></text>
+                    <text class="tmt-honor__name">{{item.honorName}}</text>
+                    <text class="tmt-honor__prize">{{item.honorPrize}}</text>
+                </view>
+            </block>
+        </view>
+        <!-- 团队日志 -->
+        <view class="mgB20">
+            <view class="tmt-introduce-title">团队日志</view>
+            <timeline-view eventList="{{eventList}}"></timeline-view>
+            <view class="tmt-moreBtn ft14">点击查看更多...</view>
+        </view>
+        <!-- 团队管理 -->
+        <view class="">
+            <view class="tmt-introduce-title">团队日志</view>
+        </view>
+    </view>
+</view>

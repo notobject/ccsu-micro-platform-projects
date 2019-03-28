@@ -1,0 +1,16 @@
+<!-- 时间线组件 -->
+<view class="timelineBox">
+    <!-- 时间节点 -->
+    <block wx:for="{{eventList}}" wx:for-item="eventItem" wx:key="eventIndex">
+        <view class="timeline-event">
+            <view class="timeline-left">
+                <view class="iconfont iconSpot"></view>
+                <view class="line"></view>
+            </view>
+            <view class="timeline-right">
+                <text class="timeline-eventData">{{eventItem.eventData}}</text>
+                <text class="timeline-eventName">{{eventItem.eventName}}</text>
+            </view>
+        </view>
+    </block>
+</view>

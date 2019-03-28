@@ -1,0 +1,27 @@
+<!-- 文章详情 -->
+<view class="atc-content">
+    <!-- 标题 -->
+    <view class="atc-top">
+        <view class="ft16">
+            育优良团风，圆青春梦想。 ——我校第七届团支部风采大赛决赛圆满落幕
+        </view>
+    </view>
+    <!-- 标签 -->
+    <view class="atc-tip displayFlex">
+        <view class="atc-tip-item activit ft14">活动</view>
+        <view class="atc-tip-item recent ft14">最新</view>
+    </view>
+    <!-- 文章信息 -->
+    <view class="atc-messBox">
+        <text class="atc-mess-time">发布时间：2018-11-27</text>
+        <text class="">作者：叶纯吉 孙浩宇 罗晴</text>
+    </view>
+    <!-- 文章内容 -->
+    <view class="atc-essay">
+
+    </view>
+    <!-- 按钮 -->
+    <view class="atc-footer">
+        <button class="atc-applyBtn" hover-class="atc-applayBtnActive">申请参加</button>
+    </view>
+</view>

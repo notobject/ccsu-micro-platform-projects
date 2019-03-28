@@ -1,0 +1,22 @@
+<!-- 双创 -->
+<import src="./template/dct-template.wxml" />
+<view class="dct-content {{isIphoneX ? 'b160' : ''}}">
+    <view class="dct-main">
+        <!-- 我的团队 -->
+        <view class="dct-main-myTeam">
+            <view class="dct-myTeam__title ft14">我的团队</view>
+            <block wx:for="{{teamList}}" wx:for-item="item" wx:key="myTeamIndex">
+                <template is="myTeam" data="{{...item}}"></template>
+            </block>
+        </view>
+        <!-- 我的项目 -->
+        <view class="dct-main-project">
+            <view class="dct-project__title ft14">我的项目</view>
+            <block wx:for="{{projectList}}" wx:for-item="item" wx:key="myProjectIndex">
+                <template is="myProject" data="{{...item}}"></template>
+            </block>
+        </view>
+    </view>
+</view>
+<!-- 底部按钮 -->
+<tabbar-view active-index="2" bind:getIsIphoneX="getIsIphoneX"></tabbar-view>

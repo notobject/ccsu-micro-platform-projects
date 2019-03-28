@@ -1,0 +1,14 @@
+<!-- 活动模板 -->
+<template name="usaTemplate">
+    <view class="usa-acitivityBox displayFlex">
+        <view class="image">
+            <image class="usa-activeImg" src=""></image>
+        </view>
+        <view class="usa-activeMess">
+            <view class="usa-activeName">{{activeName}}</view>
+            <view class="usa-activePlace">地点：{{activePlace}}</view>
+            <view class="usa-activeRegist-time">报名：{{registTime}}</view>
+            <view class="usa-activeStart-time">活动：{{startTime}}</view>
+        </view>
+    </view>
+</template>

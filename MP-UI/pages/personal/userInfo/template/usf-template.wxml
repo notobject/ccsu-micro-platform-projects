@@ -1,0 +1,7 @@
+<!-- 个人信息模板 -->
+<template name="usfTemplate">
+    <view class="usf-messger pd20 displayFlex">
+        <view class="usf-userInfoTitle">{{userInfoTitle}}</view>
+        <view class="usf-userInfocontent">{{userInfocontent}}</view>
+    </view>
+</template>

@@ -1,0 +1,10 @@
+<!-- 团队成员简介 -->
+<import src="./template/tmt-templateChidren.wxml" />
+<template name="memberMess">
+    <view class="tmt-memberMess-detailBox displayFlex">
+        <block wx:for="{{memberListItem}}" wx:for-item="item" wx:key="memberItemIndex">
+            <template is="memberMessDetail" data="{{...item}}">
+            </template>
+        </block>
+    </view>
+</template>

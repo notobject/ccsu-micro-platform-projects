@@ -1,0 +1,65 @@
+/* 圈子 */
+@import './template/frm-template.wxss';
+.frm-content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 120rpx;
+    left: 0;
+    overflow: hidden;
+    overflow-y: auto;
+    background-color: #F0F0F2;
+    -webkit-overflow-scrolling: touch; /* ios下惯性滚动 */
+}
+/* iponeX系列 */
+.b160 {
+    bottom: 168rpx !important;
+}
+/* 信息筛选 */
+.frm-header {
+    padding: 0 40rpx;
+    font-size: 28rpx;
+    align-items: center;
+    padding: 10rpx 20rpx;
+    background-color: #fff;
+    border-top: 2rpx solid #f0f0f2; 
+}
+.frm-typeBox {
+    align-items: center;
+}
+.frm-type {
+    padding: 0 20rpx;
+}
+.frm-label-item {
+    margin-left: 20rpx;
+    padding: 0 20rpx;
+}
+.frm-label-item.active {
+    background-color: red;
+}
+/* 近期热帖 */
+.frm-hotArticle {
+    height: 180rpx;
+    padding: 20rpx 0;
+    align-items: center;
+    margin: 10rpx 20rpx;
+    background-color: #fff;
+    border-radius: 8rpx;
+    font-size: 28rpx;
+    overflow: hidden;
+}
+.frm-hotArticle-type {
+    height: 140rpx;
+    width: 140rpx;
+    line-height: 140rpx;
+    text-align: center;
+    border-radius: 8rpx;
+}
+.frm-hotArticle-titleBox {
+    margin-left: 40rpx;
+}
+
+/* url链接样式 */
+.urlActive {
+    background-color: rgba(0, 0, 0, .03)
+}

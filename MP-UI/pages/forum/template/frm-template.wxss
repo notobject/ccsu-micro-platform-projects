@@ -1,0 +1,44 @@
+/* 帖子模板 */
+.frm-articleBox {
+    margin: 20rpx;
+    padding: 0 30rpx;
+    height: 280rpx;
+    background-color: #fff;
+    font-size: 28rpx;
+}
+/* 作者信息 */
+.frm-article-header {
+    height: 100rpx;
+    align-items: center;
+}
+.frm-imageBox {
+    width: 60rpx;
+    height: 60rpx;
+    border-radius: 50%;
+    background-color: red;
+}
+.frm-author-headImg {
+    width: 60rpx;
+    height: 60rpx;
+}
+.frm-author-name {
+    flex: 1;
+    margin-left: 20rpx;
+}
+.frm-author-time, .frm-author-tip {
+    margin: 0 10rpx;
+    font-size: 24rpx;
+}
+.frm-article-name {
+    font-size: 32rpx;
+}
+/* 超出内容隐藏 */
+.frm-article-content {
+    display: -webkit-box;
+    margin: 20rpx 0;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+}

@@ -1,0 +1,13 @@
+<!--  -->
+<template name="memberMessDetail">
+    <view class="tmt-memberBox displayFlex">
+        <view class="tmt-memberpic">
+            <image class="tmt-memberImg" src=""></image>
+        </view>
+        <view class="tmt-memberInfo">
+            <view class="tmt-memberInfo__name">{{memberInfoName}}</view>
+            <view class="tmt-memberInfo__college">{{memberInfoCollege}}</view>
+            <view class="tmt-memberInfo__job">{{memberInfoJob}}</view>
+        </view>
+    </view>
+</template>

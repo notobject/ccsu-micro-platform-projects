@@ -1,0 +1,20 @@
+/* 双创 */
+@import "./template/dct-template.wxss";
+.dct-content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 120rpx;
+    left: 0;
+    overflow: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* ios下惯性滚动 */
+}
+/* iponeX系列 */
+.b160 {
+    bottom: 168rpx !important;
+}
+.dct-main {
+    padding: 10rpx 40rpx;
+    background-color: #f2f2f2;
+}

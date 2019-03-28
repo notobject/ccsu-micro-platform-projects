@@ -1,0 +1,58 @@
+/* 团队详情 */
+@import './template/tmt-template.wxss';
+.tmt-content {
+    position: relative;
+    padding: 0 20rpx;
+    overflow: hidden;
+    overflow-y: auto;
+    background-color: #f8f8f8;
+}
+.tmt-header {
+    height: 76rpx;
+    line-height: 76rpx;
+    font-size: 32rpx;
+    border-bottom: 2rpx solid #BBB;
+}
+.tmt-header-title {
+    flex: 1;
+}
+.tmt-header-fold {
+    margin-top: 8rpx;
+    width: 60rpx;
+}
+/*  */
+.tmt-membersBox {
+    margin-top: 20rpx;
+    width: 100%;
+}
+/* 团队项目简介 */
+.tmt-project-introduce {
+    font-size: 32rpx;
+    line-height: 1.4;
+}
+.mgB20 {
+    margin-bottom: 30rpx;
+}
+/* 团队项目 */
+.tmt-projectType {
+    margin: 20rpx 0;
+}
+.tmt-projectName {
+    color: #259B24;
+}
+/* 团队荣誉 */
+.tmt-projectHonor {
+    margin: 16rpx 0;
+    width: 100%;
+    font-size: 28rpx;
+    align-items: center;
+}
+.tmt-honor__name {
+    margin: 0 16rpx;
+}
+/* 团队日志 */
+.tmt-moreBtn {
+    padding: 10rpx 0;
+    color: #3F51B5;
+    border-bottom: 2rpx solid #BBB;
+}

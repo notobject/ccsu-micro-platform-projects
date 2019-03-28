@@ -1,0 +1,11 @@
+<!-- 评论详情 -->
+<import src="./template/cmd-template.wxml" />
+<view class="cmd-content">
+    <!-- 评论详情 -->
+    <view class="cmd-mian">
+        <template is="commentDetailBox" data="{{...commentObj}}"></template>
+    </view>
+    <view class="cmd-commentsContent">
+        <template is="commentDetailBox" data="{{...commentObj.comments}}"></template>
+    </view>
+</view>

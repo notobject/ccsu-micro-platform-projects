@@ -1,0 +1,42 @@
+@import '../../../static/iconFonts/fonts/iconfont.wxss';
+/* 时间线组件 */
+.timelineBox {
+    position: relative;
+    padding: 30rpx 0 0;
+}
+.timeline-event {
+    position: relative;
+    display:-webkit-box;
+    display:-webkit-flex;
+    display:flex;
+    box-sizing:border-box;
+    height: 60rpx;
+}
+.timeline-left {
+    height: 60rpx;
+    display:-webkit-box;
+    display:-webkit-flex;
+    display:flex;
+    box-sizing:border-box;
+    flex-direction: column;
+    align-items: center;
+}
+.iconSpot  {
+    margin-top: -8rpx;
+    font-size: 24rpx;
+}
+.line {
+    width: 2rpx;
+    height: 100%;
+    margin-top: -10rpx;
+    border-left: 2rpx solid #BBB;
+}
+.timeline-right {
+    width: 600rpx;
+    margin-top: -8rpx;
+    font-size: 26rpx;
+    margin-left: 40rpx;
+}
+.timeline-eventName {
+    margin-left: 20rpx;
+}
