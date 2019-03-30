@@ -1,6 +1,5 @@
 server:
   port: 8090
-
 eureka:
   instance:
     # 动态指定
@@ -14,7 +13,6 @@ eureka:
     fetch-registry: true                        # 获取服务注册信息（配置中心不需要消费其他服务，因此设为false）
     service-url:
       defaultZone: http://39.106.96.220:8761/eureka/
-
 spring:
   rabbitmq:
     host: mq.notobject.com
@@ -66,7 +64,6 @@ spring:
                 username: guest
                 password: guest
                 virtual-host: /
-
 mybatis:
   mapperLocations: classpath:mapper/*.xml
   typeAliasesPackage: cn.ccsu.main.pojo.po

@@ -1,6 +1,6 @@
 eureka:
   instance:
-    ip-address: ${IP_ADDRESS:127.0.0.1}               # 本机地址，运行时注入：120.78.82.47 ， 39.106.96.220
+    ip-address: ${IP_ADDRESS:127.0.0.1}               # 本机地址，运行时注入
     prefer-ip-address: true
     instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${server.port}
   server:
