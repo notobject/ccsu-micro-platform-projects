@@ -49,11 +49,87 @@
 
 ### step 6. Register-Server
 
+#### 注册中心:ServiceA 120.78.82.47
+
+git clone https://github.com/notobject/ccsu-micro-platform-projects build
+
+cd build/
+
+cd ccsu-register-server/
+
+mvn clean package -Dmaven.test.skip=true -Pprod
+
+cp target/*.jar ./app.jar
+
+vim Dockerfile
+
+#-----------------------------下同
+
+FROM java:openjdk-8-jre-alpine
+
+COPY app.jar /app.jar
+
+ENTRYPOINT ["java","-jar","/app.jar"]
+
+#---------------------------------------
+
+docker build -t notobject/mp-base:register-center .
+
+docker run -d --name register-server -p 8761:8761 -t notobject/mp-base:register-center -v /var/log/:/var/log/ --restart=always --eureka.instance.ip-address=120.78.82.47 --eureka.client.service-url.defaultZone=http://39.106.96.220:8761/eureka/
+
+// 推送镜像到远程，
+
+docker push notobject/mp-base:register-center
+
+#### 注册中心:ServiceB 39.106.96.220
+
+docker pull notobject/mp-base:register-center
+
+docker run -d --name register-server -p 8761:8761 -t notobject/mp-base:register-center -v /var/log/:/var/log/ --restart=always  --eureka.instance.ip-address=39.106.96.220 --eureka.client.service-url.defaultZone=http://120.78.82.47:8761/eureka/
+
 ### step 7. Config-Server
+
+#### ServiceA 120.78.82.47
+
+docker run -d --name config-server -p 8888:8888 -v /var/log/:/var/log/ -t notobject/mp-base:config-center --restart=always --eureka.instance.ip-address=120.78.82.47 --eureka.client.service-url.defaultZone=http://120.78.82.47:8761/eureka/,http://39.106.96.220:8761/eureka/
+
+#### ServiceB 39.106.96.220
+
+docker run -d --name config-server -p 8888:8888 -v /var/log/:/var/log/ -t notobject/mp-base:config-center --restart=always --eureka.instance.ip-address=39.106.96.220 --eureka.client.service-url.defaultZone=http://120.78.82.47:8761/eureka/,http://39.106.96.220:8761/eureka/
 
 ### step 8. Proxy-Server
 
+#### ServiceA 120.78.82.47
+
+docker run -d --name proxy-server -p 8000:8000 -v /var/log/:/var/log/ -t notobject/mp-base:proxy-center --restart=always --eureka.instance.ip-address=120.78.82.47 --eureka.client.service-url.defaultZone=http://120.78.82.47:8761/eureka/,http://39.106.96.220:8761/eureka/
+
+#### ServiceB 39.106.96.220
+
+docker run -d --name proxy-server -p 8000:8000 -v /var/log/:/var/log/ -t notobject/mp-base:proxy-center --restart=always --eureka.instance.ip-address=39.106.96.220 --eureka.client.service-url.defaultZone=http://120.78.82.47:8761/eureka/,http://39.106.96.220:8761/eureka/
+
 ### step 9. Business-Services
+
+#### 以ccsu-user-service 为例
+
+git clone https://github.com/notobject/ccsu-micro-platform-projects build
+
+cd build/
+
+cd ccsu-user-service
+
+mvn clean package -Dmaven.test.skip=true -Pprod
+
+cp target/*.jar ./app.jar
+
+docker build -t notobject/mp-base:user-service .
+
+- ServiceA:
+
+docker run -d --name user-service -p 58080:58080 -v /var/log/:/var/log/ -t notobject/mp-base:user-service  --restart=always --server.port=58080 --eureka.instance.ip-address=120.78.82.47 --eureka.client.service-url.defaultZone=http://120.78.82.47:8761/eureka/,http://39.106.96.220:8761/eureka/
+
+- ServiceB:
+
+docker run -d --name user-service -p 58080:58080 -v /var/log/:/var/log/ -t notobject/mp-base:user-service  --restart=always --server.port=58080 --eureka.instance.ip-address=39.106.96.220 --eureka.client.service-url.defaultZone=http://120.78.82.47:8761/eureka/,http://39.106.96.220:8761/eureka/
 
 ### step 10. MP-UI (mini program)
 
