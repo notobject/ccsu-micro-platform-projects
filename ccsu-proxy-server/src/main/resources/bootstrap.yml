@@ -7,7 +7,7 @@ spring:
       config:
         discovery:
           enabled: true
-          service-id: @config.instance.id@
+          service-id: ccsu-config-server
   profiles:
     active: @profiles.active@
 
