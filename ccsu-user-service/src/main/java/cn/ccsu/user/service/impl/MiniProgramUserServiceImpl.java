@@ -61,24 +61,31 @@ public class MiniProgramUserServiceImpl implements UserService {
 
         UserInfo userInfo = new UserInfo();
         userInfo.setOpenId(openId);
-        if (!Strings.isEmpty(rawData)){
-            JSONObject json = JSONObject.parseObject(rawData);
-            log.debug("rawData: {}", rawData);
-            userInfo.setNickName(json.getString("nickName"));
-            userInfo.setAvatarUrl(json.getString("avatarUrl"));
-            userInfo.setCity(json.getString("city"));
-            userInfo.setCountry(json.getString("country"));
-            userInfo.setGender(json.getInteger("gender"));
-            userInfo.setProvince(json.getString("province"));
-            userInfo.setRoleId(0);
-            userInfo.setStuNumber("");
-            userInfo.setRealName("");
-            userInfo.setCreateTime(new Date(System.currentTimeMillis()));
-            userInfo.setLastLoginTime(new Date(System.currentTimeMillis()));
-            if (userInfoDAO.isExist(openId)) {
-                userInfoDAO.updateLastLoginTime(openId);
-            } else {
-                userInfoDAO.insert(userInfo);
+        if (!Strings.isEmpty(rawData)) {
+
+            try {
+                JSONObject json = JSONObject.parseObject(rawData);
+                log.debug("rawData: {}", rawData);
+                userInfo.setNickName(json.getString("nickName"));
+                userInfo.setAvatarUrl(json.getString("avatarUrl"));
+                userInfo.setCity(json.getString("city"));
+                userInfo.setCountry(json.getString("country"));
+                userInfo.setGender(json.getInteger("gender"));
+                userInfo.setProvince(json.getString("province"));
+                userInfo.setRoleId(0);
+                userInfo.setStuNumber("");
+                userInfo.setRealName("");
+                userInfo.setCreateTime(new Date(System.currentTimeMillis()));
+                userInfo.setLastLoginTime(new Date(System.currentTimeMillis()));
+                if (userInfoDAO.isExist(openId)) {
+                    userInfoDAO.updateLastLoginTime(openId);
+                } else {
+                    userInfoDAO.insert(userInfo);
+                }
+            } catch (Exception e) {
+                returnJson.put("errcode", 10000);
+                returnJson.put("errmsg", "error:" + e.getMessage());
+                return returnJson.toString();
             }
         }
         // 将用户信息写入会话缓存

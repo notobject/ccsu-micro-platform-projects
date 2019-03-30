@@ -8,6 +8,7 @@ import cn.ccsu.common.util.HeaderParser;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
+import com.sun.javafx.binding.StringFormatter;
 import org.apache.http.util.TextUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,8 +64,9 @@ public class HeaderCheckFilter extends ZuulFilter {
         for (String h : rhs) {
             if (TextUtils.isEmpty(headers.get(h))) {
                 // 只要有一个必填项为空，则拦截请求
-                log.info("Request Intercepted: {}, Case: param {} is empty", request.getRequestURI(), h);
-                RespUtil.resp(10000, "sessionId is empty");
+                String msg = String.format("Request was intercepted by proxy server: {}, Case: Header<{}> can not be empty", request.getRequestURI(), h);
+                log.info(msg);
+                RespUtil.resp(10000, msg);
                 return false;
             }
         }
