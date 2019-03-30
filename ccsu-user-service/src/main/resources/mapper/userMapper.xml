@@ -4,7 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.ccsu.user.dao.UserInfoDAO">
 
-    <select id="isExist" resultType="boolean">
+    <select id="selectByOpenId" resultType="cn.ccsu.user.entity.UserInfo">
+        select * from t_user_info where open_id = #{openId}
+    </select>
+
+    <select id="isExist" resultType="java.lang.Boolean">
         select count(id) from t_user_info where open_id = #{openId}
     </select>
 

@@ -32,6 +32,8 @@ public class FeedController {
     @Autowired
     private InformationService informationService;
 
+
+
     // 最新的10条
     @ApiOperation("请求最新得十条feed流数据")
     @JsonView(Information.SimpleInformation.class)
