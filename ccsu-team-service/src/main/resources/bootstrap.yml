@@ -1,3 +1,10 @@
 spring:
+  application:
+    name: ccsu-team-service
   profiles:
     active: @profiles.active@
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: @config.instance.id@

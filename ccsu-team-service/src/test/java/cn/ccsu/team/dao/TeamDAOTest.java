@@ -58,7 +58,7 @@ public class TeamDAOTest extends CcsuTeamServiceApplicationTests {
 
     @Test
     public void selectTeamByUserId() {
-        List<TeamPO> teamPOS = teamDAO.selectTeamByUserId(1);
+        List<TeamPO> teamPOS = teamDAO.selectTeamByUserId("xxxxxxxx");
         teamPOS.forEach(System.out::println);
     }
 }

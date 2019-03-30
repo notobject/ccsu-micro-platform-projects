@@ -18,7 +18,7 @@ public interface TeamDAO {
 
     int insertTeam(TeamPO teamPO);
 
-    int insert2TeamUser(@Param("teamId") int teamId, @Param("userId") int userId);
+    int insert2TeamUser(@Param("teamId") int teamId, @Param("userId") String userId);
 
     int insert2TeamProject(@Param("teamId") int teamId, @Param("projectId") int projectId);
 
@@ -32,6 +32,6 @@ public interface TeamDAO {
 
     List<TeamPO> selectTeamByProjectId(int projectId);
 
-    List<TeamPO> selectTeamByUserId(int userId);
+    List<TeamPO> selectTeamByUserId(String userId);
 
 }

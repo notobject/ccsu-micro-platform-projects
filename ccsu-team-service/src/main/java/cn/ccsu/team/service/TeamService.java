@@ -41,7 +41,7 @@ public class TeamService {
         return teamVO;
     }
 
-    public List<TeamVO> getTeamByUserId(int userId) {
+    public List<TeamVO> getTeamByUserId(String userId) {
         List<TeamPO> teamPOS = teamDAO.selectTeamByUserId(userId);
         List<TeamVO> teamVOS = teamPOS.stream().map(teamPO -> teamPO2VO(teamPO)).collect(Collectors.toList());
         return teamVOS;
@@ -66,7 +66,7 @@ public class TeamService {
     }
 
     // 添加userId到team
-    public void addUser2Team(int teamId, int userId) {
+    public void addUser2Team(int teamId, String userId) {
         teamDAO.insert2TeamUser(teamId, userId);
     }
 
