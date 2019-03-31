@@ -30,8 +30,8 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("REST API")
-                .description("rest api 文档构建利器")
+                .title("ccsu-team-service REST API")
+                .description("ccsu-team-service ")
                 .version("1.0")
                 .build();
     }

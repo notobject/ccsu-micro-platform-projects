@@ -5,7 +5,7 @@ eureka:
   instance:
     # 动态指定
     # java -jar xxx.jar --eureka.instance.ip-address=ip
-    ip-address: localhost                                  # 本机IP 地址，运行时注入
+    ip-address:                                   # 本机IP 地址，运行时注入
     instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${server.port}
     prefer-ip-address: true                      # 注册IP （缺省为主机名）
     lease-renewal-interval-in-seconds: 30       # 服务续约间隔时间（缺省为30s）
@@ -13,7 +13,7 @@ eureka:
   client:
     fetch-registry: true                        # 获取服务注册信息（配置中心不需要消费其他服务，因此设为false）
     service-url:
-      defaultZone: http://39.106.96.220:8761/eureka/
+      defaultZone: ${REGISTE_CENTER:http://39.106.96.220:8761/eureka/,http://120.78.82.47:8761/eureka/} # 注册中心
 
 spring:
   rabbitmq:

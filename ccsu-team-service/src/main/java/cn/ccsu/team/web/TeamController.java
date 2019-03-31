@@ -1,6 +1,6 @@
 package cn.ccsu.team.web;
 
-import cn.ccsu.common.entity.UserInfo;
+import cn.ccsu.team.anno.OpenId;
 import cn.ccsu.team.pojo.po.ProjectPO;
 import cn.ccsu.team.pojo.vo.BaseRes;
 import cn.ccsu.team.pojo.vo.GroupMemberVO;
@@ -8,6 +8,7 @@ import cn.ccsu.team.pojo.vo.TeamVO;
 import cn.ccsu.team.service.TeamService;
 import cn.ccsu.team.utils.BaseResUtil;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,9 +30,9 @@ public class TeamController {
 
     //1，根据userId查询团队数据
     @GetMapping("/getTeamByUserId")
-    public BaseRes getTeamByUserId(String userInfo) {
-        JSONObject info = JSONObject.parseObject(userInfo).getJSONObject("userInfo");
-        List<TeamVO> teamVOS = teamService.getTeamByUserId(info.getString("openId"));
+    public BaseRes getTeamByUserId(@OpenId String openId) {
+        if (StringUtils.isBlank(openId)) return BaseResUtil.error(-1, "openId为空");
+        List<TeamVO> teamVOS = teamService.getTeamByUserId(openId);
         return BaseResUtil.success(teamVOS);
     }
 
@@ -53,9 +54,9 @@ public class TeamController {
 
     // 增加项目user
     @GetMapping("/addUser2Team")
-    public BaseRes addUser2Team(int teamId, String userInfo) {
-        JSONObject info = JSONObject.parseObject(userInfo).getJSONObject("userInfo");
-        teamService.addUser2Team(teamId, info.getString("openId"));
+    public BaseRes addUser2Team(int teamId, @OpenId String openId) {
+        if (StringUtils.isBlank(openId)) return BaseResUtil.error(-1, "openId为空");
+        teamService.addUser2Team(teamId, openId);
         return BaseResUtil.success();
     }
 
