@@ -1,4 +1,5 @@
-# 长沙学院-校园双创服务平台
+# 校园双创服务平台（微服务实践项目）
+
 [![Build Status](https://travis-ci.org/notobject/ccsu-micro-platform-projects.svg?branch=master)](https://travis-ci.org/notobject/ccsu-micro-platform-projects)
 [![License](https://img.shields.io/badge/LICENSE-Apache2.0-ff69b4.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 ## 一、介绍
