@@ -40,7 +40,7 @@
 目录名 | 简述
 -------|--
 MP-Agent |控制代理，运行于宿主机，通过接收控制中心指令，在服务上执行相应的操作，Go语言实现。采用了RabbitMQ的topic模式用于接收指令，fanout模式用于实时上报执行过程和执行结果。
-MP-UI|平台前端，采用威胁小程序实现
+MP-UI|平台前端，采用微信小程序实现
 control-center|控制中心Web端，负责展示系统状态，和用户交互。将命令下发给控制代理，并展示过程和结果。
 common-script|一些Shell脚本，主要用于前期自动化部署测试，现已废弃。
 common-code|项目公共代码
@@ -55,18 +55,8 @@ ccsu-socre-service|综测服务，统一综测管理，该服务为通用服务�
 
 ## 三、准备
 
-### 系统&工具版本参考
-- CentOS = 7.x
-- JDK >= 1.8
-- Maven >= 3.6.0
-- Git >= 2.20.0
-- Go >= 1.1
-- Nginx 
-- Mysql
-- Redis
-- RabbitMQ
+### 服务器资源分配
 
-### 服务器资源分配参考
 为能够最大程度模拟集群部署，请至少准备4台云服务器 or 个人电脑 or 虚拟机：
 
 序号|标签|用途|备注
@@ -76,29 +66,37 @@ ccsu-socre-service|综测服务，统一综测管理，该服务为通用服务�
 3|ServerC|持久化集群| 这个非重点，用一台模拟集群环境
 4|ServerD|服务治理平台| 这个可以选择在自己本地部署
 
+### 系统&工具
+
+### centos 配置
+### maven 安装及配置
+### git 安装及配置
+### docker 安装及配置
+### ningx 安装及配置
+### mysql 安装及配置
+### redis 安装及配置
+### rabbitMQ 安装及配置
+
+
 ## 四、开始
 
-### step 1. Mysql安装
+### step 1. Control-Center
 
-### step 2. Redis安装
+### step 2. MP-Agent
 
-### step 3. RabbitMQ安装
-
-### step 4. MP-Agent
-
-### step 5. Control-Center
-
-### step 6. Register-Server
+### step 3. Register-Server
 
 #### 注册中心:ServiceA 120.78.82.47
 
+首先拉取代码并执行编译
+
+```shell
+
 git clone https://github.com/notobject/ccsu-micro-platform-projects build
-
 cd build/
-
 cd ccsu-register-server/
-
 mvn clean package -Dmaven.test.skip=true -Pprod
+
 
 cp target/*.jar ./app.jar
 
@@ -118,17 +116,23 @@ docker build -t notobject/mp-base:register-center .
 
 docker run -d --name register-server -p 8761:8761 -t notobject/mp-base:register-center -v /var/log/:/var/log/ --restart=always --eureka.instance.ip-address=120.78.82.47 --eureka.client.service-url.defaultZone=http://39.106.96.220:8761/eureka/
 
-// 推送镜像到远程，
+#推送镜像到远程，
 
 docker push notobject/mp-base:register-center
 
+```
+
 #### 注册中心:ServiceB 39.106.96.220
+
+> 拉取远程镜像
 
 docker pull notobject/mp-base:register-center
 
+> 运行容器
+
 docker run -d --name register-server -p 8761:8761 -t notobject/mp-base:register-center -v /var/log/:/var/log/ --restart=always  --eureka.instance.ip-address=39.106.96.220 --eureka.client.service-url.defaultZone=http://120.78.82.47:8761/eureka/
 
-### step 7. Config-Server
+### step 4. Config-Server
 
 #### ServiceA 120.78.82.47
 
@@ -138,7 +142,7 @@ docker run -d --name config-server -p 8888:8888 -v /var/log/:/var/log/ -t notobj
 
 docker run -d --name config-server -p 8888:8888 -v /var/log/:/var/log/ -t notobject/mp-base:config-center --restart=always --eureka.instance.ip-address=39.106.96.220 --eureka.client.service-url.defaultZone=http://120.78.82.47:8761/eureka/,http://39.106.96.220:8761/eureka/
 
-### step 8. Proxy-Server
+### step 5. Proxy-Server
 
 #### ServiceA 120.78.82.47
 
@@ -148,7 +152,7 @@ docker run -d --name proxy-server -p 8000:8000 -v /var/log/:/var/log/ -t notobje
 
 docker run -d --name proxy-server -p 8000:8000 -v /var/log/:/var/log/ -t notobject/mp-base:proxy-center --restart=always --eureka.instance.ip-address=39.106.96.220 --eureka.client.service-url.defaultZone=http://120.78.82.47:8761/eureka/,http://39.106.96.220:8761/eureka/
 
-### step 9. Business-Services
+### step 6. Business-Services
 
 #### 以ccsu-user-service 为例
 
@@ -172,7 +176,7 @@ docker run -d --name user-service -p 58080:58080 -v /var/log/:/var/log/ -t notob
 
 docker run -d --name user-service -p 58080:58080 -v /var/log/:/var/log/ -t notobject/mp-base:user-service  --restart=always --server.port=58080 --eureka.instance.ip-address=39.106.96.220 --eureka.client.service-url.defaultZone=http://120.78.82.47:8761/eureka/,http://39.106.96.220:8761/eureka/
 
-### step 10. MP-UI (mini program)
+### step 7. MP-UI (mini program)
 
 ## 五、FAQ
 - Any issue or question is welcome, Please feel free to open github issues :)
@@ -183,4 +187,5 @@ docker run -d --name user-service -p 58080:58080 -v /var/log/:/var/log/ -t notob
 - [zhanghang](https://github.com/notobject/ccsu-micro-platform-projects/edit/master/README.md#六、Contributors)
 - [caoxiaoshuang](https://github.com/notobject/ccsu-micro-platform-projects/edit/master/README.md#六、Contributors)
 - [hechong](https://github.com/notobject/ccsu-micro-platform-projects/edit/master/README.md#六、Contributors)
+- [xiaohaoxiong](https://github.com/notobject/ccsu-micro-platform-projects/edit/master/README.md#六、Contributors)
 
