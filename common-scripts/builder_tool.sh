@@ -26,7 +26,7 @@ git clone $git_url . &>/dev/null
 echo "[build] pull done."
 
 echo "[build] start build..."
-mvn package -DskipTests=true -Pprod >> mvn.log
+mvn package -Dmaven.test.skip=true -Pprod >> mvn.log
 
 success_flag=$(cat mvn.log | grep "BUILD SUCCESS")
 

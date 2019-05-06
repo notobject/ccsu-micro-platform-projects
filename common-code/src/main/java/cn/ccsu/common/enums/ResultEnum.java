@@ -7,7 +7,7 @@ import lombok.Getter;
  * @date 2018/12/10
  * *****************
  * function:
- * api 返回码
+ * web 返回码
  */
 @Getter
 public enum ResultEnum {
