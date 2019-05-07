@@ -10,6 +10,7 @@ import lombok.ToString;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -23,6 +24,8 @@ public class MachineInfo {
     private String queue;
     private String user;
     private String passwd;
+    private Date lastHbTime;
+    private String status;
     private int cpuNum;
     private long totalMem;
     private long totalDisk;

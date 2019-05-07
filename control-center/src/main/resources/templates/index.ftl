@@ -7,8 +7,8 @@
                 <div class="sm-st clearfix">
                     <span class="sm-st-icon st-red"><i class="fa fa-users"></i></span>
                     <div class="sm-st-info">
-                        <span>3200 个</span>
-                        累积用户数
+                        <span>1 个</span>
+                        资产数量
                     </div>
                 </div>
             </div>
@@ -16,7 +16,7 @@
                 <div class="sm-st clearfix">
                     <span class="sm-st-icon st-violet"><i class="fa fa-arrow-up"></i></span>
                     <div class="sm-st-info">
-                        <span>2200 个</span>
+                        <span>2 个</span>
                         微服务数量
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                 <div class="sm-st clearfix">
                     <span class="sm-st-icon st-green"><i class="fa fa-tasks"></i></span>
                     <div class="sm-st-info">
-                        <span>4567</span>
+                        <span>2</span>
                         正在执行的任务数量
                     </div>
                 </div>

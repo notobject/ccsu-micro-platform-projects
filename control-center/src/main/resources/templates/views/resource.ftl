@@ -26,6 +26,7 @@
                                     <th>队列名称</th>
                                     <th>集群类型</th>
                                     <th>最近心跳时间</th>
+                                    <th>运行状态</th>
                                     <th>操作</th>
                                 </tr>
                                 <#list resources as resource>
@@ -35,12 +36,13 @@
                                         <td>${resource.queue}</td>
                                         <td>
                                             <#list resource.machineType as type>
-                                                <span class="badge badge-success">${type}</span>
+                                                <span class="badge badge-info">${type}</span>
                                             </#list>
                                         </td>
-                                        <td>${(user.createTime?string("yyyy-MM-dd HH:mm:ss"))!}</td>
+                                        <td>${(resource.lastHbTime?string("yyyy-MM-dd HH:mm:ss"))!}</td>
+                                        <td><span class="badge badge-primary">${resource.status}</span></td>
                                         <td>
-                                            <a href="#" style="color: green">查看</a>
+                                            <a href="/resource/staus?ip=${resource.ip}" style="color: green">监控</a>
                                         </td>
                                     </tr>
                                 </#list>

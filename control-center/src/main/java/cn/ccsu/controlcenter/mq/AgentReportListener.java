@@ -4,10 +4,7 @@
  */
 package cn.ccsu.controlcenter.mq;
 
-import cn.ccsu.controlcenter.pojo.AckInfo;
-import cn.ccsu.controlcenter.pojo.MachineInfo;
-import cn.ccsu.controlcenter.pojo.ServiceInfo;
-import cn.ccsu.controlcenter.pojo.UserInfo;
+import cn.ccsu.controlcenter.pojo.*;
 import cn.ccsu.controlcenter.service.MachineManagement;
 import cn.ccsu.controlcenter.service.MicroServiceService;
 import cn.ccsu.controlcenter.service.TaskManagement;
@@ -25,31 +22,32 @@ public class AgentReportListener implements ChannelAwareMessageListener {
     public static final String ACTION_HEART_BEAT = "heartbeat";
     public static final String ACTION_ACK = "ack";
 
-    @Autowired
-    private MicroServiceService serviceService;
 
+    @Autowired
+    private MQSender sender;
 
     @Override
     public void onMessage(Message message, Channel channel) {
         JSONObject msg = (JSONObject) JSONObject.parse(message.getBody());
-        log.info("recv {}", msg);
+//        log.info("recv {}", msg);
         String action = msg.getString("action");
         if (ACTION_HEART_BEAT.equals(action)) {
             MachineInfo machineInfo = JSONObject.parseObject(msg.getString("data"), MachineInfo.class);
             log.info("heartbeat {}", machineInfo);
             MachineManagement.getInstance().update(machineInfo);
             // TODO 测试需要....
-            UserInfo user = new UserInfo();
-            user.setId(1);
-            ServiceInfo service = new ServiceInfo();
-            service.setCreator("me");
-            service.setInstanceNum(1);
-            service.setRepoUrl("https://github.com/notobject/ccsu-micro-platform-projects.git");
-            service.setCreatorId(1);
-            service.setServiceName("ccsu-register-server");
-            service.setVersionName("1.0.0.RELEASE");
-            service.setServicePort(8761);
-            serviceService.newService(user, service);
+//            UserInfo user = new UserInfo();
+////            user.setId(1);
+////            ServiceInfo service = new ServiceInfo();
+////            service.setCreator("me");
+////            service.setInstanceNum(1);
+////            service.setRepoUrl("https://github.com/notobject/ccsu-micro-platform-projects.git");
+////            service.setCreatorId(1);
+////            service.setServiceName("ccsu-register-server");
+////            service.setVersionName("1.0.0.RELEASE");
+////            service.setServicePort(8761);
+////            serviceService.build(user, service);
+            sender.send(ACTION_HEART_BEAT, machineInfo.getQueue(), "pong");
         } else if (ACTION_ACK.equals(action)) {
             AckInfo ackInfo = JSONObject.parseObject(msg.getString("data"), AckInfo.class);
             log.info("ack {}", ackInfo);

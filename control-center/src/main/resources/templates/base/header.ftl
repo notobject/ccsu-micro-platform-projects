@@ -1,3 +1,4 @@
+<#setting number_format="#">
 <!DOCTYPE html>
 <html>
 <head>

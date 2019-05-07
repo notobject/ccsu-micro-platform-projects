@@ -73,10 +73,10 @@ public class TaskManagement {
             return;
         }
         int code = ackInfo.getCode();
-        List<String> messages = taskInfo.getMessages();
-        String m = String.format("[%s][%d] %s \n%s\n", sdf.format(new Date(ackInfo.getTimestamp())), ackInfo.getSerialNo(), ackInfo.getCmd(), ackInfo.getMsg());
-        messages.add(m);
         if (code != 10000) {
+            List<String> messages = taskInfo.getMessages();
+            String m = String.format("[%s][%d] %s \n%s\n", sdf.format(new Date(ackInfo.getTimestamp() * 1000)), ackInfo.getSerialNo(), ackInfo.getCmd(), ackInfo.getMsg());
+            messages.add(m);
             taskInfo.setCurrentStatus(TASK_STATUS_PROCESSING);
         } else {
             taskInfo.setCurrentStatus(TASK_STATUS_COMPLETE);

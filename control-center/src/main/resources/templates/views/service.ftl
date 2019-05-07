@@ -75,37 +75,33 @@
                                                 <th>ID</th>
                                                 <th>服务名称</th>
                                                 <th>负责人</th>
-                                                <th>实例数量</th>
-                                                <th>创建日期</th>
+                                                <th>实例地址</th>
+                                                <th>上线日期</th>
+                                                <th>状态</th>
                                                 <th>备注</th>
                                                 <th>操作</th>
                                             </tr>
-                                            <tr>
-                                                <td>4s5ad7sa5</td>
-                                                <td>ccsu-register-server</td>
-                                                <td>龙杜平</td>
-                                                <td><span class="badge badge-info">20</span></td>
-                                                <td>2019-03-31 13:27:05</td>
-                                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback
-                                                    doner.
-                                                </td>
-                                                <td>
-                                                    <a href="#">管理</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>4as4d4as8f</td>
-                                                <td>ccsu-main-server</td>
-                                                <td>张航</td>
-                                                <td><span class="badge badge-info">5</span></td>
-                                                <td>2019-03-31 13:27:05</td>
-                                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback
-                                                    doner.
-                                                </td>
-                                                <td>
-                                                    <a href="#">管理</a>
-                                                </td>
-                                            </tr>
+                                            <#list serviceList as service>
+                                                <tr>
+                                                    <td>${service.id}</td>
+                                                    <td>${service.serviceName}:${service.versionName}</td>
+                                                    <td>${service.creator}</td>
+                                                    <td><a href="http://${service.ipAddress}:${service.servicePort}"
+                                                           target="_blank">${service.ipAddress}
+                                                            :${service.servicePort}</a></td>
+                                                    <td>${(service.createTime?string("yyyy-MM-dd HH:mm:ss"))!}</td>
+                                                    <td>
+                                                        <a href="/service/status?taskId=${service.taskId}">${service.status}</a>
+                                                    </td>
+                                                    <td>${service.note}
+                                                    </td>
+                                                    <td>
+                                                        <a href="/service/manage?action=start&sid=${service.id}">启动</a>|
+                                                        <a href="/service/manage?action=stop&sid=${service.id}">停止</a>|
+                                                        <a href="/service/manage?action=restart&sid=${service.id}">重启</a>|
+                                                    </td>
+                                                </tr>
+                                            </#list>
                                             </tbody>
                                         </table>
                                         <!-- 分页组件 -->
@@ -182,15 +178,6 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label class="col-sm-2 col-sm-2 control-label">实例数量</label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" name="instanceNum" class="form-control"
-                                                           value="2" placeholder="默认为：1">
-                                                    <span class="help-block">指的是本次为该服务创建多少个实例。服务创建成功之后也可通过扩容/缩容进行更改。</span>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
                                                 <label class="col-sm-2 col-sm-2 control-label">构建命令</label>
                                                 <div class="col-sm-10">
                                                     <input type="text" name="buildCmd"
@@ -213,11 +200,7 @@
                                     <div class="col-md-6">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <div style="width: 100%; height: 480px">
-                                                        <textarea class="form-control" id="process-detail"
-                                                                  name="processDetail"
-                                                                  style="width: 100%;height: 100%;"></textarea>
-                                                </div>
+                                                <div style="width: 100%; height: 480px" id="content"></div>
                                             </div>
                                         </div>
                                         <div id="stat-complete" class="stat" style="display: none">
@@ -258,15 +241,18 @@
             type: "GET",
             success: function (res) {
                 console.log(res);
-                process = $("#process-detail");
-                if (res.status === "waiting" && process.val() === "") {
-                    process.val("waiting...\n");
-                    return;
-                }
-                process.val(process.val() + res.msg);
-                if (res.status === "complete") {
-                    process.val(process.val() + "done.\n");
+                process = $("#content");
+                msg = "";
+                if (res.status === "waiting" && process.innerText === "") {
+                    msg = "waiting for response...\n";
+                } else if (res.status === "complete") {
+                    msg = res.msg + "done\n";
                     clearInterval(timer);
+                } else {
+                    msg = res.msg
+                }
+                if (msg !== "") {
+                    process.append("<p>" + msg.replace("\n", "<br />") + "</p>");
                 }
             }
         })
@@ -276,7 +262,7 @@
         param = $('#form-new').serializeObject();
         // console.log(param);
         $.ajax({
-            url: "/service/new",
+            url: "/service/build",
             data: param,
             dataType: "json",
             type: "POST",

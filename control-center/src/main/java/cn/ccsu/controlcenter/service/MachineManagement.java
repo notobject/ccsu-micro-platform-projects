@@ -7,6 +7,7 @@ package cn.ccsu.controlcenter.service;
 import cn.ccsu.controlcenter.pojo.MachineInfo;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -50,6 +51,12 @@ public class MachineManagement {
         if (index != -1) {
             pool.remove(index);
         }
+        machine.setLastHbTime(new Date(System.currentTimeMillis()));
+        machine.setStatus("Running");
         pool.add(machine);
+    }
+
+    public List<MachineInfo> getAll() {
+        return pool;
     }
 }

@@ -4,6 +4,7 @@
  */
 package cn.ccsu.controlcenter.web;
 
+import cn.ccsu.controlcenter.service.MachineManagement;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,8 +24,15 @@ public class ResourceController {
         if (session.getAttribute("user") == null) {
             return new ModelAndView("redirect:/user/login");
         }
-
         modelAndView.setViewName("views/resource");
+        modelAndView.addObject("resources", MachineManagement.getInstance().getAll());
+        return modelAndView;
+    }
+
+    @GetMapping("/staus")
+    public ModelAndView status(String ip, ModelAndView modelAndView) {
+
+
         return modelAndView;
     }
 }
