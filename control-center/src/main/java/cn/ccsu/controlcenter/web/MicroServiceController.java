@@ -4,20 +4,18 @@
  */
 package cn.ccsu.controlcenter.web;
 
-import cn.ccsu.controlcenter.service.TaskManagement;
 import cn.ccsu.controlcenter.pojo.BaseRes;
 import cn.ccsu.controlcenter.pojo.ServiceInfo;
 import cn.ccsu.controlcenter.pojo.TaskInfo;
 import cn.ccsu.controlcenter.pojo.UserInfo;
 import cn.ccsu.controlcenter.service.MicroServiceService;
+import cn.ccsu.controlcenter.service.TaskManagement;
 import cn.ccsu.controlcenter.util.Resp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.HttpSession;
-import java.util.Date;
 
 /**
  * 服务管理：
@@ -31,12 +29,12 @@ public class MicroServiceController {
     private MicroServiceService microServiceService;
 
     @GetMapping()
-    public ModelAndView form(HttpSession session, ModelAndView modelAndView) {
+    public ModelAndView form(HttpSession session, ModelAndView modelAndView, Integer sid) {
         if (session.getAttribute("user") == null) {
             return new ModelAndView("redirect:/user/login");
         }
-
         modelAndView.setViewName("views/service");
+        modelAndView.addObject("service", microServiceService.getOne(sid));
         modelAndView.addObject("serviceList", microServiceService.getAll());
         return modelAndView;
     }

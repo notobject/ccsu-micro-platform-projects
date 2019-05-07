@@ -12,28 +12,17 @@
                 </ul>
                 <!--breadcrumbs end -->
             </div>
-            <!--<div class="col-md-4">-->
-            <!--<div class="progress progress-striped" style="margin-top: 8px">-->
-            <!--<div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar"-->
-            <!--aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">-->
-            <!--<span class="sr-only">等待指令...</span>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</div>-->
         </div>
         <div class="row">
             <div class="col-md-12">
                 <section class="panel general">
                     <header class="panel-heading tab-bg-dark-navy-blue">
                         <ul class="nav nav-tabs">
-                            <li class="active">
+                            <li>
                                 <a data-toggle="tab" href="#search">查询</a>
                             </li>
                             <li>
                                 <a data-toggle="tab" href="#new">上线</a>
-                            </li>
-                            <li>
-                                <a data-toggle="tab" href="#ccsu-register-server">ccsu-register-server</a>
                             </li>
                         </ul>
                     </header>
@@ -84,7 +73,8 @@
                                             <#list serviceList as service>
                                                 <tr>
                                                     <td>${service.id}</td>
-                                                    <td>${service.serviceName}:${service.versionName}</td>
+                                                    <td><a href="/service?sid=${service.id}">${service.serviceName}
+                                                            :${service.versionName}</a></td>
                                                     <td>${service.creator}</td>
                                                     <td><a href="http://${service.ipAddress}:${service.servicePort}"
                                                            target="_blank">${service.ipAddress}
@@ -127,7 +117,7 @@
                                         <form id="form-new" class="form-horizontal tasi-form" method="post"
                                               action="/service/new">
                                             <div class="form-group">
-                                                <label class="col-sm-2 col-sm-2 control-label">服务名称</label>
+                                                <label class="col-sm-2 col-sm-2 control-label">服务名称:版本</label>
                                                 <div class="col-sm-6">
                                                     <input type="text" name="serviceName" class="form-control"
                                                            value="ccsu-register-server">
@@ -200,7 +190,7 @@
                                     <div class="col-md-6">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <div style="width:100%;height:100%;overflow-y:auto; padding:0 10px 0 10px;">
+                                                <div style="width:100%;height:600px;overflow-y:auto; padding:0 10px 0 10px;">
                                                     <div id="content" style="width:100%;line-height:20px;"></div>
                                                     <span id="msg_end" style="overflow:hidden"></span>
                                                 </div>
@@ -222,10 +212,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- 服务管理页 -->
-                            <div id="management" class="tab-pane">
-                                ccsu-register-server
-                            </div>
                         </div>
                     </div>
                 </section>
@@ -234,7 +220,10 @@
     </section>
 </aside>
 <script type="text/javascript">
+    <#if service??>
 
+        $("#management").style = "display:block";
+    </#if>
     function startLoop(taskId, timer) {
         $.ajax({
             url: "/service/process",
@@ -256,7 +245,7 @@
                     msg = res.msg
                 }
                 if (msg !== "") {
-                    process.append("<p>" + msg.replace("\n", "<br />") + "</p>");
+                    process.append("<p>" + msg.replace("\n", "<br />").replace("\r\n", "<br />") + "</p>");
                 }
             }
         })

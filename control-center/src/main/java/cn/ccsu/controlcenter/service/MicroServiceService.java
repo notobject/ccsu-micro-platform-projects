@@ -120,4 +120,8 @@ public class MicroServiceService {
         serviceInfo.setTaskId(taskId);
         serviceDAO.updateByPrimaryKey(serviceInfo);
     }
+
+    public ServiceInfo getOne(Integer sid) {
+        return serviceDAO.selectByPrimaryKey(sid);
+    }
 }
