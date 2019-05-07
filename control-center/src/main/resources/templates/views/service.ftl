@@ -200,7 +200,11 @@
                                     <div class="col-md-6">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <div style="width: 100%; height: 480px" id="content"></div>
+                                                <div style="width:100%;height:100%;overflow-y:auto; padding:0 10px 0 10px;">
+                                                    <div id="content" style="width:100%;line-height:20px;"></div>
+                                                    <span id="msg_end" style="overflow:hidden"></span>
+                                                </div>
+
                                             </div>
                                         </div>
                                         <div id="stat-complete" class="stat" style="display: none">
@@ -243,7 +247,7 @@
                 console.log(res);
                 process = $("#content");
                 msg = "";
-                if (res.status === "waiting" && process.innerText === "") {
+                if (res.status === "waiting") {
                     msg = "waiting for response...\n";
                 } else if (res.status === "complete") {
                     msg = res.msg + "done\n";

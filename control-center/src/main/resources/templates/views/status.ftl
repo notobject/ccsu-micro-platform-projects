@@ -22,18 +22,17 @@
             success: function (res) {
                 console.log(res);
                 content = $("#content");
-
                 msg = "";
-                if (res.status === "waiting" && process.val() === "") {
+                if (res.status === "waiting" && content.val() === "") {
                     msg = "waiting for response...\n";
-                }else if (res.status === "complete") {
-                    msg = "done.\n";
+                } else if (res.status === "complete") {
+                    msg = res.msg + "done.\n";
                     clearInterval(timer);
-                }else{
+                } else {
                     msg = res.msg
                 }
-                if(msg !== ""){
-                    content.append("<p>" + msg.replace("\n","<br />") + "</p>");
+                if (msg !== "") {
+                    content.append("<p>" + msg.replace("\n", "<br />") + "</p>");
                 }
             }
         })
