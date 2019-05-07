@@ -32,6 +32,7 @@ public class AgentReportListener implements ChannelAwareMessageListener {
     @Override
     public void onMessage(Message message, Channel channel) {
         JSONObject msg = (JSONObject) JSONObject.parse(message.getBody());
+        log.info("recv {}", msg);
         String action = msg.getString("action");
         if (ACTION_HEART_BEAT.equals(action)) {
             MachineInfo machineInfo = JSONObject.parseObject(msg.getString("data"), MachineInfo.class);

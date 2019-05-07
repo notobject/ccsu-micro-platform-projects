@@ -1,3 +1,4 @@
 FROM java:openjdk-8-jre-alpine
-COPY app.jar /app.jar
+COPY target/*.jar /app.jar
+VOLUME /var/logs /var/logs
 ENTRYPOINT ["java","-jar","/app.jar"]

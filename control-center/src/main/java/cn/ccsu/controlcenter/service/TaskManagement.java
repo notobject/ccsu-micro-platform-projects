@@ -64,15 +64,19 @@ public class TaskManagement {
 
     public void doProcess(AckInfo ackInfo) {
         TaskInfo taskInfo = pool.get(ackInfo.getTaskId());
+        if (taskInfo == null) {
+            log.info("task {} not exist.", ackInfo.getTaskId());
+            return;
+        }
         if (TASK_STATUS_COMPLETE.equals(taskInfo.getCurrentStatus())) {
             log.info("task {} already completed.", taskInfo.getId());
             return;
         }
         int code = ackInfo.getCode();
-        if (code == 0) {
-            List<String> messages = taskInfo.getMessages();
-            String m = String.format("[%s][%d] %s \n%s\n", sdf.format(new Date(ackInfo.getTimestamp())), ackInfo.getSerialNo(), ackInfo.getCmd(), ackInfo.getMsg());
-            messages.add(m);
+        List<String> messages = taskInfo.getMessages();
+        String m = String.format("[%s][%d] %s \n%s\n", sdf.format(new Date(ackInfo.getTimestamp())), ackInfo.getSerialNo(), ackInfo.getCmd(), ackInfo.getMsg());
+        messages.add(m);
+        if (code != 10000) {
             taskInfo.setCurrentStatus(TASK_STATUS_PROCESSING);
         } else {
             taskInfo.setCurrentStatus(TASK_STATUS_COMPLETE);

@@ -31,8 +31,8 @@ public class RabbitMQConfig {
     RabbitAdmin rabbitAdmin(final ConnectionFactory connectionFactory) {
         final RabbitAdmin rabbitAdmin = new RabbitAdmin(connectionFactory);
         String[] queues = {SUFFIX + "control-center"};
-        rabbitAdmin.deleteExchange(TOPIC_EXCHANGE);
-        TopicExchange topicExchange = new TopicExchange(TOPIC_EXCHANGE);
+        // rabbitAdmin.deleteExchange(TOPIC_EXCHANGE);
+        TopicExchange topicExchange = new TopicExchange(TOPIC_EXCHANGE, true, false);
         rabbitAdmin.declareExchange(topicExchange);
         for (int i = 0; i < queues.length; i++) {
             Queue queue = new Queue(queues[i]);

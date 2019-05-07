@@ -58,6 +58,7 @@ public class MicroServiceService {
         }
         params.put("port", port);
         params.put("options", "--server.port=$port --eureka.instance.ip-address=$HOST --eureka.client.service-url.defaultZone=$REGISTER_CENTER");
+
         JSONObject cmd = new JSONObject();
         cmd.put("dir", "$work_dir");
         cmd.put("cmd", "rm -rf ccsu-micro-platform-projects");
@@ -74,14 +75,17 @@ public class MicroServiceService {
         cmd.put("dir", "$work_dir/ccsu-micro-platform-projects/$service_name");
         cmd.put("cmd", "mvn clean package -P$profile");
         cmds.add(cmd);
+
         cmd = new JSONObject();
         cmd.put("dir", "$work_dir/ccsu-micro-platform-projects/$service_name");
-        cmd.put("cmd", "mv target/*.jar /var/jars/");
+        cmd.put("cmd", "docker build -t notobject/$service_name:$version .");
         cmds.add(cmd);
+
         cmd = new JSONObject();
         cmd.put("dir", "/var/jars/");
-        cmd.put("cmd", "docker run -d --name $service_name -p $port:$port -v /var/jars:/var/jars -v /var/logs:/var/logs --restart=always java:openjdk-8-jre-alpine java -jar /var/jars/$service_name-$version.jar $options");
+        cmd.put("cmd", "docker push notobject/$service_name:$version");
         cmds.add(cmd);
+
         data.put("cmds", cmds);
         data.put("params", params);
         sender.send(task, data);

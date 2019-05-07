@@ -261,14 +261,12 @@
                 process = $("#process-detail");
                 if (res.status === "waiting" && process.val() === "") {
                     process.val("waiting...\n");
+                    return;
                 }
+                process.val(process.val() + res.msg);
                 if (res.status === "complete") {
                     process.val(process.val() + "done.\n");
                     clearInterval(timer);
-                    $("#stat-processing").css("display", "");
-                }
-                if (res.status === "processing") {
-                    process.val(process.val() + res.msg)
                 }
             }
         })
@@ -276,19 +274,18 @@
 
     $("#new-submit").on("click", function (event) {
         param = $('#form-new').serializeObject();
-        console.log(param);
+        // console.log(param);
         $.ajax({
             url: "/service/new",
             data: param,
             dataType: "json",
             type: "POST",
             success: function (res) {
+                console.log(res);
                 taskId = res.data.id;
                 timer = setInterval(function () {
                     startLoop(taskId, timer);
-                    $("#new-cancel").disable()
                 }, 1000);
-                console.log(res)
             }
         })
     })
