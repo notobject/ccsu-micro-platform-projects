@@ -4,9 +4,9 @@
  */
 package cn.ccsu.controlcenter.mq;
 
-import cn.ccsu.controlcenter.pojo.*;
+import cn.ccsu.controlcenter.pojo.AckInfo;
+import cn.ccsu.controlcenter.pojo.MachineInfo;
 import cn.ccsu.controlcenter.service.MachineManagement;
-import cn.ccsu.controlcenter.service.MicroServiceService;
 import cn.ccsu.controlcenter.service.TaskManagement;
 import com.alibaba.fastjson.JSONObject;
 import com.rabbitmq.client.Channel;
@@ -33,6 +33,10 @@ public class AgentReportListener implements ChannelAwareMessageListener {
         String action = msg.getString("action");
         if (ACTION_HEART_BEAT.equals(action)) {
             MachineInfo machineInfo = JSONObject.parseObject(msg.getString("data"), MachineInfo.class);
+            if (machineInfo == null) {
+                log.error("parse machine info error {}", msg.getString("data"));
+                return;
+            }
             log.info("heartbeat {}", machineInfo);
             MachineManagement.getInstance().update(machineInfo);
             // TODO 测试需要....

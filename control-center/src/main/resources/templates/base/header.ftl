@@ -94,6 +94,16 @@
         });
         return o;
     };
+    function sleep(numberMillis) {
+        var now = new Date();
+        var exitTime = now.getTime() + numberMillis;
+        while (true) {
+            now = new Date();
+            if (now.getTime() > exitTime)
+                return;
+        }
+    }
+
 </script>
 <body class="skin-black">
 <!-- header logo: style can be found in header.less -->
@@ -144,7 +154,7 @@
                         <li class="divider"></li>
 
                         <li>
-                            <a href="#"><i class="fa fa-ban fa-fw pull-right"></i> Logout</a>
+                            <a href="/user/logout"><i class="fa fa-ban fa-fw pull-right"></i> Logout</a>
                         </li>
                     </ul>
                 </li>
@@ -201,11 +211,11 @@
                         <i class="fa fa-globe"></i> <span>用户管理</span>
                     </a>
                 </li>
-                <li>
-                    <a href="/system">
-                        <i class="fa fa-flash"></i> <span>系统管理</span>
-                    </a>
-                </li>
+                <#--<li>-->
+                    <#--<a href="/system">-->
+                        <#--<i class="fa fa-flash"></i> <span>系统管理</span>-->
+                    <#--</a>-->
+                <#--</li>-->
 
                 <!--<li>-->
                 <!--<a href="#">-->

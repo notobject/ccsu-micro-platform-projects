@@ -4,10 +4,12 @@
  */
 package cn.ccsu.controlcenter.web;
 
+import cn.ccsu.controlcenter.pojo.MachineInfo;
 import cn.ccsu.controlcenter.service.MachineManagement;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -29,10 +31,9 @@ public class ResourceController {
         return modelAndView;
     }
 
-    @GetMapping("/staus")
-    public ModelAndView status(String ip, ModelAndView modelAndView) {
-
-
-        return modelAndView;
+    @GetMapping("/status")
+    @ResponseBody
+    public MachineInfo status(String ip) {
+        return MachineManagement.getInstance().getOne(ip);
     }
 }

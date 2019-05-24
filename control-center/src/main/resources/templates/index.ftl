@@ -59,7 +59,7 @@
         </div>
 
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <section class="panel">
                     <header class="panel-heading">
                         操作日志
@@ -77,128 +77,91 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td><span class="label label-success">系统登录</span></td>
-                                <td>通过IP[192.168.1.1]登录系统</td>
-                                <td>曹孝双</td>
-                                <td>2019-03-30 20:28:54</td>
-                                <td><span class="badge badge-success">成功</span></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td><span class="label label-success">系统登录</span></td>
-                                <td>通过IP[192.168.1.1]登录系统</td>
-                                <td>曹孝双</td>
-                                <td>2019-03-30 20:28:54</td>
-                                <td><span class="badge badge-success">成功</span></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td><span class="label label-success">系统登录</span></td>
-                                <td>通过IP[192.168.1.1]登录系统</td>
-                                <td>曹孝双</td>
-                                <td>2019-03-30 20:28:54</td>
-                                <td><span class="badge badge-success">成功</span></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td><span class="label label-success">系统登录</span></td>
-                                <td>通过IP[192.168.1.1]登录系统</td>
-                                <td>曹孝双</td>
-                                <td>2019-03-30 20:28:54</td>
-                                <td><span class="badge badge-success">成功</span></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td><span class="label label-success">系统登录</span></td>
-                                <td>通过IP[192.168.1.1]登录系统</td>
-                                <td>曹孝双</td>
-                                <td>2019-03-30 20:28:54</td>
-                                <td><span class="badge badge-success">成功</span></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td><span class="label label-success">系统登录</span></td>
-                                <td>通过IP[192.168.1.1]登录系统</td>
-                                <td>曹孝双</td>
-                                <td>2019-03-30 20:28:54</td>
-                                <td><span class="badge badge-success">成功</span></td>
-                            </tr>
+                           <#list audits as audit>
+                               <tr>
+                                   <td>${audit.id}</td>
+                                   <td><span class="label label-default">${audit.opType}</span></td>
+                                   <td>${audit.opDetail}</td>
+                                   <td>${audit.user}</td>
+                                   <td>${(audit.opTime?string("yyyy-MM-dd HH:mm:ss"))!}</td>
+                                   <td><span class="badge badge-success">${audit.opStatus}</span></td>
+                               </tr>
+                           </#list>
+
                             </tbody>
                         </table>
                     </div>
                 </section>
             </div><!--end col-8 -->
-            <div class="col-md-4">
-                <section class="panel">
-                    <header class="panel-heading">
-                        系统信息
-                    </header>
-                    <div class="panel-body table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                            <tr>
-                                <th>设备</th>
-                                <th>型号</th>
-                                <th>剩余</th>
-                                <th>状态</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>CPU</td>
-                                <td>Core i7</td>
-                                <td>
-                                    <div class="progress-bar progress-bar-primary" style="width: 63%">63%</div>
-                                </td>
-                                <td><span class="label label-primary">正常</span></td>
-                            </tr>
-                            <tr>
-                                <td>内存</td>
-                                <td>未知</td>
-                                <td>
-                                    <div class="progress-bar progress-bar-danger" style="width: 10%">10%</div>
-                                </td>
-                                <td><span class="label label-danger">不足</span></td>
-                            </tr>
-                            <tr>
-                                <td>硬盘</td>
-                                <td>三星</td>
-                                <td>
-                                    <div class="progress-bar progress-bar-success" style="width: 86%">86%</div>
-                                </td>
-                                <td><span class="label label-success">充足</span></td>
-                            </tr>
-                            <tr>
-                                <td>CPU</td>
-                                <td>Core i7</td>
-                                <td>
-                                    <div class="progress-bar progress-bar-primary" style="width: 63%">63%</div>
-                                </td>
-                                <td><span class="label label-primary">正常</span></td>
-                            </tr>
-                            <tr>
-                                <td>内存</td>
-                                <td>未知</td>
-                                <td>
-                                    <div class="progress-bar progress-bar-danger" style="width: 10%">10%</div>
-                                </td>
-                                <td><span class="label label-danger">不足</span></td>
-                            </tr>
-                            <tr>
-                                <td>硬盘</td>
-                                <td>三星</td>
-                                <td>
-                                    <div class="progress-bar progress-bar-success" style="width: 86%">86%</div>
-                                </td>
-                                <td><span class="label label-success">充足</span></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-            </div>
+            <#--<div class="col-md-4">-->
+                <#--<section class="panel">-->
+                    <#--<header class="panel-heading">-->
+                        <#--系统信息-->
+                    <#--</header>-->
+                    <#--<div class="panel-body table-responsive">-->
+                        <#--<table class="table table-hover">-->
+                            <#--<thead>-->
+                            <#--<tr>-->
+                                <#--<th>设备</th>-->
+                                <#--<th>型号</th>-->
+                                <#--<th>剩余</th>-->
+                                <#--<th>状态</th>-->
+                            <#--</tr>-->
+                            <#--</thead>-->
+                            <#--<tbody>-->
+                            <#--<tr>-->
+                                <#--<td>CPU</td>-->
+                                <#--<td>Core i7</td>-->
+                                <#--<td>-->
+                                    <#--<div class="progress-bar progress-bar-primary" style="width: 63%">63%</div>-->
+                                <#--</td>-->
+                                <#--<td><span class="label label-primary">正常</span></td>-->
+                            <#--</tr>-->
+                            <#--<tr>-->
+                                <#--<td>内存</td>-->
+                                <#--<td>未知</td>-->
+                                <#--<td>-->
+                                    <#--<div class="progress-bar progress-bar-danger" style="width: 10%">10%</div>-->
+                                <#--</td>-->
+                                <#--<td><span class="label label-danger">不足</span></td>-->
+                            <#--</tr>-->
+                            <#--<tr>-->
+                                <#--<td>硬盘</td>-->
+                                <#--<td>三星</td>-->
+                                <#--<td>-->
+                                    <#--<div class="progress-bar progress-bar-success" style="width: 86%">86%</div>-->
+                                <#--</td>-->
+                                <#--<td><span class="label label-success">充足</span></td>-->
+                            <#--</tr>-->
+                            <#--<tr>-->
+                                <#--<td>CPU</td>-->
+                                <#--<td>Core i7</td>-->
+                                <#--<td>-->
+                                    <#--<div class="progress-bar progress-bar-primary" style="width: 63%">63%</div>-->
+                                <#--</td>-->
+                                <#--<td><span class="label label-primary">正常</span></td>-->
+                            <#--</tr>-->
+                            <#--<tr>-->
+                                <#--<td>内存</td>-->
+                                <#--<td>未知</td>-->
+                                <#--<td>-->
+                                    <#--<div class="progress-bar progress-bar-danger" style="width: 10%">10%</div>-->
+                                <#--</td>-->
+                                <#--<td><span class="label label-danger">不足</span></td>-->
+                            <#--</tr>-->
+                            <#--<tr>-->
+                                <#--<td>硬盘</td>-->
+                                <#--<td>三星</td>-->
+                                <#--<td>-->
+                                    <#--<div class="progress-bar progress-bar-success" style="width: 86%">86%</div>-->
+                                <#--</td>-->
+                                <#--<td><span class="label label-success">充足</span></td>-->
+                            <#--</tr>-->
+                            <#--</tbody>-->
+                        <#--</table>-->
+                    <#--</div>-->
+                <#--</section>-->
+            <#--</div>-->
 
         </div>
     </section><!-- /.content -->

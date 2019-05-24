@@ -9,6 +9,7 @@ import lombok.ToString;
 import org.springframework.data.annotation.Id;
 
 import javax.persistence.Table;
+import java.util.Date;
 
 @ToString
 @Data
@@ -17,9 +18,17 @@ public class AuditInfo {
 
     @Id
     private Integer id;
-    private Integer userId;
+    private String user;
     private String opType;
     private String opDetail;
-    private String opTime;
+    private Date opTime;
     private String opStatus;
+
+    public AuditInfo(String user, String opType, String opDetail, boolean opStatus) {
+        this.user = user;
+        this.opType = opType;
+        this.opDetail = opDetail;
+        this.opStatus = opStatus ? "success" : "failed";
+        this.opTime = new Date(System.currentTimeMillis());
+    }
 }

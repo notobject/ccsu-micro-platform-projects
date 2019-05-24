@@ -20,11 +20,10 @@ public class TaskInfo {
     @Id
     private String id;
     private String action;
-    private Integer serviceId;
     private Date createTime;
     private Integer creatorId;
     private String currentStatus;
     private MachineInfo machine;
-    private List<String> messages;
+    private List<AckInfo> messages;
     private int mark;
 }

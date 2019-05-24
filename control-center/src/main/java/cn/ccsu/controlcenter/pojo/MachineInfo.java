@@ -5,11 +5,9 @@
 package cn.ccsu.controlcenter.pojo;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.Id;
-import javax.persistence.Table;
 import java.util.Date;
 import java.util.List;
 
@@ -33,6 +31,5 @@ public class MachineInfo {
     private long freeMem;
     private long freeDisk;
     private List<String> machineType;
-
 
 }

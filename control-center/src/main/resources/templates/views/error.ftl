@@ -5,6 +5,6 @@
     <title>ERROR</title>
 </head>
 <body>
-<p align="center">${msg}</p>
+<p align="center">${msg!}</p>
 </body>
 </html>

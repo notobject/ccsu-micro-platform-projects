@@ -14,6 +14,12 @@ import org.springframework.context.annotation.Configuration;
 
 import java.io.IOException;
 
+/**
+ *
+ * docker  运行 rabbitMQ
+ * docker run -d --name rabbitmq-server -v /var/lib/rabbitmq:/var/lib/rabbitmq -p 5672:5672 -p 15672:15672 -e DEFAULT_RABBITMQ_USER=admin -e DEFAULT_RABBITMQ_PASS=hhxs.ttxs rabbitmq:3-management
+ * docker run --name mysql-server -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.6 --character-set-server=utf8 --collation-server=utf8_unicode_ci
+ */
 @Configuration
 public class RabbitMQConfig {
 

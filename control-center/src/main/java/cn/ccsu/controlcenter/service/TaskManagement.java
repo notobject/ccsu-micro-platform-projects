@@ -45,7 +45,17 @@ public class TaskManagement {
     }
 
     public TaskInfo newTask(String action, Integer creator) {
-        MachineInfo machine = MachineManagement.getInstance().get(action);
+        return newTask(action, creator, new String[]{}, null);
+    }
+
+    public TaskInfo newTask(String action, Integer creator, MachineInfo machineInfo) {
+        return newTask(action, creator, new String[]{}, machineInfo);
+    }
+
+    public TaskInfo newTask(String action, Integer creator, String[] excepts, MachineInfo machine) {
+        if (machine == null) {
+            machine = MachineManagement.getInstance().get(action, excepts);
+        }
         if (machine == null) {
             log.info("has no machine to using...");
             return null;
@@ -74,9 +84,8 @@ public class TaskManagement {
         }
         int code = ackInfo.getCode();
         if (code != 10000) {
-            List<String> messages = taskInfo.getMessages();
-            String m = String.format("[%s][%d] %s \n%s\n", sdf.format(new Date(ackInfo.getTimestamp() * 1000)), ackInfo.getSerialNo(), ackInfo.getCmd(), ackInfo.getMsg());
-            messages.add(m);
+            List<AckInfo> messages = taskInfo.getMessages();
+            messages.add(ackInfo);
             taskInfo.setCurrentStatus(TASK_STATUS_PROCESSING);
         } else {
             taskInfo.setCurrentStatus(TASK_STATUS_COMPLETE);
@@ -91,16 +100,19 @@ public class TaskManagement {
             res.put("status", "error");
             return res.toString();
         }
-        List<String> messages = taskInfo.getMessages();
+        int start = taskInfo.getMark();
+        List<AckInfo> messages = taskInfo.getMessages();
         StringBuilder msg = new StringBuilder();
-        for (int i = taskInfo.getMark(); i < messages.size(); i++) {
-            msg.append(messages.get(i));
+        for (int i = start; i < messages.size(); i++) {
+            AckInfo ackInfo = messages.get(i);
+            msg.append(String.format("[%s][%d] %s", sdf.format(new Date(ackInfo.getTimestamp() * 1000)), ackInfo.getSerialNo(), ackInfo.getCmd()));
+            msg.append("<br/ >");
+            msg.append(ackInfo.getMsg().replaceAll("\n", "<br/>"));
+            msg.append("<br/ >");
             taskInfo.setMark(i + 1);
         }
         res.put("msg", msg.toString());
         res.put("status", taskInfo.getCurrentStatus());
         return res.toString();
     }
-
-
 }

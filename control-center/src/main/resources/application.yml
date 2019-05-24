@@ -26,7 +26,7 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     username: root
     password:
-    url: jdbc:mysql://127.0.0.1:3306/control-center?characterEncoding=UTF-8&serverTimezone=GMT
+    url: jdbc:mysql://172.20.10.5:3306/control-center?characterEncoding=UTF-8&serverTimezone=GMT
     dbcp2:
       pool-prepared-statements: true
       max-open-prepared-statements: 20
@@ -34,7 +34,7 @@ spring:
       time-between-eviction-runs-millis: 60000
       min-evictable-idle-time-millis: 300000
   rabbitmq:
-    host: 120.78.82.47
+    host: 172.20.10.5
     port: 5672
     username: admin
     password: hhxx.ttxs
