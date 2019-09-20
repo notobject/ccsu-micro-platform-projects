@@ -69,20 +69,46 @@ ccsu-socre-service|综测服务，统一综测管理，该服务为通用服务�
 ### 系统&工具
 
 ### centos 配置
+  
+  略
+  
 ### maven 安装及配置
+  
+  略
+  
 ### git 安装及配置
+  
+  略
+  
 ### docker 安装及配置
+  
+  略
+  
 ### ningx 安装及配置
+  
+  略
+  
 ### mysql 安装及配置
+  
+  略
+  
 ### redis 安装及配置
+  
+  略
+  
 ### rabbitMQ 安装及配置
-
+  
+  略
+  
 
 ## 四、开始
 
 ### step 1. Control-Center
 
 ### step 2. MP-Agent
+  
+  参见微信小程序开发文档
+  
 
 ### step 3. Register-Server
 
@@ -177,6 +203,9 @@ docker run -d --name user-service -p 58080:58080 -v /var/log/:/var/log/ -t notob
 docker run -d --name user-service -p 58080:58080 -v /var/log/:/var/log/ -t notobject/mp-base:user-service  --restart=always --server.port=58080 --eureka.instance.ip-address=39.106.96.220 --eureka.client.service-url.defaultZone=http://120.78.82.47:8761/eureka/,http://39.106.96.220:8761/eureka/
 
 ### step 7. MP-UI (mini program)
+  
+  参见微信小程序开发文档
+  
 
 ## 五、FAQ
 - Any issue or question is welcome, Please feel free to open github issues :)
