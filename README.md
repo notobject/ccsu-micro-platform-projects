@@ -105,10 +105,11 @@ ccsu-socre-service|综测服务，统一综测管理，该服务为通用服务�
 
 ### step 1. Control-Center
 
+  略
+
 ### step 2. MP-Agent
   
-  参见微信小程序开发文档
-  
+  略
 
 ### step 3. Register-Server
 
